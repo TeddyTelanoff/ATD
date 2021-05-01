@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Soldier: Tower
 {
-	public GameObject placementNotifier;
 	public GameObject dartPrefab;
 	public float reloadSpeed;
 
@@ -31,14 +30,14 @@ public class Soldier: Tower
 			dart.GetComponent<Dart>().dir = dir;
 			dart.GetComponent<Dart>().pierce = pierce;
 		}
-		catch (NullReferenceException e)
+		catch (NullReferenceException)
+		{ }
+		catch (MissingReferenceException)
 		{ }
 	}
 
 	private IEnumerator FireLoop()
 	{
-		placementNotifier.SetActive(true);
-
 		while (placing)
 		{
 			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -49,8 +48,6 @@ public class Soldier: Tower
 
 			yield return null;
 		}
-
-		placementNotifier.SetActive(false);
 
 		while (true)
 		{
