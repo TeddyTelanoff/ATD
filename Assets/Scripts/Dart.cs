@@ -11,10 +11,8 @@ public class Dart: MonoBehaviour
 	public Vector3 dir;
 	public Rigidbody2D rb;
 
-	private void Start()
-	{
+	private void Start() =>
 		rb = GetComponent<Rigidbody2D>();
-	}
 
 	private void FixedUpdate()
 	{

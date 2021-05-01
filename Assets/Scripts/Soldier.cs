@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier: MonoBehaviour
+public class Soldier: MonoBehaviour, Tower
 {
 	public GameObject dartPrefab;
 	public float reloadSpeed;
@@ -10,28 +10,31 @@ public class Soldier: MonoBehaviour
 	[Header("Don t Touch")]
 	public List<Ant> antsInRange;
 
-	private void Start()
+	private void Start() =>
+		StartCoroutine(FireLoop());
+
+	public void Fire(Ant ant)
 	{
-		StartCoroutine(Fire());
+		Vector2 dir = ant.transform.position - transform.position;
+		dir.Normalize();
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		var dart = Instantiate(dartPrefab);
+		dart.transform.position = transform.position;
+		dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		dart.GetComponent<Dart>().dir = dir;
 	}
 
-	private IEnumerator Fire()
+	private IEnumerator FireLoop()
 	{
 		while (true)
 		{
 			if (antsInRange.Count > 0)
 			{
 				var ant = antsInRange[0];
+				Fire(ant);
 
-				Vector2 dir = ant.transform.position - transform.position;
-				dir.Normalize();
-				transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-				var dart = Instantiate(dartPrefab);
-				dart.transform.position = transform.position;
-				dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-				dart.GetComponent<Dart>().dir = dir;
 				yield return new WaitForSeconds(reloadSpeed);
 			}
 
