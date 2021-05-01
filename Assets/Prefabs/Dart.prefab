@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc48624b764e9a4384815f05198c882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   pierce: 0
+  damage: 0
   speed: 1000
-  timeout: 0.1
+  timeout: 1
   dir: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
 --- !u!60 &6941180275584852700

@@ -649,7 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   checkpoints: []
-  speed: 3
+  color: 0
+  speed: 0
   nextCheckIndex: 0
   nextCheckpoint: {fileID: 0}
   speedSqrd: 0

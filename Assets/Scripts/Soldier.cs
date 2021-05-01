@@ -8,7 +8,8 @@ public class Soldier: Tower
 	public override string Name { get => "Soldier"; }
 
 	public GameObject dartPrefab;
-	public float reloadSpeed;
+	public float reload;
+	public int damage;
 
 	[Header("Don t Touch")]
 	public List<Ant> antsInRange;
@@ -19,7 +20,78 @@ public class Soldier: Tower
 
 	protected override void UpgradeInternal(Path path)
 	{
-		print($"Upgrading to {path}");
+		switch (path)
+		{
+		case Path.Path1:
+			switch (path1Tier)
+			{
+			case Tier.Tier1:
+				pierce++;
+				break;
+			case Tier.Tier2:
+				damage++;
+				transform.Find("View").localScale += new Vector3(2, 2);
+				break;
+			case Tier.Tier3:
+				damage += 2;
+				transform.Find("View").localScale += new Vector3(1, 1);
+				break;
+			case Tier.Tier4:
+				pierce += 2;
+				damage++;
+				break;
+			case Tier.Tier5:
+				transform.Find("View").localScale += new Vector3(3, 3);
+				pierce += 2;
+				damage += 2;
+				break;
+			}
+			break;
+		case Path.Path2:
+			switch (path2Tier)
+			{
+			case Tier.Tier1:
+				reload -= .2f;
+				break;
+			case Tier.Tier2:
+				reload -= .2f;
+				break;
+			case Tier.Tier3:
+				reload -= .5f;
+				pierce++;
+				break;
+			case Tier.Tier4:
+				pierce += 3;
+				damage++;
+				break;
+			case Tier.Tier5:
+				transform.Find("View").localScale += new Vector3(5, 5);
+				pierce++;
+				reload = 0;
+				break;
+			}
+			break;
+		case Path.Path3:
+			switch (path3Tier)
+			{
+			case Tier.Tier1:
+				pierce += 2;
+				break;
+			case Tier.Tier2:
+				break;
+			case Tier.Tier3:
+				pierce += 3;
+				break;
+			case Tier.Tier4:
+				transform.Find("View").localScale = new Vector3(99, 99, 1);
+				break;
+			case Tier.Tier5:
+				pierce += 95;
+				reload -= .2f;
+				break;
+			}
+			break;
+		}
 	}
 
 	public override string UpgradeName(Path path, Tier tier)
@@ -72,6 +144,7 @@ public class Soldier: Tower
 
 			dart.GetComponent<Dart>().dir = dir;
 			dart.GetComponent<Dart>().pierce = pierce;
+			dart.GetComponent<Dart>().damage = damage;
 		}
 		catch (NullReferenceException)
 		{ antsInRange.RemoveAll(item => item == null); }
@@ -99,7 +172,7 @@ public class Soldier: Tower
 				var ant = antsInRange[0];
 				Fire(ant);
 
-				yield return new WaitForSeconds(reloadSpeed);
+				yield return new WaitForSeconds(reload);
 			}
 
 			yield return new WaitForFixedUpdate();

@@ -2,23 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AntType
+{
+	Black,
+	White,
+	Blue,
+	Green,
+	Yellow,
+	Brown,
+}
+
 public class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
-	public AntColor color;
+	public AntType type;
 	public float speed;
 
 	[Header("Don't Touch")]
 	public int nextCheckIndex;
 	public Transform nextCheckpoint;
-	public float speedSqrd;
 
 	private void Start()
 	{
-		nextCheckpoint = checkpoints[0];
-		speedSqrd = speed * speed;
-
-		UpdateColor();
+		nextCheckpoint = checkpoints[nextCheckIndex];
+		UpdateType();
 	}
 
 	private void FixedUpdate()
@@ -26,7 +33,7 @@ public class Ant: MonoBehaviour
 		Vector3 dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
-		if (dir.sqrMagnitude < speedSqrd)
+		if (dir.sqrMagnitude < speed * speed)
 		{
 			transform.position = nextCheckpoint.position;
 			nextCheckIndex++;
@@ -42,37 +49,74 @@ public class Ant: MonoBehaviour
 			transform.position += speed * dir.normalized * Time.deltaTime;
 	}
 
-	public void Pop()
+	public void Pop(Dart dart)
 	{
-		switch (color)
+		for (int i = 0; i < dart.damage; i++)
 		{
-		case AntColor.Black:
-			Destroy(gameObject);
-			break;
-		case AntColor.White:
-			color = AntColor.Black;
-			break;
-		case AntColor.Blue:
-			color = AntColor.White;
-			break;
+			switch (type)
+			{
+			case AntType.Black:
+				Destroy(gameObject);
+				return;
+			case AntType.White:
+				type = AntType.Black;
+				break;
+			case AntType.Blue:
+				type = AntType.White;
+				break;
+			case AntType.Green:
+				type = AntType.White;
+				Instantiate(this).transform.position = transform.position;
+				break;
+			case AntType.Yellow:
+				type = AntType.Blue;
+				Instantiate(this).transform.position = transform.position;
+				type = AntType.Green;
+				Instantiate(this).transform.position = transform.position;
+				break;
+			case AntType.Brown:
+				type = AntType.Green;
+				Instantiate(this).transform.position = transform.position;
+				Instantiate(this).transform.position = transform.position;
+				Instantiate(this).transform.position = transform.position;
+				Instantiate(this).transform.position = transform.position;
+				type = AntType.Blue;
+				Instantiate(this).transform.position = transform.position;
+				break;
+			}
 		}
 
-		UpdateColor();
+		UpdateType();
 	}
 
-	public void UpdateColor()
+	public void UpdateType()
 	{
 		Color matCol = Color.black;
-		switch (color)
+		switch (type)
 		{
-		case AntColor.Black:
+		case AntType.Black:
+			speed = 3;
 			matCol = Color.gray;
 			break;
-		case AntColor.White:
+		case AntType.White:
+			speed = 3;
 			matCol = Color.white;
 			break;
-		case AntColor.Blue:
+		case AntType.Blue:
+			speed = 4;
 			matCol = Color.blue;
+			break;
+		case AntType.Green:
+			speed = 4;
+			matCol = Color.green;
+			break;
+		case AntType.Yellow:
+			speed = 8;
+			matCol = Color.yellow;
+			break;
+		case AntType.Brown:
+			speed = 5;
+			matCol = new Color(210, 105, 30);
 			break;
 		}
 
@@ -87,11 +131,4 @@ public class Ant: MonoBehaviour
 			Gizmos.DrawLine(transform.position, nextCheckpoint.position);
 		}
 	}
-}
-
-public enum AntColor
-{
-	Black,
-	White,
-	Blue,
 }

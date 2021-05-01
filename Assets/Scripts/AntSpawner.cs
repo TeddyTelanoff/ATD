@@ -28,12 +28,12 @@ public class AntSpawner: MonoBehaviour
 	public void PlayRound() =>
 		StartCoroutine(PlayRoundInternal());
 
-	public void SpawnAnt(AntColor color)
+	public void SpawnAnt(AntType type)
 	{
 		var ant = Instantiate(antPrefab, parent);
 		ant.transform.position = checkpoints[0].position;
 		ant.GetComponent<Ant>().checkpoints = checkpoints;
-		ant.GetComponent<Ant>().color = color;
+		ant.GetComponent<Ant>().type = type;
 	}
 
 	private IEnumerator PlayRoundInternal()
@@ -43,23 +43,78 @@ public class AntSpawner: MonoBehaviour
 		case 1:
 			for (int i = 0; i < 14; i++)
 			{
-				SpawnAnt(AntColor.Black);
+				SpawnAnt(AntType.Black);
 				yield return new WaitForSeconds(1.2f);
 			}
 			break;
 		case 2:
 			for (int i = 0; i < 12; i++)
 			{
-				SpawnAnt(AntColor.Black);
+				SpawnAnt(AntType.Black);
 				yield return new WaitForSeconds(1f);
 			}
 			break;
 		case 3:
 			for (int i = 0; i < 6; i++)
 			{
-				SpawnAnt(AntColor.White);
+				SpawnAnt(AntType.White);
 				yield return new WaitForSeconds(1.6f);
 			}
+			break;
+		case 4:
+			for (int i = 0; i < 20; i++)
+			{
+				SpawnAnt(AntType.Black);
+				yield return new WaitForSeconds(1f);
+			}
+			break;
+		case 5:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.Black);
+				yield return new WaitForSeconds(1f);
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				SpawnAnt(AntType.White);
+				yield return new WaitForSeconds(1.6f);
+			}
+			break;
+		case 6:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.White);
+				yield return new WaitForSeconds(1f);
+			}
+			break;
+		case 7:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.Blue);
+				yield return new WaitForSeconds(1.6f);
+			}
+			break;
+		case 8:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.White);
+				yield return new WaitForSeconds(1.6f);
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				SpawnAnt(AntType.Green);
+				yield return new WaitForSeconds(1.6f);
+			}
+			break;
+		case 9:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.Green);
+				yield return new WaitForSeconds(1.6f);
+			}
+			break;
+		case 10:
+			SpawnAnt(AntType.Yellow);
 			break;
 		}
 

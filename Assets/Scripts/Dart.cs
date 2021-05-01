@@ -1,10 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DartType
+{
+	Sharp,
+	Explosive,
+	HyperSonic,
+}
+
 public class Dart: MonoBehaviour
 {
+	public DartType type;
 	public int pierce;
+	public int damage;
 	public float speed;
 	public float timeout;
 
@@ -28,7 +38,7 @@ public class Dart: MonoBehaviour
 	{
 		if (pierce > 0 && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 		{
-			other.GetComponent<Ant>().Pop();
+			other.GetComponent<Ant>().Pop(this);
 			pierce--;
 
 			if (pierce <= 0)
