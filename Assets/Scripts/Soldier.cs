@@ -78,6 +78,7 @@ public class Soldier: Tower
 				pierce += 2;
 				break;
 			case Tier.Tier2:
+				transform.Find("View").localScale = new Vector3(1, 1, 1);
 				break;
 			case Tier.Tier3:
 				pierce += 3;
@@ -127,6 +128,42 @@ public class Soldier: Tower
 			},
 
 			_ => null,
+		};
+	}
+
+	public override int UpgradePrice(Path path, Tier tier)
+	{
+		return path switch
+		{
+			Path.Path1 => tier switch
+			{
+				Tier.Tier0 => 50,
+				Tier.Tier1 => 500,
+				Tier.Tier2 => 900,
+				Tier.Tier3 => 1200,
+				Tier.Tier4 => 4300,
+				_ => 0,
+			},
+			Path.Path2 => tier switch
+			{
+				Tier.Tier0 => 100,
+				Tier.Tier1 => 120,
+				Tier.Tier2 => 900,
+				Tier.Tier3 => 1200,
+				Tier.Tier4 => 10000,
+				_ => 0,
+			},
+			Path.Path3 => tier switch
+			{
+				Tier.Tier0 => 120,
+				Tier.Tier1 => 350,
+				Tier.Tier2 => 1700,
+				Tier.Tier3 => 4000,
+				Tier.Tier4 => 3000,
+				_ => 0,
+			},
+
+			_ => 0,
 		};
 	}
 

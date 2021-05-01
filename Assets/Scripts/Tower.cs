@@ -36,6 +36,9 @@ public abstract class Tower: MonoBehaviour
 		switch (path)
 		{
 		case Path.Path1:
+			if (GameManager.Instance.Money < UpgradePrice(path, path1Tier))
+				break;
+
 			if (disPath == path)
 				break;
 
@@ -56,10 +59,14 @@ public abstract class Tower: MonoBehaviour
 				if (path3Tier > Tier.Tier0)
 					disPath = Path.Path2;
 
+				GameManager.Instance.Money -= UpgradePrice(path, path1Tier - 1);
 				UpgradeInternal(path);
 			}
 			break;
 		case Path.Path2:
+			if (GameManager.Instance.Money < UpgradePrice(path, path2Tier))
+				break;
+
 			if (disPath == path)
 				break;
 
@@ -80,10 +87,14 @@ public abstract class Tower: MonoBehaviour
 				if (path3Tier > Tier.Tier0)
 					disPath = Path.Path1;
 
+				GameManager.Instance.Money -= UpgradePrice(path, path2Tier - 1);
 				UpgradeInternal(path);
 			}
 			break;
 		case Path.Path3:
+			if (GameManager.Instance.Money < UpgradePrice(path, path3Tier))
+				break;
+
 			if (disPath == path)
 				break;
 
@@ -104,6 +115,7 @@ public abstract class Tower: MonoBehaviour
 				if (path2Tier > Tier.Tier0)
 					disPath = Path.Path1;
 
+				GameManager.Instance.Money -= UpgradePrice(path, path3Tier - 1);
 				UpgradeInternal(path);
 			}
 			break;
@@ -121,6 +133,18 @@ public abstract class Tower: MonoBehaviour
 			Path.Path2 => UpgradeName(path, path2Tier),
 			Path.Path3 => UpgradeName(path, path3Tier),
 			_ => null,
+		};
+	}
+
+	public abstract int UpgradePrice(Path path, Tier tier);
+	public int UpgradePrice(Path path)
+	{
+		return path switch
+		{
+			Path.Path1 => UpgradePrice(path, path1Tier),
+			Path.Path2 => UpgradePrice(path, path2Tier),
+			Path.Path3 => UpgradePrice(path, path3Tier),
+			_ => 0,
 		};
 	}
 }
