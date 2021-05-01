@@ -27,10 +27,11 @@ public class Ant: MonoBehaviour
 		{
 			transform.position = nextCheckpoint.position;
 			nextCheckIndex++;
-			if (nextCheckIndex > checkpoints.Length)
+			if (nextCheckIndex >= checkpoints.Length)
 			{
 				print("Leaked!");
 				Destroy(gameObject);
+				return;
 			}
 			nextCheckpoint = checkpoints[nextCheckIndex];
 		}

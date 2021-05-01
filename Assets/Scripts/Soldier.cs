@@ -32,9 +32,10 @@ public class Soldier: MonoBehaviour
 				dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
 				dart.GetComponent<Dart>().dir = dir;
+				yield return new WaitForSeconds(reloadSpeed);
 			}
 
-			yield return new WaitForSeconds(reloadSpeed);
+			yield return new WaitForFixedUpdate();
 		}
 	}
 

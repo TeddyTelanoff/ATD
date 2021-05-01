@@ -59,6 +59,7 @@
     <Compile Include="Assets\Scripts\Soldier.cs" />
     <Compile Include="Assets\Scripts\Ant.cs" />
     <Compile Include="Assets\Scripts\Dart.cs" />
+    <Compile Include="Assets\Scripts\AntSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
