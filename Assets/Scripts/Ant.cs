@@ -35,7 +35,7 @@ public class Ant: MonoBehaviour
 		Vector3 dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
-		if (dir.sqrMagnitude < speed * speed)
+		if (dir.sqrMagnitude < speed * speed * Time.deltaTime * Time.deltaTime)
 		{
 			transform.position = nextCheckpoint.position;
 			nextCheckIndex++;
