@@ -5,6 +5,7 @@ using TMPro;
 
 public class AntSpawner: MonoBehaviour
 {
+	public Transform parent;
 	public Transform[] checkpoints;
 	public GameObject antPrefab;
 	public int round;
@@ -29,7 +30,7 @@ public class AntSpawner: MonoBehaviour
 
 	public void SpawnAnt(AntColor color)
 	{
-		var ant = Instantiate(antPrefab);
+		var ant = Instantiate(antPrefab, parent);
 		ant.transform.position = checkpoints[0].position;
 		ant.GetComponent<Ant>().checkpoints = checkpoints;
 		ant.GetComponent<Ant>().color = color;

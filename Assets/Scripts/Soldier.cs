@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Soldier: Tower
 {
+	public override string Name { get => "Soldier"; }
+
 	public GameObject dartPrefab;
 	public float reloadSpeed;
 
@@ -14,6 +16,47 @@ public class Soldier: Tower
 
 	private void Start() =>
 		StartCoroutine(FireLoop());
+
+	protected override void UpgradeInternal(Path path)
+	{
+		print($"Upgrading to {path}");
+	}
+
+	public override string UpgradeName(Path path, Tier tier)
+	{
+		return path switch
+		{
+			Path.Path1 => tier switch
+			{
+				Tier.Tier0 => "Bigger Barrel",
+				Tier.Tier1 => "Cannon",
+				Tier.Tier2 => "Missle Launcher",
+				Tier.Tier3 => "Boom Box",
+				Tier.Tier4 => "Tzar Bomba",
+				_ => null,
+			},
+			Path.Path2 => tier switch
+			{
+				Tier.Tier0 => "Faster Barrel",
+				Tier.Tier1 => "Better Stock",
+				Tier.Tier2 => "BB Gun",
+				Tier.Tier3 => "Hot Rifle",
+				Tier.Tier4 => "Gamer Gun",
+				_ => null,
+			},
+			Path.Path3 => tier switch
+			{
+				Tier.Tier0 => "Iron Dart",
+				Tier.Tier1 => "Night Vision",
+				Tier.Tier2 => "Dart Ricochet",
+				Tier.Tier3 => "X-Ray Vision",
+				Tier.Tier4 => "Ants Finding Society",
+				_ => null,
+			},
+
+			_ => null,
+		};
+	}
 
 	public override void Fire(Ant ant)
 	{
@@ -73,5 +116,10 @@ public class Soldier: Tower
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 			antsInRange.Remove(other.GetComponent<Ant>());
+	}
+
+	private void OnMouseUpAsButton()
+	{
+		TowerManager.Instance.Select(this);
 	}
 }

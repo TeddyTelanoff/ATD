@@ -61,7 +61,7 @@
     <Compile Include="Assets\Scripts\Dart.cs" />
     <Compile Include="Assets\Scripts\Tower.cs" />
     <Compile Include="Assets\Scripts\Ant.cs" />
-    <Compile Include="Assets\Scripts\TowerSpawner.cs" />
+    <Compile Include="Assets\Scripts\TowerManager.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
