@@ -1,33 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soldier: MonoBehaviour, Tower
+public class Soldier: Tower
 {
+	public GameObject placementNotifier;
 	public GameObject dartPrefab;
 	public float reloadSpeed;
 
 	[Header("Don t Touch")]
 	public List<Ant> antsInRange;
+	public bool placing;
 
 	private void Start() =>
 		StartCoroutine(FireLoop());
 
-	public void Fire(Ant ant)
+	public override void Fire(Ant ant)
 	{
-		Vector2 dir = ant.transform.position - transform.position;
-		dir.Normalize();
-		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+		try
+		{
+			Vector2 dir = ant.transform.position - transform.position;
+			dir.Normalize();
+			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
-		var dart = Instantiate(dartPrefab);
-		dart.transform.position = transform.position;
-		dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+			var dart = Instantiate(dartPrefab);
+			dart.transform.position = transform.position;
+			dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
-		dart.GetComponent<Dart>().dir = dir;
+			dart.GetComponent<Dart>().dir = dir;
+			dart.GetComponent<Dart>().pierce = pierce;
+		}
+		catch (NullReferenceException e)
+		{ }
 	}
 
 	private IEnumerator FireLoop()
 	{
+		placementNotifier.SetActive(true);
+
+		while (placing)
+		{
+			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
+
+			if (Input.GetMouseButtonUp(0))
+				placing = false;
+
+			yield return null;
+		}
+
+		placementNotifier.SetActive(false);
+
 		while (true)
 		{
 			if (antsInRange.Count > 0)

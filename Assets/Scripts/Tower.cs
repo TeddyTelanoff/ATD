@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Tower
+public abstract class Tower: MonoBehaviour
 {
-	public void Fire(Ant ant);
+	public int pierce;
+
+	public abstract void Fire(Ant ant);
 }

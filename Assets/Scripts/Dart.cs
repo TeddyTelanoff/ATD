@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dart: MonoBehaviour
 {
+	public int pierce;
 	public float speed;
 	public float timeout;
 
@@ -25,10 +26,13 @@ public class Dart: MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
+		if (pierce > 0 && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 		{
 			Destroy(other.gameObject);
-			Destroy(gameObject);
+			pierce--;
+
+			if (pierce <= 0)
+				Destroy(gameObject);
 		}
 	}
 }
