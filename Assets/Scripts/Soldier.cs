@@ -31,9 +31,9 @@ public class Soldier: Tower
 			dart.GetComponent<Dart>().pierce = pierce;
 		}
 		catch (NullReferenceException)
-		{ }
+		{ antsInRange.RemoveAll(item => item == null); }
 		catch (MissingReferenceException)
-		{ }
+		{ antsInRange.RemoveAll(item => item == null); }
 	}
 
 	private IEnumerator FireLoop()
