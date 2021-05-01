@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pierce: 2
   dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
-  reloadSpeed: 1.5
+  reloadSpeed: 1.3
   antsInRange: []
   placing: 1
 --- !u!50 &1795074292609758919

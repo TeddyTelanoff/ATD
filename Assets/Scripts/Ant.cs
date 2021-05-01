@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
+	public AntColor color;
 	public float speed;
 
 	[Header("Don't Touch")]
@@ -16,6 +17,8 @@ public class Ant: MonoBehaviour
 	{
 		nextCheckpoint = checkpoints[0];
 		speedSqrd = speed * speed;
+
+		UpdateColor();
 	}
 
 	private void FixedUpdate()
@@ -39,6 +42,43 @@ public class Ant: MonoBehaviour
 			transform.position += speed * dir.normalized * Time.deltaTime;
 	}
 
+	public void Pop()
+	{
+		switch (color)
+		{
+		case AntColor.Black:
+			Destroy(gameObject);
+			break;
+		case AntColor.White:
+			color = AntColor.Black;
+			break;
+		case AntColor.Blue:
+			color = AntColor.White;
+			break;
+		}
+
+		UpdateColor();
+	}
+
+	public void UpdateColor()
+	{
+		Color matCol = Color.black;
+		switch (color)
+		{
+		case AntColor.Black:
+			matCol = Color.gray;
+			break;
+		case AntColor.White:
+			matCol = Color.white;
+			break;
+		case AntColor.Blue:
+			matCol = Color.blue;
+			break;
+		}
+
+		GetComponent<Renderer>().material.color = matCol;
+	}
+
 	private void OnDrawGizmos()
 	{
 		if (!(nextCheckpoint is null))
@@ -47,4 +87,11 @@ public class Ant: MonoBehaviour
 			Gizmos.DrawLine(transform.position, nextCheckpoint.position);
 		}
 	}
+}
+
+public enum AntColor
+{
+	Black,
+	White,
+	Blue,
 }

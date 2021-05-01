@@ -28,7 +28,7 @@ public class Dart: MonoBehaviour
 	{
 		if (pierce > 0 && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 		{
-			Destroy(other.gameObject);
+			other.GetComponent<Ant>().Pop();
 			pierce--;
 
 			if (pierce <= 0)

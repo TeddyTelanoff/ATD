@@ -13,8 +13,8 @@ public class AntSpawner: MonoBehaviour
 	{
 		if (!int.TryParse(input.text, out round))
 		{
-			round = 0;
-			input.text = "0";
+			round = 1;
+			input.text = "1";
 		}
 	}
 
@@ -27,11 +27,12 @@ public class AntSpawner: MonoBehaviour
 	public void PlayRound() =>
 		StartCoroutine(PlayRoundInternal());
 
-	public void SpawnAnt()
+	public void SpawnAnt(AntColor color)
 	{
 		var ant = Instantiate(antPrefab);
 		ant.transform.position = checkpoints[0].position;
 		ant.GetComponent<Ant>().checkpoints = checkpoints;
+		ant.GetComponent<Ant>().color = color;
 	}
 
 	private IEnumerator PlayRoundInternal()
@@ -41,21 +42,21 @@ public class AntSpawner: MonoBehaviour
 		case 1:
 			for (int i = 0; i < 14; i++)
 			{
-				SpawnAnt();
+				SpawnAnt(AntColor.Black);
 				yield return new WaitForSeconds(1.2f);
 			}
 			break;
 		case 2:
-			for (int i = 0; i < 16; i++)
+			for (int i = 0; i < 12; i++)
 			{
-				SpawnAnt();
+				SpawnAnt(AntColor.Black);
 				yield return new WaitForSeconds(1f);
 			}
 			break;
 		case 3:
 			for (int i = 0; i < 6; i++)
 			{
-				SpawnAnt();
+				SpawnAnt(AntColor.White);
 				yield return new WaitForSeconds(1.6f);
 			}
 			break;
