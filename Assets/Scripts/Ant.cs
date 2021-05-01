@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AntType
+public enum AntType: int
 {
+	None,
+
 	Black,
 	White,
 	Blue,
@@ -39,7 +41,7 @@ public class Ant: MonoBehaviour
 			nextCheckIndex++;
 			if (nextCheckIndex >= checkpoints.Length)
 			{
-				print("Leaked!");
+				GameManager.Instance.Health -= (int)type;
 				Destroy(gameObject);
 				return;
 			}
@@ -53,6 +55,8 @@ public class Ant: MonoBehaviour
 	{
 		for (int i = 0; i < dart.damage; i++)
 		{
+			GameManager.Instance.Money++;
+
 			switch (type)
 			{
 			case AntType.Black:
