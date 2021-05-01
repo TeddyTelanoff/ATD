@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20630d5f8fa0616479ff03bee5e858e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pierce: 1
+  pierce: 2
   dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
   reloadSpeed: 1.5
   antsInRange: []
