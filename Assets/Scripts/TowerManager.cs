@@ -5,7 +5,7 @@ using TMPro;
 
 public class TowerManager : MonoBehaviour
 {
-	public const string upgradeLocked = "UPGRADE LOCKED", maxUpgrade = "MAXED UPGRADE";
+	public const string upgradeLocked = "PATH LOCKED", maxUpgrade = "MAXED UPGRADE";
 	public static TowerManager Instance { get; private set; }
 
 	public Transform parent;
@@ -33,6 +33,9 @@ public class TowerManager : MonoBehaviour
 	{
 		if (spawning)
 		{
+			if (GameManager.Instance.Money < 350)
+				return;
+
 			var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
 			towers.Add(tower);
 			spawning = false;

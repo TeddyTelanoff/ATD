@@ -46,6 +46,8 @@ public class AntSpawner: MonoBehaviour
 
 	private IEnumerator PlayRoundInternal()
 	{
+		int moneyEarned = 100;
+
 		switch (round)
 		{
 		case 1:
@@ -123,12 +125,13 @@ public class AntSpawner: MonoBehaviour
 			break;
 		case 10:
 			SpawnAnt(AntType.Yellow);
+			moneyEarned = 150;
 			break;
 		}
 
 		while (!RoundOver())
 			yield return new WaitForFixedUpdate();
-		GameManager.Instance.Money += 100;
+		GameManager.Instance.Money += moneyEarned;
 		round++;
 
 		roundTxt.text = round.ToString();

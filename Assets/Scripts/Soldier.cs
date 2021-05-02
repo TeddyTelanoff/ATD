@@ -197,7 +197,12 @@ public class Soldier: Tower
 			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
 
 			if (Input.GetMouseButtonUp(0))
+			{
+				GameManager.Instance.Money -= 350;
 				placing = false;
+			}
+			else if (Input.GetMouseButtonUp(1))
+				Destroy(gameObject);
 
 			yield return null;
 		}
