@@ -26,7 +26,7 @@ public class Soldier: Tower
 			switch (path1Tier)
 			{
 			case Tier.Tier1:
-				pierce++;
+				damage++;
 				break;
 			case Tier.Tier2:
 				damage++;
@@ -169,24 +169,37 @@ public class Soldier: Tower
 
 	public override void Fire(Ant ant)
 	{
+		Vector2 dir = ant.transform.position - transform.position;
+		dir.Normalize();
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		var dart = Instantiate(dartPrefab);
+		dart.transform.position = transform.position;
+		dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		dart.GetComponent<Dart>().dir = dir;
+		dart.GetComponent<Dart>().pierce = pierce;
+		dart.GetComponent<Dart>().damage = damage;
+	}
+
+	private void TryFireFirst()
+	{
+		var ant = antsInRange[0];
+
 		try
-		{
-			Vector2 dir = ant.transform.position - transform.position;
-			dir.Normalize();
-			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-			var dart = Instantiate(dartPrefab);
-			dart.transform.position = transform.position;
-			dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-
-			dart.GetComponent<Dart>().dir = dir;
-			dart.GetComponent<Dart>().pierce = pierce;
-			dart.GetComponent<Dart>().damage = damage;
-		}
+		{ Fire(ant); }
 		catch (NullReferenceException)
-		{ antsInRange.RemoveAll(item => item == null); }
+		{
+			antsInRange.RemoveAll(item => item == null);
+			if (antsInRange.Count > 0)
+				TryFireFirst();
+		}
 		catch (MissingReferenceException)
-		{ antsInRange.RemoveAll(item => item == null); }
+		{
+			antsInRange.RemoveAll(item => item == null);
+			if (antsInRange.Count > 0)
+				TryFireFirst();
+		}
 	}
 
 	private IEnumerator FireLoop()
@@ -198,7 +211,7 @@ public class Soldier: Tower
 
 			if (Input.GetMouseButtonUp(0))
 			{
-				GameManager.Instance.Money -= 350;
+				GameManager.Instance.Money -= 200;
 				placing = false;
 			}
 			else if (Input.GetMouseButtonUp(1))
@@ -211,8 +224,7 @@ public class Soldier: Tower
 		{
 			if (antsInRange.Count > 0)
 			{
-				var ant = antsInRange[0];
-				Fire(ant);
+				TryFireFirst();
 
 				yield return new WaitForSeconds(reload);
 			}
@@ -233,8 +245,6 @@ public class Soldier: Tower
 			antsInRange.Remove(other.GetComponent<Ant>());
 	}
 
-	private void OnMouseUpAsButton()
-	{
+	private void OnMouseUpAsButton() =>
 		TowerManager.Instance.Select(this);
-	}
 }

@@ -51,6 +51,9 @@ public class Ant: MonoBehaviour
 			transform.position += speed * dir.normalized * Time.deltaTime;
 	}
 
+	public void Split() =>
+		Instantiate(this).transform.position += (Vector3)Random.insideUnitCircle;
+
 	public void Pop(Dart dart)
 	{
 		for (int i = 0; i < dart.damage; i++)
@@ -70,22 +73,21 @@ public class Ant: MonoBehaviour
 				break;
 			case AntType.Green:
 				type = AntType.White;
-				Instantiate(this).transform.position = transform.position;
 				break;
 			case AntType.Yellow:
 				type = AntType.Blue;
-				Instantiate(this).transform.position = transform.position;
+				Split();
 				type = AntType.Green;
-				Instantiate(this).transform.position = transform.position;
+				Split();
 				break;
 			case AntType.Brown:
 				type = AntType.Green;
-				Instantiate(this).transform.position = transform.position;
-				Instantiate(this).transform.position = transform.position;
-				Instantiate(this).transform.position = transform.position;
-				Instantiate(this).transform.position = transform.position;
+				Split();
+				Split();
+				Split();
+				Split();
 				type = AntType.Blue;
-				Instantiate(this).transform.position = transform.position;
+				Split();
 				break;
 			}
 		}

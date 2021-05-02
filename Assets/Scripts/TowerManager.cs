@@ -33,7 +33,7 @@ public class TowerManager : MonoBehaviour
 	{
 		if (spawning)
 		{
-			if (GameManager.Instance.Money < 350)
+			if (GameManager.Instance.Money < 200)
 				return;
 
 			var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
