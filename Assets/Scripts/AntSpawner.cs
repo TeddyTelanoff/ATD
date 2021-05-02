@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,18 @@ public class AntSpawner: MonoBehaviour
 	public Transform parent;
 	public Transform[] checkpoints;
 	public GameObject antPrefab;
+	public TMP_InputField roundTxt;
 	public int round;
 
-	public void SetRoundFromInput(TMP_InputField input)
+	private void Start() =>
+		roundTxt.text = round.ToString();
+
+	public void SetRoundFromInput()
 	{
-		if (!int.TryParse(input.text, out round))
+		if (!int.TryParse(roundTxt.text, out round))
 		{
 			round = 1;
-			input.text = "1";
+			roundTxt.text = "1";
 		}
 	}
 
@@ -27,6 +32,9 @@ public class AntSpawner: MonoBehaviour
 
 	public void PlayRound() =>
 		StartCoroutine(PlayRoundInternal());
+
+	public Boolean RoundOver() =>
+		parent.childCount <= 0;
 
 	public void SpawnAnt(AntType type)
 	{
@@ -118,6 +126,11 @@ public class AntSpawner: MonoBehaviour
 			break;
 		}
 
-		yield return null;
+		while (!RoundOver())
+			yield return new WaitForFixedUpdate();
+		GameManager.Instance.Money += 100;
+		round++;
+
+		roundTxt.text = round.ToString();
 	}
 }

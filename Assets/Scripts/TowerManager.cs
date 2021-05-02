@@ -93,10 +93,10 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path2:
-				UpdatePath(Path.Path2, Path.Path3, pt2, pp2, pt3, pp3);
+				UpdatePath(Path.Path2, Path.Path3, selectedTower.path3Tier, pt2, pp2, pt3, pp3);
 				break;
 			case Path.Path3:
-				UpdatePath(Path.Path3, Path.Path2, pt3, pp3, pt2, pp2);
+				UpdatePath(Path.Path3, Path.Path2, selectedTower.path2Tier, pt3, pp3, pt2, pp2);
 				break;
 
 			default:
@@ -111,10 +111,10 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path1:
-				UpdatePath(Path.Path1, Path.Path3, pt1, pp1, pt3, pp3);
+				UpdatePath(Path.Path1, Path.Path3, selectedTower.path3Tier, pt1, pp1, pt3, pp3);
 				break;
 			case Path.Path3:
-				UpdatePath(Path.Path3, Path.Path1, pt3, pp3, pt1, pp1);
+				UpdatePath(Path.Path3, Path.Path1, selectedTower.path1Tier, pt3, pp3, pt1, pp1);
 				break;
 
 			default:
@@ -129,10 +129,10 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path1:
-				UpdatePath(Path.Path1, Path.Path2, pt1, pp1, pt2, pp2);
+				UpdatePath(Path.Path1, Path.Path2, selectedTower.path2Tier, pt1, pp1, pt2, pp2);
 				break;
 			case Path.Path2:
-				UpdatePath(Path.Path2, Path.Path1, pt2, pp2, pt1, pp1);
+				UpdatePath(Path.Path2, Path.Path1, selectedTower.path1Tier, pt2, pp2, pt1, pp1);
 				break;
 
 			default:
@@ -154,14 +154,14 @@ public class TowerManager : MonoBehaviour
 		ppb.text = $"${selectedTower.UpgradePrice(b)}";
 	}
 
-	private void UpdatePath(Path prim, Path sec,
+	private void UpdatePath(Path prim, Path sec, Tier secTier,
 		TMP_Text pt1, TMP_Text pp1,
 			TMP_Text pt2, TMP_Text pp2)
 	{
 		pt1.text = selectedTower.UpgradeName(prim) ?? maxUpgrade;
 		pp1.text = $"${selectedTower.UpgradePrice(prim)}";
 
-		if (selectedTower.path3Tier < Tier.Tier2)
+		if (secTier < Tier.Tier2)
 		{
 			pt2.text = selectedTower.UpgradeName(sec);
 			pp2.text = $"${selectedTower.UpgradePrice(sec)}";
