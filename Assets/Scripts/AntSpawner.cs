@@ -6,14 +6,20 @@ using TMPro;
 
 public class AntSpawner: MonoBehaviour
 {
+	public static AntSpawner Instance { get; private set; }
+
+	public AudioSource antPop;
 	public Transform parent;
 	public Transform[] checkpoints;
 	public GameObject antPrefab;
 	public TMP_InputField roundTxt;
 	public int round;
 
-	private void Start() =>
+	private void Start()
+	{
+		Instance = this;
 		roundTxt.text = round.ToString();
+	}
 
 	public void SetRoundFromInput()
 	{
@@ -36,12 +42,16 @@ public class AntSpawner: MonoBehaviour
 	public Boolean RoundOver() =>
 		parent.childCount <= 0;
 
-	public void SpawnAnt(AntType type)
+	public Ant SpawnAnt(AntType type)
 	{
-		var ant = Instantiate(antPrefab, parent);
-		ant.transform.position = checkpoints[0].position;
-		ant.GetComponent<Ant>().checkpoints = checkpoints;
-		ant.GetComponent<Ant>().type = type;
+		var obj = Instantiate(antPrefab, parent);
+		obj.transform.position = checkpoints[0].position;
+
+		var ant = obj.GetComponent<Ant>();
+		ant.checkpoints = checkpoints;
+		ant.pop = antPop;
+		ant.type = type;
+		return ant;
 	}
 
 	private IEnumerator PlayRoundInternal()

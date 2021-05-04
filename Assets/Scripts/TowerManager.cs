@@ -15,31 +15,21 @@ public class TowerManager : MonoBehaviour
 	[Header("No Peeking")]
 	public List<Tower> towers;
 	public Tower selectedTower;
-	public bool spawning;
 
 	private void Start() =>
 		Instance = this;
 
 	public void Spawn() =>
-		spawning = true;
+		StartCoroutine(CoSpawn());
 
-	private void Update()
+	private IEnumerator CoSpawn()
 	{
-		if (Input.GetKeyUp(KeyCode.Return))
-			DeSelect();
-	}
+		if (GameManager.Instance.Money < 200)
+			yield return null;
 
-	public void FixedUpdate()
-	{
-		if (spawning)
-		{
-			if (GameManager.Instance.Money < 200)
-				return;
-
-			var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
-			towers.Add(tower);
-			spawning = false;
-		}
+		yield return new WaitForFixedUpdate();
+		var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
+		towers.Add(tower);
 	}
 
 	public void Upgrade(int path)
@@ -51,12 +41,16 @@ public class TowerManager : MonoBehaviour
 	public void Select(Tower tower)
 	{
 		selectedTower = tower;
+		selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = true;
 		upgradePanel.SetActive(true);
 		UpdatePaths();
 	}
 
 	public void DeSelect()
 	{
+		if (selectedTower)
+			selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = false;
+
 		selectedTower = null;
 		upgradePanel.SetActive(false);
 	}

@@ -5516,6 +5516,7 @@ MonoBehaviour:
   speed: 0
   props: 0
   flameSystem: {fileID: 191880744899336094}
+  pop: {fileID: 0}
   nextCheckIndex: 0
   nextCheckpoint: {fileID: 0}
 --- !u!70 &2257595214409899375

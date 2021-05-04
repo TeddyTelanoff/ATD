@@ -12,13 +12,6 @@ public class Soldier: Tower
 	public bool flaming;
 	public int damage;
 
-	[Header("Don t Touch")]
-	public List<Ant> antsInRange;
-	public bool placing;
-
-	private void Start() =>
-		StartCoroutine(FireLoop());
-
 	protected override void UpgradeInternal(Path path)
 	{
 		switch (path)
@@ -186,44 +179,8 @@ public class Soldier: Tower
 			dart.GetComponent<Dart>().props |= DartProperty.Flame;
 	}
 
-	private void TryFireFirst()
+	protected override IEnumerator FireLoop()
 	{
-		var ant = antsInRange[0];
-
-		try
-		{ Fire(ant); }
-		catch (NullReferenceException)
-		{
-			antsInRange.RemoveAll(item => item == null);
-			if (antsInRange.Count > 0)
-				TryFireFirst();
-		}
-		catch (MissingReferenceException)
-		{
-			antsInRange.RemoveAll(item => item == null);
-			if (antsInRange.Count > 0)
-				TryFireFirst();
-		}
-	}
-
-	private IEnumerator FireLoop()
-	{
-		while (placing)
-		{
-			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
-
-			if (Input.GetMouseButtonUp(0))
-			{
-				GameManager.Instance.Money -= 200;
-				placing = false;
-			}
-			else if (Input.GetMouseButtonUp(1))
-				Destroy(gameObject);
-
-			yield return null;
-		}
-
 		while (true)
 		{
 			if (antsInRange.Count > 0)
@@ -236,19 +193,4 @@ public class Soldier: Tower
 			yield return new WaitForFixedUpdate();
 		}
 	}
-
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
-			antsInRange.Add(other.GetComponent<Ant>());
-	}
-
-	private void OnTriggerExit2D(Collider2D other)
-	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
-			antsInRange.Remove(other.GetComponent<Ant>());
-	}
-
-	private void OnMouseUpAsButton() =>
-		TowerManager.Instance.Select(this);
 }

@@ -29,6 +29,7 @@ public class Ant: MonoBehaviour
 	public float speed;
 	public AntProperty props;
 	public ParticleSystem flameSystem;
+	public AudioSource pop;
 
 	[Header("Don't Touch")]
 	public int nextCheckIndex;
@@ -65,8 +66,13 @@ public class Ant: MonoBehaviour
 			transform.position += speed * dir.normalized * Time.deltaTime;
 	}
 
-	public void Split() =>
-		Instantiate(this).transform.position += (Vector3)Random.insideUnitCircle;
+	public void Split()
+	{
+		var ant = AntSpawner.Instance.SpawnAnt(type);
+		ant.transform.position = transform.position + (Vector3)Random.insideUnitCircle;
+		ant.nextCheckIndex = nextCheckIndex;
+		ant.props = props;
+	}
 
 	public void Pop(Dart dart)
 	{
@@ -92,6 +98,7 @@ public class Ant: MonoBehaviour
 	public void Pop()
 	{
 		GameManager.Instance.Money++;
+		pop.Play();
 
 		switch (type)
 		{
@@ -174,8 +181,9 @@ public class Ant: MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		if (!(nextCheckpoint is null))
+		if (nextCheckpoint)
 		{
+			print(nextCheckpoint);
 			Gizmos.color = Color.white;
 			Gizmos.DrawLine(transform.position, nextCheckpoint.position);
 		}

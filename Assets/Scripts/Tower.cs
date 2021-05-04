@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,12 +25,19 @@ public abstract class Tower: MonoBehaviour
 {
 	public abstract string Name { get; }
 
+	[Header("Don t Touch")]
+	public List<Ant> antsInRange;
+	public bool placing;
+
 	public int pierce;
 	public Path primPath;
 	public Path disPath;
 	public Tier path1Tier;
 	public Tier path2Tier;
 	public Tier path3Tier;
+
+	private void Start() =>
+		StartCoroutine(Place());
 
 	public void Upgrade(Path path)
 	{
@@ -147,4 +155,62 @@ public abstract class Tower: MonoBehaviour
 			_ => 0,
 		};
 	}
+
+	protected abstract IEnumerator FireLoop();
+
+	protected void TryFireFirst()
+	{
+		var ant = antsInRange[0];
+
+		try
+		{ Fire(ant); }
+		catch (NullReferenceException)
+		{
+			antsInRange.RemoveAll(item => item == null);
+			if (antsInRange.Count > 0)
+				TryFireFirst();
+		}
+		catch (MissingReferenceException)
+		{
+			antsInRange.RemoveAll(item => item == null);
+			if (antsInRange.Count > 0)
+				TryFireFirst();
+		}
+	}
+
+	private IEnumerator Place()
+	{
+		while (placing)
+		{
+			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
+
+			if (Input.GetMouseButtonUp(0))
+			{
+				GameManager.Instance.Money -= 200;
+				placing = false;
+			}
+			else if (Input.GetMouseButtonUp(1))
+				Destroy(gameObject);
+
+			yield return null;
+		}
+
+		StartCoroutine(FireLoop());
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
+			antsInRange.Add(other.GetComponent<Ant>());
+	}
+
+	private void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
+			antsInRange.Remove(other.GetComponent<Ant>());
+	}
+
+	public void Select() =>
+		TowerManager.Instance.Select(this);
 }
