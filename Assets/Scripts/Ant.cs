@@ -84,6 +84,9 @@ public class Ant: MonoBehaviour
 
 	public void Pop(Dart dart)
 	{
+		if (props.HasFlag(AntProperty.Camo) && !dart.props.HasFlag(DartProperty.Camo))
+			return;
+
 		if (dart.props.HasFlag(DartProperty.Flame))
 		{
 			effect = AntEffect.Flame;

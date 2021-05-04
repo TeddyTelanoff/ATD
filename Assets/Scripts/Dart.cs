@@ -8,7 +8,8 @@ public enum DartProperty
 {
 	None,
 
-	Flame = 1 << 0,
+	Camo = 1 << 0,
+	Flame = 1 << 1,
 }
 
 public enum DartType

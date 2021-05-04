@@ -54,6 +54,15 @@ public class AntSpawner: MonoBehaviour
 		return ant;
 	}
 
+	public IEnumerator SpawnAnts(AntType type, int count, float interval)
+	{
+		for (int i = 0; i < count; i++)
+		{
+			yield return SpawnAnt(type);
+			yield return new WaitForSeconds(interval);
+		}
+	}
+
 	private IEnumerator PlayRoundInternal()
 	{
 		int moneyEarned = 100;
@@ -136,6 +145,9 @@ public class AntSpawner: MonoBehaviour
 		case 10:
 			SpawnAnt(AntType.Yellow);
 			moneyEarned = 150;
+			break;
+		case 11:
+
 			break;
 		}
 
