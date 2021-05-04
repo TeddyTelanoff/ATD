@@ -7,7 +7,14 @@ public enum AntProperty: int
 {
 	None,
 
-	Flame = 1 << 0,
+	Camo = 1 << 0,
+}
+
+public enum AntEffect: int
+{
+	None,
+
+	Flame,
 }
 
 public enum AntType: int
@@ -27,6 +34,7 @@ public class Ant: MonoBehaviour
 	public Transform[] checkpoints;
 	public AntType type;
 	public float speed;
+	public AntEffect effect;
 	public AntProperty props;
 	public ParticleSystem flameSystem;
 	public AudioSource pop;
@@ -40,7 +48,7 @@ public class Ant: MonoBehaviour
 		nextCheckpoint = checkpoints[nextCheckIndex];
 		UpdateType();
 
-		if (props.HasFlag(AntProperty.Flame))
+		if (effect == AntEffect.Flame)
 			flameSystem.Play();
 		StartCoroutine(DPSLoop());
 	}
@@ -78,7 +86,7 @@ public class Ant: MonoBehaviour
 	{
 		if (dart.props.HasFlag(DartProperty.Flame))
 		{
-			props |= AntProperty.Flame;
+			effect = AntEffect.Flame;
 			flameSystem.Play();
 		}
 
@@ -172,7 +180,7 @@ public class Ant: MonoBehaviour
 	{
 		while (true)
 		{
-			if (props.HasFlag(AntProperty.Flame))
+			if (effect == AntEffect.Flame)
 				Pop();
 
 			yield return new WaitForSeconds(1);
