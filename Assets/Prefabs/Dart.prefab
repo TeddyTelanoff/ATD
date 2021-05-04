@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc48624b764e9a4384815f05198c882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  props: 0
   type: 0
   pierce: 0
   damage: 0

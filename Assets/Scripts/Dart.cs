@@ -3,6 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Flags]
+public enum DartProperty
+{
+	None,
+
+	Flame = 1 << 0,
+}
+
 public enum DartType
 {
 	Sharp,
@@ -12,6 +20,7 @@ public enum DartType
 
 public class Dart: MonoBehaviour
 {
+	public DartProperty props;
 	public DartType type;
 	public int pierce;
 	public int damage;

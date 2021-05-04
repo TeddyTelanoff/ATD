@@ -9,6 +9,7 @@ public class Soldier: Tower
 
 	public GameObject dartPrefab;
 	public float reload;
+	public bool flaming;
 	public int damage;
 
 	[Header("Don t Touch")]
@@ -63,6 +64,7 @@ public class Soldier: Tower
 			case Tier.Tier4:
 				pierce += 3;
 				damage++;
+				flaming = true;
 				break;
 			case Tier.Tier5:
 				transform.Find("View").localScale += new Vector3(5, 5);
@@ -180,6 +182,8 @@ public class Soldier: Tower
 		dart.GetComponent<Dart>().dir = dir;
 		dart.GetComponent<Dart>().pierce = pierce;
 		dart.GetComponent<Dart>().damage = damage;
+		if (flaming)
+			dart.GetComponent<Dart>().props |= DartProperty.Flame;
 	}
 
 	private void TryFireFirst()

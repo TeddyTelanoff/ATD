@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Flags]
+public enum AntProperty: int
+{
+	None,
+
+	Flame = 1 << 0,
+}
+
 public enum AntType: int
 {
 	None,
@@ -19,6 +27,8 @@ public class Ant: MonoBehaviour
 	public Transform[] checkpoints;
 	public AntType type;
 	public float speed;
+	public AntProperty props;
+	public ParticleSystem flameSystem;
 
 	[Header("Don't Touch")]
 	public int nextCheckIndex;
@@ -28,6 +38,10 @@ public class Ant: MonoBehaviour
 	{
 		nextCheckpoint = checkpoints[nextCheckIndex];
 		UpdateType();
+
+		if (props.HasFlag(AntProperty.Flame))
+			flameSystem.Play();
+		StartCoroutine(DPSLoop());
 	}
 
 	private void FixedUpdate()
@@ -56,40 +70,58 @@ public class Ant: MonoBehaviour
 
 	public void Pop(Dart dart)
 	{
+		if (dart.props.HasFlag(DartProperty.Flame))
+		{
+			props |= AntProperty.Flame;
+			flameSystem.Play();
+		}
+
 		for (int i = 0; i < dart.damage; i++)
 		{
-			GameManager.Instance.Money++;
+			dart.pierce--;
+			Pop();
+		}
+	}
 
-			switch (type)
-			{
-			case AntType.Black:
-				Destroy(gameObject);
-				return;
-			case AntType.White:
-				type = AntType.Black;
-				break;
-			case AntType.Blue:
-				type = AntType.White;
-				break;
-			case AntType.Green:
-				type = AntType.White;
-				break;
-			case AntType.Yellow:
-				type = AntType.Blue;
-				Split();
-				type = AntType.Green;
-				Split();
-				break;
-			case AntType.Brown:
-				type = AntType.Green;
-				Split();
-				Split();
-				Split();
-				Split();
-				type = AntType.Blue;
-				Split();
-				break;
-			}
+	public void Pop(int damage)
+	{
+		for (int i = 0; i < damage; i++)
+			Pop();
+	}
+
+	public void Pop()
+	{
+		GameManager.Instance.Money++;
+
+		switch (type)
+		{
+		case AntType.Black:
+			Destroy(gameObject);
+			return;
+		case AntType.White:
+			type = AntType.Black;
+			break;
+		case AntType.Blue:
+			type = AntType.White;
+			break;
+		case AntType.Green:
+			type = AntType.White;
+			break;
+		case AntType.Yellow:
+			type = AntType.Blue;
+			Split();
+			type = AntType.Green;
+			Split();
+			break;
+		case AntType.Brown:
+			type = AntType.Green;
+			Split();
+			Split();
+			Split();
+			Split();
+			type = AntType.Blue;
+			Split();
+			break;
 		}
 
 		UpdateType();
@@ -127,6 +159,17 @@ public class Ant: MonoBehaviour
 		}
 
 		GetComponent<Renderer>().material.color = matCol;
+	}
+
+	private IEnumerator DPSLoop()
+	{
+		while (true)
+		{
+			if (props.HasFlag(AntProperty.Flame))
+				Pop();
+
+			yield return new WaitForSeconds(1);
+		}
 	}
 
 	private void OnDrawGizmos()
