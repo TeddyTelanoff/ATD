@@ -15,6 +15,7 @@ public class TowerManager : MonoBehaviour
 	[Header("No Peeking")]
 	public List<Tower> towers;
 	public Tower selectedTower;
+	public bool deselecting;
 
 	private void Start() =>
 		Instance = this;
@@ -38,8 +39,15 @@ public class TowerManager : MonoBehaviour
 		UpdatePaths();
 	}
 
+	public void ReSelect()
+	{
+		if (selectedTower)
+			Select(selectedTower);
+	}
+
 	public void Select(Tower tower)
 	{
+		deselecting = false;
 		selectedTower = tower;
 		selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = true;
 		upgradePanel.SetActive(true);
@@ -48,6 +56,17 @@ public class TowerManager : MonoBehaviour
 
 	public void DeSelect()
 	{
+		deselecting = true;
+		StartCoroutine(CoDeSelect());
+	}
+
+	private IEnumerator CoDeSelect()
+	{
+		yield return new WaitForFixedUpdate();
+
+		if (!deselecting)
+			yield break;
+
 		if (selectedTower)
 			selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = false;
 
