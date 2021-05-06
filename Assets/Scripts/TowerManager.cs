@@ -62,6 +62,7 @@ public class TowerManager : MonoBehaviour
 
 	private IEnumerator CoDeSelect()
 	{
+		yield return new WaitForEndOfFrame();
 		yield return new WaitForFixedUpdate();
 
 		if (!deselecting)
