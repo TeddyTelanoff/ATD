@@ -6,6 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance { get; private set; }
+	public static float FixedDeltaTime { get => 0.02f; }
 
 	public TMP_Text moneyText;
 	public int Money

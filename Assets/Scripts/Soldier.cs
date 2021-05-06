@@ -73,7 +73,7 @@ public class Soldier: Tower
 				pierce += 2;
 				break;
 			case Tier.Tier2:
-				transform.Find("View").localScale = new Vector3(1, 1, 1);
+				transform.Find("View").localScale += new Vector3(1, 1, 1);
 				break;
 			case Tier.Tier3:
 				pierce += 3;

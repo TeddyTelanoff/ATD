@@ -58,7 +58,7 @@ public class Ant: MonoBehaviour
 		Vector3 dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
-		if (dir.sqrMagnitude < speed * speed * Time.deltaTime * Time.deltaTime)
+		if (dir.sqrMagnitude < speed * speed * GameManager.FixedDeltaTime * GameManager.FixedDeltaTime)
 		{
 			transform.position = nextCheckpoint.position;
 			nextCheckIndex++;
@@ -71,7 +71,7 @@ public class Ant: MonoBehaviour
 			nextCheckpoint = checkpoints[nextCheckIndex];
 		}
 		else
-			transform.position += speed * dir.normalized * Time.deltaTime;
+			transform.position += speed * dir.normalized * GameManager.FixedDeltaTime;
 	}
 
 	public void Split()
@@ -194,7 +194,6 @@ public class Ant: MonoBehaviour
 	{
 		if (nextCheckpoint)
 		{
-			print(nextCheckpoint);
 			Gizmos.color = Color.white;
 			Gizmos.DrawLine(transform.position, nextCheckpoint.position);
 		}

@@ -40,8 +40,8 @@ public class Dart: MonoBehaviour
 		if (timeout <= 0)
 			Destroy(gameObject);
 
-		rb.AddForce(speed * dir * Time.deltaTime, ForceMode2D.Impulse);
-		timeout -= Time.deltaTime;
+		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
+		timeout -= GameManager.FixedDeltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
