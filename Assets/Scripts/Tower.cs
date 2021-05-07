@@ -29,12 +29,17 @@ public abstract class Tower: MonoBehaviour
 	public List<Ant> antsInRange;
 	public bool placing;
 
-	public int pierce;
 	public Path primPath;
 	public Path disPath;
 	public Tier path1Tier;
 	public Tier path2Tier;
 	public Tier path3Tier;
+
+	public GameObject dartPrefab;
+	public DartProperty dartProps;
+	public float reload;
+	public int damage;
+	public int pierce;
 
 	private void Start() =>
 		StartCoroutine(Place());
@@ -131,7 +136,6 @@ public abstract class Tower: MonoBehaviour
 	}
 
 	protected abstract void UpgradeInternal(Path path);
-	public abstract void Fire(Ant ant);
 	public abstract string UpgradeName(Path path, Tier tier);
 	public string UpgradeName(Path path)
 	{
@@ -156,7 +160,21 @@ public abstract class Tower: MonoBehaviour
 		};
 	}
 
-	protected abstract IEnumerator FireLoop();
+	public void Fire(Ant ant)
+	{
+		Vector2 dir = ant.transform.position - transform.position;
+		dir.Normalize();
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		var dart = Instantiate(dartPrefab);
+		dart.transform.position = transform.position;
+		dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+
+		dart.GetComponent<Dart>().dir = dir;
+		dart.GetComponent<Dart>().pierce = pierce;
+		dart.GetComponent<Dart>().damage = damage;
+		dart.GetComponent<Dart>().props = dartProps;
+	}
 
 	protected void TryFireFirst()
 	{
@@ -175,6 +193,21 @@ public abstract class Tower: MonoBehaviour
 			antsInRange.RemoveAll(item => item == null);
 			if (antsInRange.Count > 0)
 				TryFireFirst();
+		}
+	}
+
+	private IEnumerator FireLoop()
+	{
+		while (true)
+		{
+			if (antsInRange.Count > 0)
+			{
+				TryFireFirst();
+
+				yield return new WaitForSeconds(reload);
+			}
+
+			yield return new WaitForFixedUpdate();
 		}
 	}
 
