@@ -9,7 +9,7 @@ public class Soldier: Tower
 
 	public GameObject dartPrefab;
 	public float reload;
-	public bool flaming;
+	public DartProperty dartProps;
 	public int damage;
 
 	protected override void UpgradeInternal(Path path)
@@ -57,7 +57,7 @@ public class Soldier: Tower
 			case Tier.Tier4:
 				pierce += 3;
 				damage++;
-				flaming = true;
+				dartProps |= DartProperty.Flame;
 				break;
 			case Tier.Tier5:
 				transform.Find("View").localScale += new Vector3(5, 5);
@@ -73,6 +73,7 @@ public class Soldier: Tower
 				pierce += 2;
 				break;
 			case Tier.Tier2:
+				dartProps |= DartProperty.Camo;
 				transform.Find("View").localScale += new Vector3(1, 1, 1);
 				break;
 			case Tier.Tier3:
@@ -175,8 +176,7 @@ public class Soldier: Tower
 		dart.GetComponent<Dart>().dir = dir;
 		dart.GetComponent<Dart>().pierce = pierce;
 		dart.GetComponent<Dart>().damage = damage;
-		if (flaming)
-			dart.GetComponent<Dart>().props |= DartProperty.Flame;
+		dart.GetComponent<Dart>().props = dartProps;
 	}
 
 	protected override IEnumerator FireLoop()

@@ -42,13 +42,14 @@ public class AntSpawner: MonoBehaviour
 	public Boolean RoundOver() =>
 		parent.childCount <= 0;
 
-	public Ant SpawnAnt(AntType type)
+	public Ant SpawnAnt(AntType type, AntProperty props = AntProperty.None)
 	{
 		var obj = Instantiate(antPrefab, parent);
 		obj.transform.position = checkpoints[0].position;
 
 		var ant = obj.GetComponent<Ant>();
 		ant.checkpoints = checkpoints;
+		ant.props = props;
 		ant.pop = antPop;
 		ant.type = type;
 		return ant;
@@ -191,6 +192,27 @@ public class AntSpawner: MonoBehaviour
 				yield return new WaitForSeconds(1f);
 			}
 			moneyEarned = 150;
+			break;
+		case 16:
+			for (int i = 0; i < 10; i++)
+				SpawnAnt(AntType.Blue);
+			break;
+		case 17:
+			for (int i = 0; i < 40; i++)
+			{
+				SpawnAnt(AntType.Green);
+				yield return new WaitForSeconds(1.6f);
+			}
+			break;
+		case 18:
+			SpawnAnt(AntType.Black, AntProperty.Camo);
+			break;
+		case 19:
+			SpawnAnt(AntType.Yellow, AntProperty.Camo);
+			break;
+		case 20:
+			for (int i = 0; i < 100; i++)
+				SpawnAnt(AntType.Black);
 			break;
 		}
 
