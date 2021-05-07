@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -40,4 +41,10 @@ public class GameManager : MonoBehaviour
 		moneyText.text = $"${_money}";
 		healthText.text = $"{_health}hp";
 	}
+
+	public void UpdateSpeed(float speed) =>
+		Time.timeScale = speed;
+
+	public void UpdateSpeed(Slider slider) =>
+		Time.timeScale = slider.value;
 }

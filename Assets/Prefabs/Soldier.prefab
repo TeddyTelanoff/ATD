@@ -259,7 +259,8 @@ GameObject:
   - component: {fileID: 1795074292609758969}
   - component: {fileID: 1795074292609758968}
   - component: {fileID: 1795074292609758918}
-  - component: {fileID: 1795074292609758919}
+  - component: {fileID: 2757179555575685486}
+  - component: {fileID: 1741332579960026134}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -359,7 +360,7 @@ MonoBehaviour:
   reload: 1.4
   flaming: 0
   damage: 1
---- !u!50 &1795074292609758919
+--- !u!50 &2757179555575685486
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -380,6 +381,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1741332579960026134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795074292609758971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9ca833c1262374099675bd33270208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1795074292609758918}
+        m_TargetAssemblyTypeName: Tower, Assembly-CSharp
+        m_MethodName: DeSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &3886819336751287273
 PrefabInstance:
   m_ObjectHideFlags: 0

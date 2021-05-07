@@ -26,7 +26,7 @@ public class TowerManager : MonoBehaviour
 	private IEnumerator CoSpawn()
 	{
 		if (GameManager.Instance.Money < 200)
-			yield return null;
+			yield break;
 
 		yield return new WaitForFixedUpdate();
 		var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
@@ -48,6 +48,8 @@ public class TowerManager : MonoBehaviour
 	public void Select(Tower tower)
 	{
 		deselecting = false;
+		DeselectInternal();
+
 		selectedTower = tower;
 		selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = true;
 		upgradePanel.SetActive(true);
@@ -60,6 +62,15 @@ public class TowerManager : MonoBehaviour
 		StartCoroutine(CoDeSelect());
 	}
 
+	private void DeselectInternal()
+	{
+		if (selectedTower)
+			selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = false;
+
+		selectedTower = null;
+		upgradePanel.SetActive(false);
+	}
+
 	private IEnumerator CoDeSelect()
 	{
 		yield return new WaitForEndOfFrame();
@@ -68,11 +79,7 @@ public class TowerManager : MonoBehaviour
 		if (!deselecting)
 			yield break;
 
-		if (selectedTower)
-			selectedTower.transform.Find("View").GetComponent<Renderer>().enabled = false;
-
-		selectedTower = null;
-		upgradePanel.SetActive(false);
+		DeselectInternal();
 	}
 
 	public void UpdatePaths()

@@ -213,4 +213,7 @@ public abstract class Tower: MonoBehaviour
 
 	public void Select() =>
 		TowerManager.Instance.Select(this);
+
+	public void DeSelect() =>
+		TowerManager.Instance.DeSelect();
 }

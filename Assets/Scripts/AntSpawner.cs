@@ -147,7 +147,50 @@ public class AntSpawner: MonoBehaviour
 			moneyEarned = 150;
 			break;
 		case 11:
-
+			for (int i = 0; i < 11; i++)
+			{
+				SpawnAnt(AntType.Blue);
+				SpawnAnt(AntType.White);
+				SpawnAnt(AntType.Black);
+				yield return new WaitForSeconds(1f);
+			}
+			moneyEarned = 150;
+			break;
+		case 12:
+			for (int i = 0; i < 20; i++)
+			{
+				SpawnAnt(AntType.Blue);
+				yield return new WaitForSeconds(1.2f);
+			}
+			break;
+		case 13:
+			for (int i = 0; i < 50; i++)
+			{
+				SpawnAnt(AntType.Black);
+				yield return new WaitForSeconds(0.75f);
+			}
+			for (int i = 0; i < 25; i++)
+			{
+				SpawnAnt(AntType.White);
+				yield return new WaitForSeconds(0.75f);
+			}
+			moneyEarned = 300;
+			break;
+		case 14:
+			for (int i = 0; i < 100; i++)
+			{
+				SpawnAnt(AntType.Blue);
+				yield return new WaitForSeconds(1f);
+			}
+			moneyEarned = 200;
+			break;
+		case 15:
+			for (int i = 0; i < 10; i++)
+			{
+				SpawnAnt(AntType.Yellow);
+				yield return new WaitForSeconds(1f);
+			}
+			moneyEarned = 150;
 			break;
 		}
 
