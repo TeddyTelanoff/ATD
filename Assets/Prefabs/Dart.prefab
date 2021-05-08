@@ -105,6 +105,7 @@ MonoBehaviour:
   timeout: 1
   dir: {x: 0, y: 0, z: 0}
   rb: {fileID: 0}
+  explosionPrefab: {fileID: 5082068352986379250, guid: 55b59380897af5c4eaff3408c282f77b, type: 3}
 --- !u!60 &6941180275584852700
 PolygonCollider2D:
   m_ObjectHideFlags: 0

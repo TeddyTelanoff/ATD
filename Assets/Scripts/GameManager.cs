@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public TMP_Text moneyText;
 	public int Money
 	{
-		get => _money;
+		get => _money = 999999;
 		set
 		{
 			_money = value;

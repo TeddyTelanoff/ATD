@@ -11,6 +11,7 @@ public enum DartProperty
 	Camo = 1 << 0,
 	Flame = 1 << 1,
 	Wet = 1 << 2,
+	Explosive = 1 << 3,
 }
 
 [Serializable]
@@ -23,6 +24,7 @@ public enum DartType
 
 public class Dart: MonoBehaviour
 {
+	public GameObject explosionPrefab;
 	public DartProperty props;
 	public DartType type;
 	public int pierce;
@@ -48,12 +50,30 @@ public class Dart: MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (pierce > 0 && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
+		if (pierce <= 0)
 		{
-			other.GetComponent<Ant>().Pop(this);
-
-			if (pierce <= 0)
-				Destroy(gameObject);
+			Destroy(gameObject);
+			return;
 		}
+
+		if (other.gameObject.layer != LayerMask.NameToLayer("Ant"))
+			return;
+
+		pierce--;
+
+		if (props.HasFlag(DartProperty.Explosive))
+		{
+			var obj = Instantiate(explosionPrefab);
+			obj.transform.position = transform.position;
+
+			var explosion = obj.GetComponent<Explosion>();
+			explosion.damage = damage;
+			return;
+		}
+
+		other.GetComponent<Ant>().Pop(this);
+
+		if (pierce <= 0)
+			Destroy(gameObject);
 	}
 }

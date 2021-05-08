@@ -19,7 +19,7 @@ public class Soldier: Tower
 				damage++;
 				break;
 			case Tier.Tier2:
-				damage++;
+				dartProps |= DartProperty.Explosive;
 				transform.Find("View").localScale += new Vector3(2, 2);
 				break;
 			case Tier.Tier3:

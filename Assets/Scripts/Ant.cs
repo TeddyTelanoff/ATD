@@ -109,17 +109,19 @@ public partial class Ant: MonoBehaviour
 			dart.pierce--;
 		}
 
-		for (int i = 0; i < dart.damage; i++)
-		{
-			dart.pierce--;
-			Pop();
-		}
+		Pop(dart.damage);
 	}
 
 	public void Pop(int damage)
 	{
-		for (int i = 0; i < damage; i++)
-			Pop();
+		if ((int)type <= damage)
+			Destroy(gameObject);
+
+		int takeAway = (int)type - damage - 1;
+		GameManager.Instance.Money += takeAway;
+		type -= takeAway;
+
+		Pop();
 	}
 
 	public void Pop()
