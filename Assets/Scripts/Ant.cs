@@ -45,6 +45,7 @@ public partial class Ant: MonoBehaviour
 	[Header("Don't Touch")]
 	public int nextCheckIndex;
 	public Transform nextCheckpoint;
+	public Vector3 dir;
 
 	private void Start()
 	{
@@ -59,7 +60,7 @@ public partial class Ant: MonoBehaviour
 	private void FixedUpdate()
 	{
 		speedMul = effect == AntEffect.Wet ? 0.5f : 1f;
-		Vector3 dir = nextCheckpoint.position - transform.position;
+		dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
 		if (dir.sqrMagnitude <= speedMul * speedMul * speed * speed * GameManager.FixedDeltaTime * GameManager.FixedDeltaTime)
