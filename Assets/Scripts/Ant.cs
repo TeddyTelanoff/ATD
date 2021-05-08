@@ -15,6 +15,7 @@ public enum AntEffect: int
 	None,
 
 	Flame,
+	Wet,
 }
 
 public enum AntType: int
@@ -29,14 +30,16 @@ public enum AntType: int
 	Brown,
 }
 
-public class Ant: MonoBehaviour
+public partial class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
 	public AntType type;
 	public float speed;
+	public float speedMul;
 	public AntEffect effect;
 	public AntProperty props;
 	public ParticleSystem flameSystem;
+	public ParticleSystem wetSystem;
 	public AudioSource pop;
 
 	[Header("Don't Touch")]
@@ -55,10 +58,11 @@ public class Ant: MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		speedMul = effect == AntEffect.Wet ? 0.5f : 1f;
 		Vector3 dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 
-		if (dir.sqrMagnitude < speed * speed * GameManager.FixedDeltaTime * GameManager.FixedDeltaTime)
+		if (dir.sqrMagnitude <= speedMul * speedMul * speed * speed * GameManager.FixedDeltaTime * GameManager.FixedDeltaTime)
 		{
 			transform.position = nextCheckpoint.position;
 			nextCheckIndex++;
@@ -71,7 +75,7 @@ public class Ant: MonoBehaviour
 			nextCheckpoint = checkpoints[nextCheckIndex];
 		}
 		else
-			transform.position += speed * dir.normalized * GameManager.FixedDeltaTime;
+			transform.position += speedMul * speed * dir.normalized * GameManager.FixedDeltaTime;
 	}
 
 	public void Split()
@@ -90,7 +94,16 @@ public class Ant: MonoBehaviour
 		if (dart.props.HasFlag(DartProperty.Flame))
 		{
 			effect = AntEffect.Flame;
+			wetSystem.Stop();
 			flameSystem.Play();
+		}
+
+		if (dart.props.HasFlag(DartProperty.Wet))
+		{
+			effect = AntEffect.Wet;
+			flameSystem.Stop();
+			wetSystem.Play();
+			dart.pierce--;
 		}
 
 		for (int i = 0; i < dart.damage; i++)

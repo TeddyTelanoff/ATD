@@ -25,6 +25,12 @@ public abstract class Tower: MonoBehaviour
 {
 	public abstract string Name { get; }
 
+	public GameObject dartPrefab;
+	public DartProperty dartProps;
+	public float reload;
+	public int damage;
+	public int pierce;
+
 	[Header("Don t Touch")]
 	public List<Ant> antsInRange;
 	public bool placing;
@@ -34,12 +40,6 @@ public abstract class Tower: MonoBehaviour
 	public Tier path1Tier;
 	public Tier path2Tier;
 	public Tier path3Tier;
-
-	public GameObject dartPrefab;
-	public DartProperty dartProps;
-	public float reload;
-	public int damage;
-	public int pierce;
 
 	private void Start() =>
 		StartCoroutine(Place());
@@ -202,6 +202,7 @@ public abstract class Tower: MonoBehaviour
 		{
 			if (antsInRange.Count > 0)
 			{
+				antsInRange.Sort();
 				TryFireFirst();
 
 				yield return new WaitForSeconds(reload);
@@ -213,6 +214,7 @@ public abstract class Tower: MonoBehaviour
 
 	private IEnumerator Place()
 	{
+		placing = true;
 		while (placing)
 		{
 			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -235,7 +237,10 @@ public abstract class Tower: MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer("Ant"))
-			antsInRange.Add(other.GetComponent<Ant>());
+		{
+			var ant = other.GetComponent<Ant>();
+			antsInRange.Add(ant);
+		}
 	}
 
 	private void OnTriggerExit2D(Collider2D other)

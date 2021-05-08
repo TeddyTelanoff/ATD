@@ -10,6 +10,7 @@ public enum DartProperty
 
 	Camo = 1 << 0,
 	Flame = 1 << 1,
+	Wet = 1 << 2,
 }
 
 public enum DartType

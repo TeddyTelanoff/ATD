@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Tower.cs" />
     <Compile Include="Assets\Scripts\Ant.cs" />
     <Compile Include="Assets\Scripts\TowerManager.cs" />
+    <Compile Include="Assets\Scripts\ComparableAnt.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
