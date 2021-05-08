@@ -5,6 +5,7 @@ using UnityEngine;
 public class Washer: Tower
 {
 	public override string Name { get => "Washer"; }
+	public override TowerId Id { get => TowerId.Washer; }
 
 	protected override void UpgradeInternal(Path path)
 	{

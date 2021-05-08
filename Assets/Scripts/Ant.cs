@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Flags]
+[System.Flags, System.Serializable]
 public enum AntProperty: int
 {
 	None,
@@ -10,6 +10,7 @@ public enum AntProperty: int
 	Camo = 1 << 0,
 }
 
+[System.Serializable]
 public enum AntEffect: int
 {
 	None,
@@ -18,6 +19,7 @@ public enum AntEffect: int
 	Wet,
 }
 
+[System.Serializable]
 public enum AntType: int
 {
 	None,

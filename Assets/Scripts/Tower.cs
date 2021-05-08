@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public enum Path: int
 {
 	None,
@@ -11,6 +12,7 @@ public enum Path: int
 	Path3,
 }
 
+[Serializable]
 public enum Tier: int
 {
 	Tier0,
@@ -21,9 +23,17 @@ public enum Tier: int
 	Tier5,
 }
 
+[Serializable]
+public enum TowerId: int
+{
+	Soldier,
+	Washer,
+}
+
 public abstract class Tower: MonoBehaviour
 {
 	public abstract string Name { get; }
+	public abstract TowerId Id { get; }
 
 	public GameObject dartPrefab;
 	public DartProperty dartProps;

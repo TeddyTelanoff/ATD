@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Flags]
+[Flags, Serializable]
 public enum DartProperty
 {
 	None,
@@ -13,6 +13,7 @@ public enum DartProperty
 	Wet = 1 << 2,
 }
 
+[Serializable]
 public enum DartType
 {
 	Sharp,

@@ -67,6 +67,8 @@
     <Compile Include="Assets\Scripts\Ant.cs" />
     <Compile Include="Assets\Scripts\TowerManager.cs" />
     <Compile Include="Assets\Scripts\ComparableAnt.cs" />
+    <Compile Include="Assets\Scripts\Serializable Dictionary\SerializableDictionary.cs" />
+    <Compile Include="Assets\Scripts\Serializable Dictionary\SerializableDictionaryDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

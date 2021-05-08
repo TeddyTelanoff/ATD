@@ -10,7 +10,7 @@ public class TowerManager : MonoBehaviour
 
 	public Transform parent;
 	public GameObject upgradePanel;
-	public GameObject soldierPrefab;
+	public GameObject[] prefabs;
 
 	[Header("No Peeking")]
 	public List<Tower> towers;
@@ -20,16 +20,16 @@ public class TowerManager : MonoBehaviour
 	private void Start() =>
 		Instance = this;
 
-	public void Spawn() =>
-		StartCoroutine(CoSpawn());
+	public void Spawn(int id) =>
+		StartCoroutine(CoSpawn(id));
 
-	private IEnumerator CoSpawn()
+	private IEnumerator CoSpawn(int id)
 	{
 		if (GameManager.Instance.Money < 200)
 			yield break;
 
 		yield return new WaitForFixedUpdate();
-		var tower = Instantiate(soldierPrefab, parent).GetComponent<Tower>();
+		var tower = Instantiate(prefabs[id], parent).GetComponent<Tower>();
 		towers.Add(tower);
 	}
 

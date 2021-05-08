@@ -6,6 +6,7 @@ using UnityEngine;
 public class Soldier: Tower
 {
 	public override string Name { get => "Soldier"; }
+	public override TowerId Id { get => TowerId.Soldier; }
 
 	protected override void UpgradeInternal(Path path)
 	{
