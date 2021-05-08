@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Flags, Serializable]
+[Flags]
 public enum DartProperty
 {
 	None,
@@ -14,7 +14,6 @@ public enum DartProperty
 	Explosive = 1 << 3,
 }
 
-[Serializable]
 public enum DartType
 {
 	Sharp,

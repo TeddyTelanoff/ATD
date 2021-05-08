@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Flags, System.Serializable]
+[System.Flags]
 public enum AntProperty: int
 {
 	None,
@@ -10,7 +10,6 @@ public enum AntProperty: int
 	Camo = 1 << 0,
 }
 
-[System.Serializable]
 public enum AntEffect: int
 {
 	None,
@@ -19,7 +18,6 @@ public enum AntEffect: int
 	Wet,
 }
 
-[System.Serializable]
 public enum AntType: int
 {
 	None,
@@ -87,6 +85,27 @@ public partial class Ant: MonoBehaviour
 		ant.transform.position = transform.position + (Vector3)Random.insideUnitCircle;
 		ant.nextCheckIndex = nextCheckIndex;
 		ant.props = props;
+	}
+	public void Pop(Explosion dart)
+	{
+		if (props.HasFlag(AntProperty.Camo) && !dart.props.HasFlag(DartProperty.Camo))
+			return;
+
+		if (dart.props.HasFlag(DartProperty.Flame))
+		{
+			effect = AntEffect.Flame;
+			wetSystem.Stop();
+			flameSystem.Play();
+		}
+
+		if (dart.props.HasFlag(DartProperty.Wet))
+		{
+			effect = AntEffect.Wet;
+			flameSystem.Stop();
+			wetSystem.Play();
+		}
+
+		Pop(dart.damage);
 	}
 
 	public void Pop(Dart dart)

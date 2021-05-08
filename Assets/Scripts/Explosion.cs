@@ -5,6 +5,7 @@ using UnityEngine;
 public class Explosion: MonoBehaviour
 {
 	public ParticleSystem system;
+	public DartProperty props;
 	public int damage;
 
 	[Header("I have CUTIES, plz don't tuch")]
@@ -23,6 +24,6 @@ public class Explosion: MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if (attacking && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
-			other.GetComponent<Ant>().Pop(damage);
+			other.GetComponent<Ant>().Pop(this);
 	}
 }

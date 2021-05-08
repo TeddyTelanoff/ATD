@@ -65,29 +65,29 @@ public class Washer: Tower
 		{
 			Path.Path1 => tier switch
 			{
-				Tier.Tier0 => "",
-				Tier.Tier1 => "",
-				Tier.Tier2 => "",
-				Tier.Tier3 => "",
-				Tier.Tier4 => "",
+				Tier.Tier0 => "Water Baloons",
+				Tier.Tier1 => "Poodles",
+				Tier.Tier2 => "Washing Machine",
+				Tier.Tier3 => "Rain Shower",
+				Tier.Tier4 => "Shower Storm",
 				_ => null,
 			},
 			Path.Path2 => tier switch
 			{
-				Tier.Tier0 => "l",
-				Tier.Tier1 => "",
-				Tier.Tier2 => "",
-				Tier.Tier3 => "",
-				Tier.Tier4 => "",
+				Tier.Tier0 => "Water Stains",
+				Tier.Tier1 => "Dirty Rinse",
+				Tier.Tier2 => "Feces",
+				Tier.Tier3 => "Acidox",
+				Tier.Tier4 => "Ants Terminator",
 				_ => null,
 			},
 			Path.Path3 => tier switch
 			{
-				Tier.Tier0 => "",
-				Tier.Tier1 => "",
-				Tier.Tier2 => "",
-				Tier.Tier3 => "",
-				Tier.Tier4 => "",
+				Tier.Tier0 => "Bigger Hose",
+				Tier.Tier1 => "Splippery Stuff",
+				Tier.Tier2 => "Magic Water",
+				Tier.Tier3 => "Power Hose",
+				Tier.Tier4 => "Super Hose of Endings",
 				_ => null,
 			},
 
