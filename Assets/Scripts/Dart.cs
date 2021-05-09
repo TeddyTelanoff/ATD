@@ -34,7 +34,6 @@ public class Dart: MonoBehaviour
 	public float effectLifetime;
 	public float speed;
 	public float timeout;
-	public Ant ricochet;
 
 	[Header("NO TOUCH")]
 	public Vector3 dir;
@@ -47,6 +46,16 @@ public class Dart: MonoBehaviour
 	{
 		if (timeout <= 0)
 			Destroy(gameObject);
+
+		if (props.HasFlag(DartProperty.Ricochet) && AntSpawner.Instance.parent.childCount > 0)
+		{
+			var ant = AntSpawner.Instance.parent.GetChild(0);
+			dir = ant.position - transform.position;
+			dir.Normalize();
+
+			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+			rb.velocity = rb.velocity.magnitude * dir;
+		}
 
 		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
 		timeout -= GameManager.FixedDeltaTime;
@@ -78,14 +87,6 @@ public class Dart: MonoBehaviour
 		}
 
 		other.GetComponent<Ant>().Pop(this);
-		if (props.HasFlag(DartProperty.Ricochet) && ricochet)
-		{
-			dir = ricochet.transform.position - transform.position;
-			dir.Normalize();
-
-			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-			rb.velocity = Vector2.zero;
-		}
 
 		if (pierce <= 0)
 			Destroy(gameObject);

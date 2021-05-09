@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\Ant.cs" />
     <Compile Include="Assets\Scripts\Serializable Dictionary\SerializableDictionaryDrawer.cs" />
     <Compile Include="Assets\Scripts\TowerManager.cs" />
-    <Compile Include="Assets\Scripts\Ricochet.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
