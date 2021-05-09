@@ -74,6 +74,7 @@ public class Soldier: Tower
 				break;
 			case Tier.Tier3:
 				pierce += 3;
+				dartProps |= DartProperty.Ricochet;
 				break;
 			case Tier.Tier4:
 				transform.Find("View").localScale = new Vector3(99, 99, 1);

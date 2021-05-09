@@ -6,6 +6,7 @@ public class Explosion: MonoBehaviour
 {
 	public ParticleSystem system;
 	public DartProperty props;
+	public float effectLifetime;
 	public int damage;
 	public int dps;
 

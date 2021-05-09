@@ -37,6 +37,7 @@ public partial class Ant: MonoBehaviour
 	public int dps;
 	public float speed;
 	public float speedMul;
+	public float effectLifetime;
 	public AntEffect effect;
 	public AntProperty props;
 	public ParticleSystem flameSystem;
@@ -105,6 +106,8 @@ public partial class Ant: MonoBehaviour
 			flameSystem.Stop();
 			wetSystem.Play();
 			dps = dart.dps;
+
+			effectLifetime = dart.effectLifetime;
 		}
 
 		Pop(dart.damage);
@@ -129,6 +132,8 @@ public partial class Ant: MonoBehaviour
 			wetSystem.Play();
 			dps = dart.dps;
 			dart.pierce--;
+
+			effectLifetime = dart.effectLifetime;
 		}
 
 		transform.position += dart.kb * dart.dir;

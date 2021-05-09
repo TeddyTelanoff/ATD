@@ -34,6 +34,7 @@ public abstract class Tower: MonoBehaviour
 
 	public GameObject dartPrefab;
 	public DartProperty dartProps;
+	public float effectLifetime;
 	public float reload;
 	public float kb;
 	public int dps;
@@ -186,6 +187,7 @@ public abstract class Tower: MonoBehaviour
 		dart.pierce = pierce;
 		dart.damage = damage;
 		dart.props = dartProps;
+		dart.effectLifetime = effectLifetime;
 
 		return dart;
 	}

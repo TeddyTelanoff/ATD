@@ -12,6 +12,7 @@ public enum DartProperty
 	Flame = 1 << 1,
 	Wet = 1 << 2,
 	Explosive = 1 << 3,
+	Ricochet = 1 << 4,
 }
 
 public enum DartType
@@ -30,8 +31,10 @@ public class Dart: MonoBehaviour
 	public int damage;
 	public int dps;
 	public float kb;
+	public float effectLifetime;
 	public float speed;
 	public float timeout;
+	public Ant ricochet;
 
 	[Header("NO TOUCH")]
 	public Vector3 dir;
@@ -68,11 +71,21 @@ public class Dart: MonoBehaviour
 			obj.transform.position = transform.position;
 
 			var explosion = obj.GetComponent<Explosion>();
+			explosion.effectLifetime = effectLifetime;
 			explosion.damage = damage;
+			explosion.dps = dps;
 			return;
 		}
 
 		other.GetComponent<Ant>().Pop(this);
+		if (props.HasFlag(DartProperty.Ricochet) && ricochet)
+		{
+			dir = ricochet.transform.position - transform.position;
+			dir.Normalize();
+
+			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+			rb.velocity = Vector2.zero;
+		}
 
 		if (pierce <= 0)
 			Destroy(gameObject);
