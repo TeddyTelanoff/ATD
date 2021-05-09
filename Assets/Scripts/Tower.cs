@@ -35,6 +35,8 @@ public abstract class Tower: MonoBehaviour
 	public GameObject dartPrefab;
 	public DartProperty dartProps;
 	public float reload;
+	public float kb;
+	public int dps;
 	public int damage;
 	public int pierce;
 
@@ -167,20 +169,25 @@ public abstract class Tower: MonoBehaviour
 		};
 	}
 
-	public void Fire(Ant ant)
+	public Dart Fire(Ant ant)
 	{
 		Vector2 dir = ant.transform.position - transform.position;
 		dir.Normalize();
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
-		var dart = Instantiate(dartPrefab);
-		dart.transform.position = transform.position;
-		dart.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
+		var obj = Instantiate(dartPrefab);
+		obj.transform.position = transform.position;
+		obj.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
-		dart.GetComponent<Dart>().dir = dir;
-		dart.GetComponent<Dart>().pierce = pierce;
-		dart.GetComponent<Dart>().damage = damage;
-		dart.GetComponent<Dart>().props = dartProps;
+		var dart = obj.GetComponent<Dart>();
+		dart.kb = kb;
+		dart.dps = dps;
+		dart.dir = dir;
+		dart.pierce = pierce;
+		dart.damage = damage;
+		dart.props = dartProps;
+
+		return dart;
 	}
 
 	protected void TryFireFirst()

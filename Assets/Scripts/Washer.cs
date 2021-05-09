@@ -15,6 +15,7 @@ public class Washer: Tower
 			switch (path1Tier)
 			{
 			case Tier.Tier1:
+				dartProps |= DartProperty.Explosive;
 				break;
 			case Tier.Tier2:
 				break;
@@ -32,12 +33,16 @@ public class Washer: Tower
 			case Tier.Tier1:
 				break;
 			case Tier.Tier2:
+				dps++;
 				break;
 			case Tier.Tier3:
+				dps++;
 				break;
 			case Tier.Tier4:
+				dps += 8;
 				break;
 			case Tier.Tier5:
+				dps += 90;
 				break;
 			}
 			break;
@@ -45,14 +50,23 @@ public class Washer: Tower
 			switch (path3Tier)
 			{
 			case Tier.Tier1:
+				pierce++;
 				break;
 			case Tier.Tier2:
+				kb++;
 				break;
 			case Tier.Tier3:
+				kb += 2;
+				pierce += 2;
+				dartProps |= DartProperty.Camo;
 				break;
 			case Tier.Tier4:
+				kb += 4;
+				damage++;
 				break;
 			case Tier.Tier5:
+				kb += 12;
+				damage += 2;
 				break;
 			}
 			break;
@@ -101,29 +115,29 @@ public class Washer: Tower
 		{
 			Path.Path1 => tier switch
 			{
-				Tier.Tier0 => 0,
-				Tier.Tier1 => 0,
-				Tier.Tier2 => 0,
-				Tier.Tier3 => 0,
-				Tier.Tier4 => 0,
+				Tier.Tier0 => 300,
+				Tier.Tier1 => 550,
+				Tier.Tier2 => 800,
+				Tier.Tier3 => 3000,
+				Tier.Tier4 => 26000,
 				_ => 0,
 			},
 			Path.Path2 => tier switch
 			{
-				Tier.Tier0 => 0,
-				Tier.Tier1 => 0,
-				Tier.Tier2 => 0,
-				Tier.Tier3 => 0,
-				Tier.Tier4 => 0,
+				Tier.Tier0 => 150,
+				Tier.Tier1 => 250,
+				Tier.Tier2 => 1000,
+				Tier.Tier3 => 6400,
+				Tier.Tier4 => 32000,
 				_ => 0,
 			},
 			Path.Path3 => tier switch
 			{
-				Tier.Tier0 => 0,
-				Tier.Tier1 => 0,
-				Tier.Tier2 => 0,
-				Tier.Tier3 => 0,
-				Tier.Tier4 => 0,
+				Tier.Tier0 => 250,
+				Tier.Tier1 => 2000,
+				Tier.Tier2 => 2700,
+				Tier.Tier3 => 5600,
+				Tier.Tier4 => 43000,
 				_ => 0,
 			},
 

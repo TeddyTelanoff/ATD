@@ -7,6 +7,7 @@ public class Explosion: MonoBehaviour
 	public ParticleSystem system;
 	public DartProperty props;
 	public int damage;
+	public int dps;
 
 	[Header("I have CUTIES, plz don't tuch")]
 	public bool attacking;

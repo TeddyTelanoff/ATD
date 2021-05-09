@@ -34,6 +34,7 @@ public partial class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
 	public AntType type;
+	public int dps;
 	public float speed;
 	public float speedMul;
 	public AntEffect effect;
@@ -103,6 +104,7 @@ public partial class Ant: MonoBehaviour
 			effect = AntEffect.Wet;
 			flameSystem.Stop();
 			wetSystem.Play();
+			dps = dart.dps;
 		}
 
 		Pop(dart.damage);
@@ -125,9 +127,11 @@ public partial class Ant: MonoBehaviour
 			effect = AntEffect.Wet;
 			flameSystem.Stop();
 			wetSystem.Play();
+			dps = dart.dps;
 			dart.pierce--;
 		}
 
+		transform.position += dart.kb * dart.dir;
 		Pop(dart.damage);
 	}
 
@@ -140,7 +144,8 @@ public partial class Ant: MonoBehaviour
 		GameManager.Instance.Money += takeAway;
 		type -= takeAway;
 
-		Pop();
+		if (damage != 0)
+			Pop();
 	}
 
 	public void Pop()
@@ -222,6 +227,8 @@ public partial class Ant: MonoBehaviour
 		{
 			if (effect == AntEffect.Flame)
 				Pop();
+			if (effect == AntEffect.Wet)
+				Pop(dps);
 
 			yield return new WaitForSeconds(1);
 		}

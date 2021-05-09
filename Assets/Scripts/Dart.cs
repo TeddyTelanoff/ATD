@@ -28,6 +28,8 @@ public class Dart: MonoBehaviour
 	public DartType type;
 	public int pierce;
 	public int damage;
+	public int dps;
+	public float kb;
 	public float speed;
 	public float timeout;
 
