@@ -21,6 +21,21 @@ public class AntSpawner: MonoBehaviour
 		roundTxt.text = round.ToString();
 	}
 
+	public void EarthQuake() =>
+		StartCoroutine(CoEarthQuake());
+
+	public IEnumerator CoEarthQuake()
+	{
+		float start = Time.time;
+		while (Time.time - start < 1f)
+		{
+			for (int i = 0; i < parent.childCount; i++)
+				parent.GetChild(i).position += (Vector3)UnityEngine.Random.insideUnitCircle;
+
+			yield return new WaitForFixedUpdate();
+		}
+	}
+
 	public void SetRoundFromInput()
 	{
 		if (int.TryParse(roundTxt.text, out round))
@@ -53,6 +68,12 @@ public class AntSpawner: MonoBehaviour
 		ant.pop = antPop;
 		ant.type = type;
 		return ant;
+	}
+
+	public void SpawnAnts(AntType type, int count)
+	{
+		for (int i = 0; i < count; i++)
+			SpawnAnt(type);
 	}
 
 	public void SpawnAnts(AntType type, int count, float interval) =>
@@ -133,7 +154,7 @@ public class AntSpawner: MonoBehaviour
 			moneyEarned = 150;
 			break;
 		case 16:
-			SpawnAnts(AntType.Blue, 10, 0f);
+			SpawnAnts(AntType.Blue, 10);
 			break;
 		case 17:
 			SpawnAnts(AntType.Green, 40, 1.6f);
@@ -145,7 +166,7 @@ public class AntSpawner: MonoBehaviour
 			SpawnAnt(AntType.Yellow, AntProperty.Camo);
 			break;
 		case 20:
-			SpawnAnts(AntType.Black, 100, 0f);
+			SpawnAnts(AntType.Black, 100);
 			break;
 		}
 
