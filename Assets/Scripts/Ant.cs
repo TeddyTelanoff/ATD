@@ -75,10 +75,12 @@ public partial class Ant: MonoBehaviour
 				Destroy(gameObject);
 				return;
 			}
+
 			nextCheckpoint = checkpoints[nextCheckIndex];
+			return;
 		}
-		else
-			transform.position += speedMul * speed * dir.normalized * GameManager.FixedDeltaTime;
+
+		transform.position += speedMul * speed * dir.normalized * GameManager.FixedDeltaTime;
 	}
 
 	public void Split()
@@ -242,9 +244,9 @@ public partial class Ant: MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		if (nextCheckpoint)
-		{
-			Gizmos.color = Color.white;
-			Gizmos.DrawLine(transform.position, nextCheckpoint.position);
-		}
+			return;
+
+		Gizmos.color = Color.white;
+		Gizmos.DrawLine(transform.position, nextCheckpoint.position);
 	}
 }

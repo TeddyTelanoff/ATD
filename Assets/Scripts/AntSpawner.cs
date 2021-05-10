@@ -23,11 +23,11 @@ public class AntSpawner: MonoBehaviour
 
 	public void SetRoundFromInput()
 	{
-		if (!int.TryParse(roundTxt.text, out round))
-		{
-			round = 1;
-			roundTxt.text = "1";
-		}
+		if (int.TryParse(roundTxt.text, out round))
+			return;
+
+		round = 1;
+		roundTxt.text = "1";
 	}
 
 	public void PlayRound(int roundNum)
@@ -55,11 +55,14 @@ public class AntSpawner: MonoBehaviour
 		return ant;
 	}
 
-	public IEnumerator SpawnAnts(AntType type, int count, float interval)
+	public void SpawnAnts(AntType type, int count, float interval) =>
+		StartCoroutine(CoSpawnAnts(type, count, interval));
+
+	private IEnumerator CoSpawnAnts(AntType type, int count, float interval)
 	{
 		for (int i = 0; i < count; i++)
 		{
-			yield return SpawnAnt(type);
+			SpawnAnt(type);
 			yield return new WaitForSeconds(interval);
 		}
 	}
@@ -71,77 +74,33 @@ public class AntSpawner: MonoBehaviour
 		switch (round)
 		{
 		case 1:
-			for (int i = 0; i < 14; i++)
-			{
-				SpawnAnt(AntType.Black);
-				yield return new WaitForSeconds(1.2f);
-			}
+			SpawnAnts(AntType.Black, 14, 1.2f);
 			break;
 		case 2:
-			for (int i = 0; i < 12; i++)
-			{
-				SpawnAnt(AntType.Black);
-				yield return new WaitForSeconds(1f);
-			}
+			SpawnAnts(AntType.Black, 12, 1f);
 			break;
 		case 3:
-			for (int i = 0; i < 6; i++)
-			{
-				SpawnAnt(AntType.White);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.White, 6, 1.6f);
 			break;
 		case 4:
-			for (int i = 0; i < 20; i++)
-			{
-				SpawnAnt(AntType.Black);
-				yield return new WaitForSeconds(1f);
-			}
+			SpawnAnts(AntType.Black, 20, 1f);
 			break;
 		case 5:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.Black);
-				yield return new WaitForSeconds(1f);
-			}
-			for (int i = 0; i < 5; i++)
-			{
-				SpawnAnt(AntType.White);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.Black, 10, 1f);
+			SpawnAnts(AntType.White, 5, 1.6f);
 			break;
 		case 6:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.White);
-				yield return new WaitForSeconds(1f);
-			}
+			SpawnAnts(AntType.White, 5, 1f);
 			break;
 		case 7:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.Blue);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.Blue, 10, 1.6f);
 			break;
 		case 8:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.White);
-				yield return new WaitForSeconds(1.6f);
-			}
-			for (int i = 0; i < 5; i++)
-			{
-				SpawnAnt(AntType.Green);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.White, 10, 1.2f);
+			SpawnAnts(AntType.Green, 5, 1.6f);
 			break;
 		case 9:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.Green);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.Green, 10, 1.6f);
 			break;
 		case 10:
 			SpawnAnt(AntType.Yellow);
@@ -158,51 +117,26 @@ public class AntSpawner: MonoBehaviour
 			moneyEarned = 150;
 			break;
 		case 12:
-			for (int i = 0; i < 20; i++)
-			{
-				SpawnAnt(AntType.Blue);
-				yield return new WaitForSeconds(1.2f);
-			}
+			SpawnAnts(AntType.Blue, 20, 1.2f);
 			break;
 		case 13:
-			for (int i = 0; i < 50; i++)
-			{
-				SpawnAnt(AntType.Black);
-				yield return new WaitForSeconds(0.75f);
-			}
-			for (int i = 0; i < 25; i++)
-			{
-				SpawnAnt(AntType.White);
-				yield return new WaitForSeconds(0.75f);
-			}
+			SpawnAnts(AntType.Blue, 50, 0.75f);
+			SpawnAnts(AntType.White, 25, 0.75f);
 			moneyEarned = 300;
 			break;
 		case 14:
-			for (int i = 0; i < 100; i++)
-			{
-				SpawnAnt(AntType.Blue);
-				yield return new WaitForSeconds(1f);
-			}
+			SpawnAnts(AntType.Blue, 100, 1f);
 			moneyEarned = 200;
 			break;
 		case 15:
-			for (int i = 0; i < 10; i++)
-			{
-				SpawnAnt(AntType.Yellow);
-				yield return new WaitForSeconds(1f);
-			}
+			SpawnAnts(AntType.Yellow, 10, 1f);
 			moneyEarned = 150;
 			break;
 		case 16:
-			for (int i = 0; i < 10; i++)
-				SpawnAnt(AntType.Blue);
+			SpawnAnts(AntType.Blue, 10, 0f);
 			break;
 		case 17:
-			for (int i = 0; i < 40; i++)
-			{
-				SpawnAnt(AntType.Green);
-				yield return new WaitForSeconds(1.6f);
-			}
+			SpawnAnts(AntType.Green, 40, 1.6f);
 			break;
 		case 18:
 			SpawnAnt(AntType.Black, AntProperty.Camo);
@@ -211,8 +145,7 @@ public class AntSpawner: MonoBehaviour
 			SpawnAnt(AntType.Yellow, AntProperty.Camo);
 			break;
 		case 20:
-			for (int i = 0; i < 100; i++)
-				SpawnAnt(AntType.Black);
+			SpawnAnts(AntType.Black, 100, 0f);
 			break;
 		}
 
