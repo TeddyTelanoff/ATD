@@ -56,17 +56,20 @@ public class Washer: Tower
 				kb++;
 				break;
 			case Tier.Tier3:
-				kb += 2;
+				kb++;
 				pierce += 2;
 				dartProps |= DartProperty.Camo;
+				dartProps |= DartProperty.Ricochet;
 				break;
 			case Tier.Tier4:
-				kb += 4;
+				kb += 2;
 				damage++;
+				pierce += 2;
 				break;
 			case Tier.Tier5:
-				kb += 12;
+				kb += 2;
 				damage += 2;
+				pierce += 2;
 				break;
 			}
 			break;

@@ -136,7 +136,7 @@ public partial class Ant: MonoBehaviour
 			effectLifetime = dart.effectLifetime;
 		}
 
-		transform.position += dart.kb * dart.dir;
+		transform.position += dart.kb * (Vector3)(Vector2)dart.dir;
 		Pop(dart.damage);
 	}
 

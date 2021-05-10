@@ -89,6 +89,7 @@ public class Dart: MonoBehaviour
 			var explosion = obj.GetComponent<Explosion>();
 			explosion.effectLifetime = effectLifetime;
 			explosion.damage = damage;
+			explosion.props = props;
 			explosion.dps = dps;
 			return;
 		}
