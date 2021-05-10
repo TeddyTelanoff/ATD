@@ -80,7 +80,7 @@ public class Soldier: Tower
 				transform.Find("View").localScale = new Vector3(99, 99, 1);
 				break;
 			case Tier.Tier5:
-				pierce += 95;
+				pierce += 45;
 				reload -= .2f;
 				break;
 			}
@@ -152,7 +152,7 @@ public class Soldier: Tower
 				Tier.Tier1 => 350,
 				Tier.Tier2 => 1700,
 				Tier.Tier3 => 7000,
-				Tier.Tier4 => 13000,
+				Tier.Tier4 => 63000,
 				_ => 0,
 			},
 
