@@ -36,6 +36,7 @@ public class Dart: MonoBehaviour
 	public float timeout;
 
 	[Header("NO TOUCH")]
+	public List<Transform> hit;
 	public Vector3 dir;
 	public Rigidbody2D rb;
 
@@ -49,7 +50,13 @@ public class Dart: MonoBehaviour
 
 		if (props.HasFlag(DartProperty.Ricochet) && AntSpawner.Instance.parent.childCount > 0)
 		{
-			var ant = AntSpawner.Instance.parent.GetChild(0);
+			Transform ant = null;
+			for (int i = 0; i < AntSpawner.Instance.parent.childCount; i++)
+			{
+				ant = AntSpawner.Instance.parent.GetChild(i);
+				if (!hit.Contains(ant))
+					break;
+			}
 			dir = ant.position - transform.position;
 			dir.Normalize();
 
@@ -86,7 +93,9 @@ public class Dart: MonoBehaviour
 			return;
 		}
 
-		other.GetComponent<Ant>().Pop(this);
+		var ant = other.GetComponent<Ant>();
+		hit.Add(ant.transform);
+		ant.Pop(this);
 
 		if (pierce <= 0)
 			Destroy(gameObject);
