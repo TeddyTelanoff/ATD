@@ -91,7 +91,6 @@ public class Dart: MonoBehaviour
 			explosion.damage = damage;
 			explosion.props = props;
 			explosion.dps = dps;
-			return;
 		}
 
 		var ant = other.GetComponent<Ant>();
