@@ -6,6 +6,7 @@ public class Washer: Tower
 {
 	public override string Name { get => "Washer"; }
 	public override TowerId Id { get => TowerId.Washer; }
+	public override int Price { get => 350; }
 
 	protected override void UpgradeInternal(Path path)
 	{

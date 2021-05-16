@@ -9,6 +9,7 @@ public class TowerManager : MonoBehaviour
 	public const string upgradeLocked = "PATH LOCKED", maxUpgrade = "MAXED UPGRADE";
 	public static TowerManager Instance { get; private set; }
 
+	public Sprite padlock;
 	public Transform parent;
 	public GameObject upgradePanel;
 	public GameObject[] prefabs;
@@ -130,6 +131,7 @@ public class TowerManager : MonoBehaviour
 			pp3.text = $"${selectedTower.UpgradePrice(Path.Path3)}";
 			break;
 		case Path.Path1:
+			pi1.sprite = padlock;
 			pt1.text = upgradeLocked;
 			pp1.text = "";
 
@@ -148,6 +150,7 @@ public class TowerManager : MonoBehaviour
 			}
 			break;
 		case Path.Path2:
+			pi2.sprite = padlock;
 			pt2.text = upgradeLocked;
 			pp2.text = "";
 
@@ -166,6 +169,7 @@ public class TowerManager : MonoBehaviour
 			}
 			break;
 		case Path.Path3:
+			pi3.sprite = padlock;
 			pt3.text = upgradeLocked;
 			pp3.text = "";
 
@@ -201,12 +205,10 @@ public class TowerManager : MonoBehaviour
 	}
 
 	private void UpdatePath(Path prim, Path sec, Tier secTier,
-		TMP_Text pt1, TMP_Text pp1, Image pia,
-			TMP_Text pt2, TMP_Text pp2, Image pib)
+		TMP_Text pt1, TMP_Text pp1, Image pi1,
+			TMP_Text pt2, TMP_Text pp2, Image pi2)
 	{
-		pia.sprite = selectedTower.UpgradeSprite(prim);
-		pib.sprite = selectedTower.UpgradeSprite(sec);
-
+		pi1.sprite = selectedTower.UpgradeSprite(prim);
 		pt1.text = selectedTower.UpgradeName(prim) ?? maxUpgrade;
 		pp1.text = $"${selectedTower.UpgradePrice(prim)}";
 
@@ -217,6 +219,7 @@ public class TowerManager : MonoBehaviour
 			return;
 		}
 
+		pi2.sprite = selectedTower.LastUpgradeSprite(sec);
 		pt2.text = maxUpgrade;
 		pp2.text = "";
 	}

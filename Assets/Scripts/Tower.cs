@@ -31,6 +31,7 @@ public abstract class Tower: MonoBehaviour
 {
 	public abstract string Name { get; }
 	public abstract TowerId Id { get; }
+	public abstract int Price { get; }
 	public int SellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
 	public Sprite[] spritesPath1 = new Sprite[6];
@@ -59,6 +60,7 @@ public abstract class Tower: MonoBehaviour
 
 	private void Start()
 	{
+		invested = Price;
 		StartCoroutine(Place());
 		sprites = new Sprite[][] { spritesPath1, spritesPath2, spritesPath3, };
 	}
@@ -133,6 +135,17 @@ public abstract class Tower: MonoBehaviour
 			Path.Path1 => UpgradeSprite(path, path1Tier),
 			Path.Path2 => UpgradeSprite(path, path2Tier),
 			Path.Path3 => UpgradeSprite(path, path3Tier),
+			_ => null,
+		};
+	}
+
+	public Sprite LastUpgradeSprite(Path path)
+	{
+		return path switch
+		{
+			Path.Path1 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path1Tier - 1) : null,
+			Path.Path2 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path2Tier - 1) : null,
+			Path.Path3 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path3Tier - 1) : null,
 			_ => null,
 		};
 	}
