@@ -112,7 +112,7 @@ public class Soldier: Tower
 			},
 			Path.Path3 => tier switch
 			{
-				Tier.Tier0 => "Iron Dart",
+				Tier.Tier0 => "Iron Darts",
 				Tier.Tier1 => "Night Vision",
 				Tier.Tier2 => "Dart Ricochet",
 				Tier.Tier3 => "X-Ray Vision",

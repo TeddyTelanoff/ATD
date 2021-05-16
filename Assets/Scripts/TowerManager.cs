@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class TowerManager : MonoBehaviour
@@ -62,6 +63,13 @@ public class TowerManager : MonoBehaviour
 		StartCoroutine(CoDeSelect());
 	}
 
+	public void Sell()
+	{
+		GameManager.Instance.Money += selectedTower.SellPrice;
+		Destroy(selectedTower.gameObject);
+		DeselectInternal();
+	}
+
 	private void DeselectInternal()
 	{
 		if (selectedTower)
@@ -87,9 +95,16 @@ public class TowerManager : MonoBehaviour
 		upgradePanel.transform.Find("Tower").GetComponent<TMP_Text>().text = selectedTower.Name;
 		upgradePanel.transform.Find("Tier").GetComponent<TMP_Text>().text = $"{(int)selectedTower.path1Tier}-{(int)selectedTower.path2Tier}-{(int)selectedTower.path3Tier}";
 
+		var sellTxt = upgradePanel.transform.Find("Sell").Find("Text (TMP)").GetComponent<TMP_Text>();
+		sellTxt.text = $"Sell {selectedTower.SellPrice}";
+
 		var p1Button = upgradePanel.transform.Find("Path (1)");
 		var p2Button = upgradePanel.transform.Find("Path (2)");
 		var p3Button = upgradePanel.transform.Find("Path (3)");
+
+		var pi1 =  p1Button.Find("Sprite").GetComponent<Image>();
+		var pi2 =  p2Button.Find("Sprite").GetComponent<Image>();
+		var pi3 =  p3Button.Find("Sprite").GetComponent<Image>();
 
 		var pt1 = p1Button.Find("Text (TMP)").GetComponent<TMP_Text>();
 		var pt2 = p2Button.Find("Text (TMP)").GetComponent<TMP_Text>();
@@ -102,6 +117,10 @@ public class TowerManager : MonoBehaviour
 		switch (selectedTower.disPath)
 		{
 		case Path.None:
+			pi1.sprite = selectedTower.UpgradeSprite(Path.Path1);
+			pi2.sprite = selectedTower.UpgradeSprite(Path.Path2);
+			pi3.sprite = selectedTower.UpgradeSprite(Path.Path3);
+
 			pt1.text = selectedTower.UpgradeName(Path.Path1) ?? maxUpgrade;
 			pt2.text = selectedTower.UpgradeName(Path.Path2) ?? maxUpgrade;
 			pt3.text = selectedTower.UpgradeName(Path.Path3) ?? maxUpgrade;
@@ -117,14 +136,14 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path2:
-				UpdatePath(Path.Path2, Path.Path3, selectedTower.path3Tier, pt2, pp2, pt3, pp3);
+				UpdatePath(Path.Path2, Path.Path3, selectedTower.path3Tier, pt2, pp2, pi2, pt3, pp3, pi3);
 				break;
 			case Path.Path3:
-				UpdatePath(Path.Path3, Path.Path2, selectedTower.path2Tier, pt3, pp3, pt2, pp2);
+				UpdatePath(Path.Path3, Path.Path2, selectedTower.path2Tier, pt3, pp3, pi3, pt2, pp2, pi2);
 				break;
 
 			default:
-				UpdatePathNormal(Path.Path2, Path.Path3, pt2, pp2, pt3, pp3);
+				UpdatePathNormal(Path.Path2, Path.Path3, pt2, pp2, pi2, pt3, pp3, pi3);
 				break;
 			}
 			break;
@@ -135,14 +154,14 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path1:
-				UpdatePath(Path.Path1, Path.Path3, selectedTower.path3Tier, pt1, pp1, pt3, pp3);
+				UpdatePath(Path.Path1, Path.Path3, selectedTower.path3Tier, pt1, pp1, pi1, pt3, pp3, pi3);
 				break;
 			case Path.Path3:
-				UpdatePath(Path.Path3, Path.Path1, selectedTower.path1Tier, pt3, pp3, pt1, pp1);
+				UpdatePath(Path.Path3, Path.Path1, selectedTower.path1Tier, pt3, pp3, pi3, pt1, pp1, pi1);
 				break;
 
 			default:
-				UpdatePathNormal(Path.Path1, Path.Path3, pt1, pp1, pt3, pp3);
+				UpdatePathNormal(Path.Path1, Path.Path3, pt1, pp1, pi1, pt3, pp3, pi2);
 				break;
 			}
 			break;
@@ -153,14 +172,14 @@ public class TowerManager : MonoBehaviour
 			switch (selectedTower.primPath)
 			{
 			case Path.Path1:
-				UpdatePath(Path.Path1, Path.Path2, selectedTower.path2Tier, pt1, pp1, pt2, pp2);
+				UpdatePath(Path.Path1, Path.Path2, selectedTower.path2Tier, pt1, pp1, pi1, pt2, pp2, pi2);
 				break;
 			case Path.Path2:
-				UpdatePath(Path.Path2, Path.Path1, selectedTower.path1Tier, pt2, pp2, pt1, pp1);
+				UpdatePath(Path.Path2, Path.Path1, selectedTower.path1Tier, pt2, pp2, pi2, pt1, pp1, pi1);
 				break;
 
 			default:
-				UpdatePathNormal(Path.Path1, Path.Path2, pt1, pp1, pt2, pp2);
+				UpdatePathNormal(Path.Path1, Path.Path2, pt1, pp1, pi1, pt2, pp2, pi2);
 				break;
 			}
 			break;
@@ -168,9 +187,12 @@ public class TowerManager : MonoBehaviour
 	}
 
 	private void UpdatePathNormal(Path a, Path b,
-		TMP_Text pta, TMP_Text ppa,
-			TMP_Text ptb, TMP_Text ppb)
+		TMP_Text pta, TMP_Text ppa, Image pia,
+			TMP_Text ptb, TMP_Text ppb, Image pib)
 	{
+		pia.sprite = selectedTower.UpgradeSprite(a);
+		pib.sprite = selectedTower.UpgradeSprite(b);
+
 		pta.text = selectedTower.UpgradeName(a) ?? maxUpgrade;
 		ptb.text = selectedTower.UpgradeName(b) ?? maxUpgrade;
 
@@ -179,9 +201,12 @@ public class TowerManager : MonoBehaviour
 	}
 
 	private void UpdatePath(Path prim, Path sec, Tier secTier,
-		TMP_Text pt1, TMP_Text pp1,
-			TMP_Text pt2, TMP_Text pp2)
+		TMP_Text pt1, TMP_Text pp1, Image pia,
+			TMP_Text pt2, TMP_Text pp2, Image pib)
 	{
+		pia.sprite = selectedTower.UpgradeSprite(prim);
+		pib.sprite = selectedTower.UpgradeSprite(sec);
+
 		pt1.text = selectedTower.UpgradeName(prim) ?? maxUpgrade;
 		pp1.text = $"${selectedTower.UpgradePrice(prim)}";
 

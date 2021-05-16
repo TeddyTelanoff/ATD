@@ -248,9 +248,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73261559722ad5478864ee84575de44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spritesPath1:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spritesPath2:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spritesPath3:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
   dartProps: 4
+  effectLifetime: 0
   reload: 1
+  kb: 0
+  dps: 0
   damage: 0
   pierce: 1
   antsInRange: []

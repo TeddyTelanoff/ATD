@@ -27,6 +27,7 @@ public enum AntType: int
 	Blue,
 	Green,
 	Yellow,
+	Pink,
 	Brown,
 }
 
@@ -35,6 +36,7 @@ public partial class Ant: MonoBehaviour
 	public Transform[] checkpoints;
 	public AntType type;
 	public int dps;
+	public int hp;
 	public float speed;
 	public float speedMul;
 	public float effectLifetime;
@@ -144,21 +146,19 @@ public partial class Ant: MonoBehaviour
 
 	public void Pop(int damage)
 	{
-		if ((int)type <= damage)
-			Destroy(gameObject);
-
-		int takeAway = (int)type - damage - 1;
-		GameManager.Instance.Money += takeAway;
-		type -= takeAway;
-
-		if (damage != 0)
+		for (int i = 0; i < damage; i++)
 			Pop();
 	}
 
 	public void Pop()
 	{
-		GameManager.Instance.Money++;
 		pop.Play();
+		hp--;
+
+		if (hp > 0)
+			return;
+
+		GameManager.Instance.Money++;
 
 		switch (type)
 		{
@@ -172,21 +172,16 @@ public partial class Ant: MonoBehaviour
 			type = AntType.White;
 			break;
 		case AntType.Green:
-			type = AntType.White;
+			type = AntType.Blue;
 			break;
 		case AntType.Yellow:
-			type = AntType.Blue;
-			Split();
 			type = AntType.Green;
-			Split();
+			break;
+		case AntType.Pink:
+			type = AntType.Yellow;
 			break;
 		case AntType.Brown:
-			type = AntType.Green;
-			Split();
-			Split();
-			Split();
-			Split();
-			type = AntType.Blue;
+			type = AntType.Pink;
 			Split();
 			break;
 		}
@@ -196,6 +191,7 @@ public partial class Ant: MonoBehaviour
 
 	public void UpdateType()
 	{
+		hp = 1;
 		Color matCol = Color.black;
 		switch (type)
 		{
@@ -219,9 +215,14 @@ public partial class Ant: MonoBehaviour
 			speed = 8;
 			matCol = Color.yellow;
 			break;
+		case AntType.Pink:
+			speed = 10;
+			matCol = Color.magenta;
+			break;
 		case AntType.Brown:
+			hp = 10;
 			speed = 5;
-			matCol = new Color(210, 105, 30);
+			matCol = new Color(0.8f, 0.4f, 0.1f);
 			break;
 		}
 

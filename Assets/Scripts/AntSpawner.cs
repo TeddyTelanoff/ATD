@@ -166,7 +166,7 @@ public class AntSpawner: MonoBehaviour
 			SpawnAnt(AntType.Yellow, AntProperty.Camo);
 			break;
 		case 20:
-			SpawnAnts(AntType.Black, 100);
+			SpawnAnts(AntType.Brown, 1);
 			break;
 		}
 

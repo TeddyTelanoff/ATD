@@ -348,18 +348,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20630d5f8fa0616479ff03bee5e858e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spritesPath1:
+  - {fileID: 21300000, guid: 28a204b7aaa2bc74f9f43d864ae2efef, type: 3}
+  - {fileID: 21300000, guid: 1dd2148cc31664d4fa8f07ef5e40508a, type: 3}
+  - {fileID: 21300000, guid: 8e68d8a5f57d477468a3fd8e833666f7, type: 3}
+  - {fileID: 21300000, guid: 7877c5954bcdefb4e885b46c008138a5, type: 3}
+  - {fileID: 21300000, guid: 81ace06960a1c9d4cbed1baa3f76dc66, type: 3}
+  - {fileID: 21300000, guid: 81ace06960a1c9d4cbed1baa3f76dc66, type: 3}
+  spritesPath2:
+  - {fileID: 21300000, guid: ca13df7268f2a4746af146795ca05b98, type: 3}
+  - {fileID: 21300000, guid: 29a5d93bf6ede8043b4f2ceaad92b546, type: 3}
+  - {fileID: 21300000, guid: 7f14f3b68192311498c5c1798fcadd06, type: 3}
+  - {fileID: 21300000, guid: 14da88e7404359a48a73e6bb1b407d51, type: 3}
+  - {fileID: 21300000, guid: 42bcb95bd2b16044fb12a19153af4344, type: 3}
+  - {fileID: 21300000, guid: 42bcb95bd2b16044fb12a19153af4344, type: 3}
+  spritesPath3:
+  - {fileID: 21300000, guid: 6fed97ffd27d1b4469ed47e14bd937c6, type: 3}
+  - {fileID: 21300000, guid: bb6e657c2e3a5c3469c4bf7831579d31, type: 3}
+  - {fileID: 21300000, guid: 282ee02e25a13a34ca895305af3f9ed7, type: 3}
+  - {fileID: 21300000, guid: 9526cb7c380da634ea664da12cb7a5e2, type: 3}
+  - {fileID: 21300000, guid: 120b37010fe5e0043bae23058e39e204, type: 3}
+  - {fileID: 21300000, guid: 120b37010fe5e0043bae23058e39e204, type: 3}
+  dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
+  dartProps: 0
+  effectLifetime: 0
+  reload: 1.4
+  kb: 0
+  dps: 0
+  damage: 1
+  pierce: 2
   antsInRange: []
   placing: 1
-  pierce: 2
   primPath: 0
   disPath: 0
   path1Tier: 0
   path2Tier: 0
   path3Tier: 0
-  dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
-  reload: 1.4
-  flaming: 0
-  damage: 1
 --- !u!50 &2757179555575685486
 Rigidbody2D:
   serializedVersion: 4

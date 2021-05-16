@@ -6,13 +6,15 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+	
 	public static GameManager Instance { get; private set; }
 	public static float FixedDeltaTime { get => 0.02f; }
 
+	public bool godMode;
 	public TMP_Text moneyText;
 	public int Money
 	{
-		get => _money = 999999;
+		get => godMode ? _money = 999999 : _money;
 		set
 		{
 			_money = value;
