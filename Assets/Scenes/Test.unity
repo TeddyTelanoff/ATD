@@ -1978,7 +1978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffe5cec3293f144f915f0ffd6d88609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  godMode: 1
+  godMode: 0
   moneyText: {fileID: 1936417512}
   healthText: {fileID: 1485471132}
   _money: 350
@@ -2015,6 +2015,138 @@ MonoBehaviour:
   - {fileID: 219127157}
   antPrefab: {fileID: 2257595214409899371, guid: 9686a1816e38013419b732a080ee24e4, type: 3}
   roundTxt: {fileID: 1441605744}
+  rounds:
+  - groups: []
+    reward: 0
+  - groups:
+    - type: 1
+      count: 20
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 32
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 14
+      interval: 1.8
+    - type: 2
+      count: 6
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 20
+      interval: 1.8
+    - type: 2
+      count: 8
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 36
+      interval: 1.8
+    reward: 100
+  - groups:
+    - type: 2
+      count: 15
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 48
+      interval: 2
+    - type: 2
+      count: 4
+      interval: 1.8
+    reward: 100
+  - groups:
+    - type: 3
+      count: 4
+      interval: 2
+    - type: 2
+      count: 9
+      interval: 1.8
+    reward: 100
+  - groups:
+    - type: 2
+      count: 12
+      interval: 1.5
+    - type: 3
+      count: 10
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 1
+      count: 10
+      interval: 1
+    - type: 1
+      count: 20
+      interval: 1.5
+    - type: 1
+      count: 30
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 3
+      count: 12
+      interval: 2
+    - type: 1
+      count: 1
+      interval: 1
+    - type: 4
+      count: 3
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 2
+      count: 20
+      interval: 1
+    - type: 5
+      count: 2
+      interval: 3
+    reward: 100
+  - groups:
+    - type: 1
+      count: 100
+      interval: 2
+    - type: 1
+      count: 50
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 3
+      count: 50
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 5
+      count: 10
+      interval: 2
+    reward: 100
+  - groups:
+    - type: 3
+      count: 32
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 3
+      count: 20
+      interval: 1
+    - type: 4
+      count: 8
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 3
+      count: 20
+      interval: 1
+    - type: 4
+      count: 8
+      interval: 1
+    reward: 100
   round: 1
 --- !u!1 &872307048
 GameObject:
