@@ -7,6 +7,7 @@ using System;
 public struct AntGroup
 {
 	public AntType type;
+	public AntProperty props;
 	public int count;
 	public float interval;
 }

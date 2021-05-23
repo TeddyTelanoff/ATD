@@ -8,6 +8,7 @@ public enum AntProperty: int
 	None,
 
 	Camo = 1 << 0,
+	Armor = 1 << 1,
 }
 
 public enum AntEffect: int

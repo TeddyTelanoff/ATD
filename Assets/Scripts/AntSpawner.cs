@@ -75,7 +75,7 @@ public class AntSpawner: MonoBehaviour
 	{
 		for (int i = 0; i < group.count; i++)
 		{
-			SpawnAnt(group.type);
+			SpawnAnt(group.type, group.props);
 			yield return new WaitForSeconds(group.interval);
 		}
 	}

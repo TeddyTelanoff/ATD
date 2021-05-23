@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b45a83ff3b090c3429f1dffb343d4907, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b45a83ff3b090c3429f1dffb343d4907, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1958,6 +1958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   padlock: {fileID: 21300000, guid: dde40095d7c2fef48810afeaea7879f1, type: 3}
+  defTex: {fileID: 21300000, guid: b45a83ff3b090c3429f1dffb343d4907, type: 3}
   parent: {fileID: 2026348288}
   upgradePanel: {fileID: 1065555007}
   prefabs:
@@ -2020,133 +2021,222 @@ MonoBehaviour:
     reward: 0
   - groups:
     - type: 1
+      props: 0
       count: 20
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 32
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 14
       interval: 1.8
     - type: 2
+      props: 0
       count: 6
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 20
       interval: 1.8
     - type: 2
+      props: 0
       count: 8
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 36
       interval: 1.8
     reward: 100
   - groups:
     - type: 2
+      props: 0
       count: 15
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 48
       interval: 2
     - type: 2
+      props: 0
       count: 4
       interval: 1.8
     reward: 100
   - groups:
     - type: 3
+      props: 0
       count: 4
       interval: 2
     - type: 2
+      props: 0
       count: 9
       interval: 1.8
     reward: 100
   - groups:
     - type: 2
+      props: 0
       count: 12
       interval: 1.5
     - type: 3
+      props: 0
       count: 10
       interval: 2
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 10
       interval: 1
     - type: 1
+      props: 0
       count: 20
       interval: 1.5
     - type: 1
+      props: 0
       count: 30
       interval: 2
     reward: 100
   - groups:
     - type: 3
+      props: 0
       count: 12
       interval: 2
     - type: 1
+      props: 0
       count: 1
       interval: 1
     - type: 4
+      props: 0
       count: 3
       interval: 2
     reward: 100
   - groups:
     - type: 2
+      props: 0
       count: 20
       interval: 1
     - type: 5
+      props: 0
       count: 2
       interval: 3
     reward: 100
   - groups:
     - type: 1
+      props: 0
       count: 100
       interval: 2
     - type: 1
+      props: 0
       count: 50
       interval: 1
     reward: 100
   - groups:
     - type: 3
+      props: 0
       count: 50
       interval: 1
     reward: 100
   - groups:
     - type: 5
+      props: 0
       count: 10
       interval: 2
     reward: 100
   - groups:
     - type: 3
+      props: 0
       count: 32
       interval: 1
     reward: 100
   - groups:
     - type: 3
+      props: 0
       count: 20
       interval: 1
     - type: 4
+      props: 0
       count: 8
       interval: 1
     reward: 100
   - groups:
-    - type: 3
-      count: 20
+    - type: 1
+      props: 0
+      count: 49
       interval: 1
-    - type: 4
-      count: 8
+    - type: 1
+      props: 1
+      count: 1
       interval: 1
     reward: 100
+  - groups:
+    - type: 5
+      props: 0
+      count: 9
+      interval: 2
+    - type: 5
+      props: 1
+      count: 1
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 4
+      props: 0
+      count: 20
+      interval: 1.8
+    - type: 5
+      props: 0
+      count: 10
+      interval: 1.5
+    - type: 2
+      props: 0
+      count: 5
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 4
+      props: 0
+      count: 21
+      interval: 1
+    reward: 100
+  - groups:
+    - type: 2
+      props: 0
+      count: 30
+      interval: 1
+    - type: 5
+      props: 0
+      count: 6
+      interval: 1.5
+    reward: 100
+  - groups:
+    - type: 4
+      props: 1
+      count: 69
+      interval: 1
+    reward: 169
+  - groups:
+    - type: 7
+      props: 0
+      count: 10
+      interval: 2
+    reward: 169
+  - groups:
+    - type: 7
+      props: 2
+      count: 1
+      interval: 1
+    reward: 169
   round: 1
 --- !u!1 &872307048
 GameObject:
@@ -2653,7 +2743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: b45a83ff3b090c3429f1dffb343d4907, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

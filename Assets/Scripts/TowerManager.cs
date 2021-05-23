@@ -10,6 +10,7 @@ public class TowerManager : MonoBehaviour
 	public static TowerManager Instance { get; private set; }
 
 	public Sprite padlock;
+	public Sprite defTex;
 	public Transform parent;
 	public GameObject upgradePanel;
 	public GameObject[] prefabs;
@@ -118,9 +119,12 @@ public class TowerManager : MonoBehaviour
 		switch (selectedTower.disPath)
 		{
 		case Path.None:
-			pi1.sprite = selectedTower.UpgradeSprite(Path.Path1);
-			pi2.sprite = selectedTower.UpgradeSprite(Path.Path2);
-			pi3.sprite = selectedTower.UpgradeSprite(Path.Path3);
+			var s1 = selectedTower.UpgradeSprite(Path.Path1);
+			var s2 = selectedTower.UpgradeSprite(Path.Path2);
+			var s3 = selectedTower.UpgradeSprite(Path.Path3);
+			pi1.sprite = s1 ? s1 : defTex;
+			pi2.sprite = s2 ? s2 : defTex;
+			pi3.sprite = s3 ? s3 : defTex;
 
 			pt1.text = selectedTower.UpgradeName(Path.Path1) ?? maxUpgrade;
 			pt2.text = selectedTower.UpgradeName(Path.Path2) ?? maxUpgrade;
@@ -194,8 +198,10 @@ public class TowerManager : MonoBehaviour
 		TMP_Text pta, TMP_Text ppa, Image pia,
 			TMP_Text ptb, TMP_Text ppb, Image pib)
 	{
-		pia.sprite = selectedTower.UpgradeSprite(a);
-		pib.sprite = selectedTower.UpgradeSprite(b);
+		var sa = selectedTower.UpgradeSprite(a);
+		var sb = selectedTower.UpgradeSprite(b);
+		pia.sprite = sa ? sa : defTex;
+		pib.sprite = sb ? sb : defTex;
 
 		pta.text = selectedTower.UpgradeName(a) ?? maxUpgrade;
 		ptb.text = selectedTower.UpgradeName(b) ?? maxUpgrade;
@@ -208,7 +214,8 @@ public class TowerManager : MonoBehaviour
 		TMP_Text pt1, TMP_Text pp1, Image pi1,
 			TMP_Text pt2, TMP_Text pp2, Image pi2)
 	{
-		pi1.sprite = selectedTower.UpgradeSprite(prim);
+		var s1 = selectedTower.UpgradeSprite(prim);
+		pi1.sprite = s1 ? s1 : defTex;
 		pt1.text = selectedTower.UpgradeName(prim) ?? maxUpgrade;
 		pp1.text = $"${selectedTower.UpgradePrice(prim)}";
 
@@ -219,7 +226,8 @@ public class TowerManager : MonoBehaviour
 			return;
 		}
 
-		pi2.sprite = selectedTower.LastUpgradeSprite(sec);
+		var s2 = selectedTower.LastUpgradeSprite(sec);
+		pi2.sprite = s2 ? s2 : defTex;
 		pt2.text = maxUpgrade;
 		pp2.text = "";
 	}
