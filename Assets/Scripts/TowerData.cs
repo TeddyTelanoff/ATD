@@ -5,14 +5,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Tower", fileName = "Tower")]
 public class TowerData: ScriptableObject
 {
+	public GameObject model;
 	public Sprite sprite;
 	public int price;
 
-	public Sprite[] spritesPath1;
-	public Sprite[] spritesPath2;
-	public Sprite[] spritesPath3;
+	public DartProperty props;
+	public float reload;
+	public float kb;
+	public int dps;
+	public int damage;
+	public int pierce;
+	public int range;
 
-	public Upgrade[] upgradesPath1;
-	public Upgrade[] upgradesPath2;
-	public Upgrade[] upgradesPath3;
+	public Upgrade[] upgradesPath1 = new Upgrade[5];
+	public Upgrade[] upgradesPath2 = new Upgrade[5];
+	public Upgrade[] upgradesPath3 = new Upgrade[5];
 }

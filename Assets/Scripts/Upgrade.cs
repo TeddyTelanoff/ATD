@@ -6,6 +6,7 @@ using System;
 [Serializable]
 public struct Upgrade
 {
+	public Sprite sprite;
 	public string name;
 	public int price;
 
@@ -15,4 +16,5 @@ public struct Upgrade
 	public int dps;
 	public int damage;
 	public int pierce;
+	public int range;
 }

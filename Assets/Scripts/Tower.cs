@@ -21,15 +21,16 @@ public enum Tier: int
 	Tier5,
 }
 
-public abstract class Tower: MonoBehaviour
+public class Tower: MonoBehaviour
 {
 	public int SellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
 	public TowerData data;
 
-	
-
 	public GameObject dartPrefab;
+	public Transform view;
+
+	[Header("Don t Touch")]
 	public DartProperty dartProps;
 	public float effectLifetime;
 	public float reload;
@@ -39,7 +40,6 @@ public abstract class Tower: MonoBehaviour
 	public int pierce;
 	public int invested;
 
-	[Header("Don t Touch")]
 	public List<Ant> antsInRange;
 	public bool placing;
 
@@ -52,6 +52,7 @@ public abstract class Tower: MonoBehaviour
 	private void Start()
 	{
 		invested = data.price;
+		transform.localScale = Vector3.one * data.range;
 		StartCoroutine(Place());
 	}
 
@@ -63,6 +64,7 @@ public abstract class Tower: MonoBehaviour
 		dps += upgrade.dps;
 		damage += upgrade.damage;
 		pierce += upgrade.pierce;
+		view.localScale += Vector3.one * upgrade.range;
 	}
 
 	public void Upgrade(Path path)
@@ -116,7 +118,6 @@ public abstract class Tower: MonoBehaviour
 		return true;
 	}	
 
-	protected abstract void UpgradeInternal(Path path);
 	public string UpgradeName(Path path, Tier tier) =>
 		path switch
 		{
@@ -138,18 +139,18 @@ public abstract class Tower: MonoBehaviour
 	public Sprite UpgradeSprite(Path path, Tier tier) =>
 		path switch
 		{
-			Path.Path1 => data.spritesPath1[(int)tier],
-			Path.Path2 => data.spritesPath2[(int)tier],
-			Path.Path3 => data.spritesPath3[(int)tier],
+			Path.Path1 => data.upgradesPath1[(int)tier].sprite,
+			Path.Path2 => data.upgradesPath2[(int)tier].sprite,
+			Path.Path3 => data.upgradesPath3[(int)tier].sprite,
 			_ => null,
 		};
 
 	public Sprite UpgradeSprite(Path path) =>
 		path switch
 		{
-			Path.Path1 => data.spritesPath1[(int)path1Tier],
-			Path.Path2 => data.spritesPath2[(int)path2Tier],
-			Path.Path3 => data.spritesPath3[(int)path3Tier],
+			Path.Path1 => data.upgradesPath1[(int)path1Tier].sprite,
+			Path.Path2 => data.upgradesPath2[(int)path2Tier].sprite,
+			Path.Path3 => data.upgradesPath3[(int)path3Tier].sprite,
 			_ => null,
 		};
 
