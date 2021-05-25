@@ -94,7 +94,7 @@ public class TowerManager : MonoBehaviour
 
 	public void UpdatePaths()
 	{
-		upgradePanel.transform.Find("Tower").GetComponent<TMP_Text>().text = selectedTower.Name;
+		upgradePanel.transform.Find("Tower").GetComponent<TMP_Text>().text = selectedTower.data.name;
 		upgradePanel.transform.Find("Tier").GetComponent<TMP_Text>().text = $"{(int)selectedTower.path1Tier}-{(int)selectedTower.path2Tier}-{(int)selectedTower.path3Tier}";
 
 		var sellTxt = upgradePanel.transform.Find("Sell").Find("Text (TMP)").GetComponent<TMP_Text>();

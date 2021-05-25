@@ -21,23 +21,14 @@ public enum Tier: int
 	Tier5,
 }
 
-public enum TowerId: int
-{
-	Soldier,
-	Washer,
-}
-
 public abstract class Tower: MonoBehaviour
 {
-	public abstract string Name { get; }
-	public abstract TowerId Id { get; }
-	public abstract int Price { get; }
 	public int SellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
-	public Sprite[] spritesPath1 = new Sprite[6];
-	public Sprite[] spritesPath2 = new Sprite[6];
-	public Sprite[] spritesPath3 = new Sprite[6];
-	public Sprite[][] sprites;
+	public TowerData data;
+
+	
+
 	public GameObject dartPrefab;
 	public DartProperty dartProps;
 	public float effectLifetime;
@@ -60,9 +51,18 @@ public abstract class Tower: MonoBehaviour
 
 	private void Start()
 	{
-		invested = Price;
+		invested = data.price;
 		StartCoroutine(Place());
-		sprites = new Sprite[][] { spritesPath1, spritesPath2, spritesPath3, };
+	}
+
+	public void Upgrade(Upgrade upgrade)
+	{
+		dartProps |= upgrade.props;
+		reload += upgrade.reload;
+		kb += upgrade.kb;
+		dps += upgrade.dps;
+		damage += upgrade.damage;
+		pierce += upgrade.pierce;
 	}
 
 	public void Upgrade(Path path)
@@ -70,97 +70,115 @@ public abstract class Tower: MonoBehaviour
 		switch (path)
 		{
 		case Path.Path1:
-			UpgradePath(path, ref path1Tier, path2Tier, path3Tier, Path.Path2, Path.Path3);
+			if (UpgradePath(path, ref path1Tier, path2Tier, path3Tier, Path.Path2, Path.Path3))
+				Upgrade(data.upgradesPath1[(int)path1Tier - 1]);
 			break;
 		case Path.Path2:
-			UpgradePath(path, ref path2Tier, path1Tier, path3Tier, Path.Path1, Path.Path3);
+			if (UpgradePath(path, ref path2Tier, path1Tier, path3Tier, Path.Path1, Path.Path3))
+				Upgrade(data.upgradesPath2[(int)path2Tier - 1]);
 			break;
 		case Path.Path3:
-			UpgradePath(path, ref path3Tier, path1Tier, path2Tier, Path.Path1, Path.Path2);
+			if (UpgradePath(path, ref path3Tier, path1Tier, path2Tier, Path.Path1, Path.Path2))
+				Upgrade(data.upgradesPath3[(int)path3Tier - 1]);
 			break;
 		}
 	}
 
-	private void UpgradePath(Path path, ref Tier pathTier, Tier tier1, Tier tier2, Path path1, Path path2)
+	private bool UpgradePath(Path path, ref Tier pathTier, Tier tier1, Tier tier2, Path path1, Path path2)
 	{
 		if (GameManager.Instance.Money < UpgradePrice(path, pathTier))
-			return;
+			return false;
 
 		if (disPath == path)
-			return;
+			return false;
 
 		if (primPath != Path.None && primPath != path && pathTier >= Tier.Tier2)
-			return;
+			return false;
 
-		if (pathTier < Tier.Tier5)
+		if (pathTier >= Tier.Tier5)
+			return false;
+		
+		pathTier++;
+		if (primPath == Path.None)
 		{
-			pathTier++;
-			if (primPath == Path.None)
-			{
-				if (pathTier >= Tier.Tier3)
-					primPath = path;
-			}
-
-			if (tier1 > Tier.Tier0)
-				disPath = path2;
-			if (tier2 > Tier.Tier0)
-				disPath = path1;
-
-			int price = UpgradePrice(path, pathTier - 1);
-			invested += price;
-			GameManager.Instance.Money -= price;
-			UpgradeInternal(path);
+			if (pathTier >= Tier.Tier3)
+				primPath = path;
 		}
+
+		if (tier1 > Tier.Tier0)
+			disPath = path2;
+		if (tier2 > Tier.Tier0)
+			disPath = path1;
+
+		int price = UpgradePrice(path, pathTier - 1);
+		invested += price;
+		GameManager.Instance.Money -= price;
+		return true;
 	}	
 
 	protected abstract void UpgradeInternal(Path path);
-	public abstract string UpgradeName(Path path, Tier tier);
-	public string UpgradeName(Path path)
-	{
-		return path switch
+	public string UpgradeName(Path path, Tier tier) =>
+		path switch
 		{
-			Path.Path1 => UpgradeName(path, path1Tier),
-			Path.Path2 => UpgradeName(path, path2Tier),
-			Path.Path3 => UpgradeName(path, path3Tier),
+			Path.Path1 => data.upgradesPath1[(int)tier].name,
+			Path.Path2 => data.upgradesPath2[(int)tier].name,
+			Path.Path3 => data.upgradesPath3[(int)tier].name,
 			_ => null,
 		};
-	}
+
+	public string UpgradeName(Path path) =>
+		path switch
+		{
+			Path.Path1 => data.upgradesPath1[(int)path1Tier].name,
+			Path.Path2 => data.upgradesPath2[(int)path2Tier].name,
+			Path.Path3 => data.upgradesPath3[(int)path3Tier].name,
+			_ => null,
+		};
+
 	public Sprite UpgradeSprite(Path path, Tier tier) =>
-		sprites[(int)path - 1][(int)tier];
-
-	public Sprite UpgradeSprite(Path path)
-	{
-		return path switch
+		path switch
 		{
-			Path.Path1 => UpgradeSprite(path, path1Tier),
-			Path.Path2 => UpgradeSprite(path, path2Tier),
-			Path.Path3 => UpgradeSprite(path, path3Tier),
+			Path.Path1 => data.spritesPath1[(int)tier],
+			Path.Path2 => data.spritesPath2[(int)tier],
+			Path.Path3 => data.spritesPath3[(int)tier],
 			_ => null,
 		};
-	}
 
-	public Sprite LastUpgradeSprite(Path path)
-	{
-		return path switch
+	public Sprite UpgradeSprite(Path path) =>
+		path switch
+		{
+			Path.Path1 => data.spritesPath1[(int)path1Tier],
+			Path.Path2 => data.spritesPath2[(int)path2Tier],
+			Path.Path3 => data.spritesPath3[(int)path3Tier],
+			_ => null,
+		};
+
+	public Sprite LastUpgradeSprite(Path path) =>
+		path switch
 		{
 			Path.Path1 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path1Tier - 1) : null,
 			Path.Path2 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path2Tier - 1) : null,
 			Path.Path3 => path1Tier > Tier.Tier0 ? UpgradeSprite(path, path3Tier - 1) : null,
 			_ => null,
 		};
-	}
 
-	public abstract int UpgradePrice(Path path, Tier tier);
-	public int UpgradePrice(Path path)
-	{
-		return path switch
+	public int UpgradePrice(Path path, Tier tier) =>
+		path switch
 		{
-			Path.Path1 => UpgradePrice(path, path1Tier),
-			Path.Path2 => UpgradePrice(path, path2Tier),
-			Path.Path3 => UpgradePrice(path, path3Tier),
+			Path.Path1 => data.upgradesPath1[(int)tier].price,
+			Path.Path2 => data.upgradesPath2[(int)tier].price,
+			Path.Path3 => data.upgradesPath3[(int)tier].price,
 			_ => 0,
 		};
-	}
+
+	public int UpgradePrice(Path path) =>
+		path switch
+		{
+			Path.Path1 => data.upgradesPath1[(int)path1Tier].price,
+			Path.Path2 => data.upgradesPath2[(int)path2Tier].price,
+			Path.Path3 => data.upgradesPath3[(int)path3Tier].price,
+			_ => 0,
+		};
 
 	public Dart Fire(Ant ant)
 	{
