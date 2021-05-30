@@ -27,6 +27,7 @@ public class Tower: MonoBehaviour
 
 	public TowerData data;
 
+	public GameObject placement;
 	public GameObject dartPrefab;
 	public Transform view;
 
@@ -42,6 +43,7 @@ public class Tower: MonoBehaviour
 
 	public List<Ant> antsInRange;
 	public bool placing;
+	public int obsTouching;
 
 	public Path primPath;
 	public Path disPath;
@@ -54,11 +56,21 @@ public class Tower: MonoBehaviour
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;
 		StartCoroutine(Place());
+
+		dartProps = data.props;
+		effectLifetime = data.effectLifetime;
+		reload = data.reload;
+		kb = data.kb;
+		dps = data.dps;
+		damage = data.damage;
+		pierce = data.pierce;
+		view.localScale = Vector3.one * data.range;
 	}
 
 	public void Upgrade(Upgrade upgrade)
 	{
 		dartProps |= upgrade.props;
+		effectLifetime += upgrade.effectLifetime;
 		reload += upgrade.reload;
 		kb += upgrade.kb;
 		dps += upgrade.dps;
@@ -198,6 +210,7 @@ public class Tower: MonoBehaviour
 		dart.pierce = pierce;
 		dart.damage = damage;
 		dart.props = dartProps;
+		dart.timeout = transform.localScale.x;
 		dart.effectLifetime = effectLifetime;
 
 		return dart;
@@ -247,18 +260,28 @@ public class Tower: MonoBehaviour
 			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
 
-			if (Input.GetMouseButtonUp(0))
+			if (obsTouching <= 0)
 			{
-				GameManager.Instance.Money -= 200;
-				placing = false;
+				view.GetComponent<Renderer>().material.color = Color.red;
+
+				if (Input.GetMouseButtonUp(0))
+				{
+					TowerManager.Instance.placingTower = null;
+					GetComponent<Rigidbody2D>().WakeUp();
+					GameManager.Instance.Money -= 200;
+					placing = false;
+				}
+				else if (Input.GetMouseButtonUp(1))
+					Destroy(gameObject);
 			}
-			else if (Input.GetMouseButtonUp(1))
-				Destroy(gameObject);
+			else
+				view.GetComponent<Renderer>().material.color = Color.grey;
 
 			yield return null;
 		}
 
 		StartCoroutine(FireLoop());
+		Destroy(placement);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

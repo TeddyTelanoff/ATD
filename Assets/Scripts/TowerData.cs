@@ -10,6 +10,7 @@ public class TowerData: ScriptableObject
 	public int price;
 
 	public DartProperty props;
+	public float effectLifetime;
 	public float reload;
 	public float kb;
 	public int dps;

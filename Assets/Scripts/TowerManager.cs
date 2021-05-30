@@ -17,6 +17,7 @@ public class TowerManager : MonoBehaviour
 
 	[Header("No Peeking")]
 	public List<Tower> towers;
+	public Tower placingTower;
 	public Tower selectedTower;
 	public bool deselecting;
 
@@ -28,12 +29,12 @@ public class TowerManager : MonoBehaviour
 
 	private IEnumerator CoSpawn(int id)
 	{
-		if (GameManager.Instance.Money < 200)
+		if (GameManager.Instance.Money < prefabs[id].GetComponent<Tower>().data.price)
 			yield break;
 
 		yield return new WaitForFixedUpdate();
-		var tower = Instantiate(prefabs[id], parent).GetComponent<Tower>();
-		towers.Add(tower);
+		placingTower = Instantiate(prefabs[id], parent).GetComponent<Tower>();
+		towers.Add(placingTower);
 	}
 
 	public void Upgrade(int path)

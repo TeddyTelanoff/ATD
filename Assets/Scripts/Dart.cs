@@ -36,16 +36,20 @@ public class Dart: MonoBehaviour
 	public float timeout;
 
 	[Header("NO TOUCH")]
+	public Vector3 startPos;
 	public List<Transform> hit;
 	public Vector3 dir;
 	public Rigidbody2D rb;
 
-	private void Start() =>
+	private void Start()
+	{
 		rb = GetComponent<Rigidbody2D>();
+		startPos = transform.position;
+	}
 
 	private void FixedUpdate()
 	{
-		if (timeout <= 0)
+		if (Vector3.Distance(transform.position, startPos) >= timeout)
 			Destroy(gameObject);
 
 		if (props.HasFlag(DartProperty.Ricochet) && AntSpawner.Instance.parent.childCount > 0)
@@ -65,7 +69,6 @@ public class Dart: MonoBehaviour
 		}
 
 		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
-		timeout -= GameManager.FixedDeltaTime;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
