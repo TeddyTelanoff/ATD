@@ -113,7 +113,29 @@ MonoBehaviour:
     damage: 0
     pierce: 0
     range: 0
+  - sprite: {fileID: 0}
+    name: 
+    price: 0
+    props: 0
+    effectLifetime: 0
+    reload: 0
+    kb: 0
+    dps: 0
+    damage: 0
+    pierce: 0
+    range: 0
   upgradesPath3:
+  - sprite: {fileID: 0}
+    name: 
+    price: 0
+    props: 0
+    effectLifetime: 0
+    reload: 0
+    kb: 0
+    dps: 0
+    damage: 0
+    pierce: 0
+    range: 0
   - sprite: {fileID: 0}
     name: 
     price: 0
