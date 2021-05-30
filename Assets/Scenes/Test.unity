@@ -6764,6 +6764,7 @@ GameObject:
   - component: {fileID: 8672297612986273702}
   - component: {fileID: 791055250368353340}
   - component: {fileID: 1984696158}
+  - component: {fileID: 644938411966545906}
   m_Layer: 0
   m_Name: House
   m_TagString: Obsticle
@@ -6771,6 +6772,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &644938411966545906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644938411966545905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d537e2d12236f4381ddf3f6b9f4ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &791055250368353340
 MeshRenderer:
   m_ObjectHideFlags: 0

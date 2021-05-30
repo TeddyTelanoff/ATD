@@ -92,7 +92,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 517870394320085900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -383,6 +383,7 @@ MonoBehaviour:
   placement: {fileID: 1344301423279991867}
   dartPrefab: {fileID: 3589104009754999247, guid: 3fd4cb4dac79ced4c9c0b21378240ee5, type: 3}
   view: {fileID: 1306673874286579444}
+  selectable: {fileID: 4611005426359368802}
   dartProps: 0
   effectLifetime: 0
   reload: 0
@@ -489,7 +490,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306673874286579445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -526,8 +527,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344301423279991867}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.051, y: -0.026, z: 0}
+  m_LocalScale: {x: 0.8, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 1306673873791883566}
   m_RootOrder: 3

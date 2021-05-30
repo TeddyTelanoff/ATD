@@ -30,6 +30,7 @@ public class Tower: MonoBehaviour
 	public GameObject placement;
 	public GameObject dartPrefab;
 	public Transform view;
+	public Transform selectable;
 
 	[Header("Don t Touch")]
 	public DartProperty dartProps;
@@ -260,14 +261,17 @@ public class Tower: MonoBehaviour
 			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
 
-			if (obsTouching <= 0)
+			if (obsTouching == 0)
 			{
-				view.GetComponent<Renderer>().material.color = Color.red;
+				view.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.1333f);
 
 				if (Input.GetMouseButtonUp(0))
 				{
+					selectable.GetComponent<Collider2D>().enabled = true;
+					view.GetComponent<Collider2D>().enabled = true;
 					TowerManager.Instance.placingTower = null;
 					GetComponent<Rigidbody2D>().WakeUp();
+					TowerManager.Instance.Select(this);
 					GameManager.Instance.Money -= 200;
 					placing = false;
 				}
@@ -275,7 +279,7 @@ public class Tower: MonoBehaviour
 					Destroy(gameObject);
 			}
 			else
-				view.GetComponent<Renderer>().material.color = Color.grey;
+				view.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.25f);
 
 			yield return null;
 		}
