@@ -10,6 +10,7 @@ public class AntSpawner: MonoBehaviour
 
 	public AudioSource antPop;
 	public Transform parent;
+	public Transform checkpointsParent;
 	public Transform[] checkpoints;
 	public GameObject antPrefab;
 	public TMP_InputField roundTxt;
@@ -20,6 +21,10 @@ public class AntSpawner: MonoBehaviour
 	{
 		Instance = this;
 		roundTxt.text = round.ToString();
+
+		checkpoints = new Transform[checkpointsParent.childCount];
+		for (int i = 0; i < checkpointsParent.childCount; i++)
+			checkpoints[i] = checkpointsParent.GetChild(i);
 	}
 
 	public void EarthQuake() =>
