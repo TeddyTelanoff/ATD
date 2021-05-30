@@ -266,15 +266,7 @@ public class Tower: MonoBehaviour
 				view.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.1333f);
 
 				if (Input.GetMouseButtonUp(0))
-				{
-					selectable.GetComponent<Collider2D>().enabled = true;
-					view.GetComponent<Collider2D>().enabled = true;
-					TowerManager.Instance.placingTower = null;
-					GetComponent<Rigidbody2D>().WakeUp();
-					TowerManager.Instance.Select(this);
-					GameManager.Instance.Money -= 200;
 					placing = false;
-				}
 				else if (Input.GetMouseButtonUp(1))
 					Destroy(gameObject);
 			}
@@ -285,7 +277,16 @@ public class Tower: MonoBehaviour
 		}
 
 		StartCoroutine(FireLoop());
-		Destroy(placement);
+		selectable.GetComponent<Collider2D>().enabled = true;
+		view.GetComponent<Collider2D>().enabled = true;
+		TowerManager.Instance.placingTower = null;
+		GameManager.Instance.Money -= data.price;
+		GetComponent<Rigidbody2D>().WakeUp();
+		TowerManager.Instance.Select(this);
+
+		placement.GetComponent<TowerPlacement>().enabled = false;
+		placement.GetComponent<Rigidbody2D>().Sleep();
+		placement.GetComponent<Obsticle>().enabled = true;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

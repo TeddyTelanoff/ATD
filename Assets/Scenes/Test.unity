@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dffe5cec3293f144f915f0ffd6d88609, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  godMode: 0
+  godMode: 1
   moneyText: {fileID: 1936417512}
   healthText: {fileID: 1485471132}
   _money: 350
@@ -5049,7 +5049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a0aaa9989b90e743acd523f02bbb75f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a0aaa9989b90e743acd523f02bbb75f, type: 3}
       propertyPath: m_LocalScale.z
@@ -5065,7 +5065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a0aaa9989b90e743acd523f02bbb75f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5a0aaa9989b90e743acd523f02bbb75f, type: 3}
       propertyPath: m_LocalRotation.w
