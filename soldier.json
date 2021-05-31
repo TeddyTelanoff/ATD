@@ -1,0 +1,608 @@
+{
+    "model": {
+        "instanceID": 0
+    },
+    "sprite": {
+        "instanceID": 16966
+    },
+    "price": 200,
+    "props": 0,
+    "effectLifetime": 0.0,
+    "reload": 1.399999976158142,
+    "kb": 0.0,
+    "dps": 0,
+    "damage": 1,
+    "pierce": 2,
+    "range": 3,
+    "upgradesPath1": [
+        {
+            "sprite": {
+                "instanceID": 18534
+            },
+            "name": "Bigger Barrel",
+            "price": 50,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 1,
+                "op": 2
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 17386
+            },
+            "name": "Cannon",
+            "price": 500,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 19838
+            },
+            "name": "Misile Launcher",
+            "price": 900,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        }
+    ],
+    "upgradesPath2": [
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        }
+    ],
+    "upgradesPath3": [
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        },
+        {
+            "sprite": {
+                "instanceID": 0
+            },
+            "name": "",
+            "price": 0,
+            "props": {
+                "value": 0,
+                "op": 0
+            },
+            "effectLifetime": {
+                "value": 0.0,
+                "op": 0
+            },
+            "reload": {
+                "value": 0.0,
+                "op": 0
+            },
+            "kb": {
+                "value": 0.0,
+                "op": 0
+            },
+            "dps": {
+                "value": 0,
+                "op": 0
+            },
+            "damage": {
+                "value": 0,
+                "op": 0
+            },
+            "pierce": {
+                "value": 0,
+                "op": 0
+            },
+            "range": {
+                "value": 0,
+                "op": 0
+            }
+        }
+    ]
+}

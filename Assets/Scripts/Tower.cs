@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -74,6 +75,10 @@ public class Tower: MonoBehaviour
 		dps = data.dps;
 		damage = data.damage;
 		pierce = data.pierce;
+
+		string stats = JsonUtility.ToJson(data, true);
+		using StreamWriter writer = File.CreateText("soldier.json");
+		writer.Write(stats);
 	}
 
 	public void Upgrade(Upgrade upgrade)
