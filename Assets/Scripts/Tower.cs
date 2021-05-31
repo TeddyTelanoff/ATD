@@ -76,9 +76,12 @@ public class Tower: MonoBehaviour
 		damage = data.damage;
 		pierce = data.pierce;
 
-		string stats = JsonUtility.ToJson(data, true);
-		using StreamWriter writer = File.CreateText("soldier.json");
-		writer.Write(stats);
+		string stats;
+		stats = JsonUtility.ToJson(data, true);
+		File.WriteAllText("soldier.json", stats);
+		print(stats);
+		//stats = File.ReadAllText("soldier.json");
+		data = JsonUtility.FromJson<TowerData>(stats);
 	}
 
 	public void Upgrade(Upgrade upgrade)

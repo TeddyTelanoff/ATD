@@ -3,7 +3,7 @@
         "instanceID": 0
     },
     "sprite": {
-        "instanceID": 16966
+        "instanceID": 16838
     },
     "price": 200,
     "props": 0,
@@ -17,7 +17,7 @@
     "upgradesPath1": [
         {
             "sprite": {
-                "instanceID": 18534
+                "instanceID": 16996
             },
             "name": "Bigger Barrel",
             "price": 50,
@@ -56,7 +56,7 @@
         },
         {
             "sprite": {
-                "instanceID": 17386
+                "instanceID": 16998
             },
             "name": "Cannon",
             "price": 500,
@@ -95,7 +95,7 @@
         },
         {
             "sprite": {
-                "instanceID": 19838
+                "instanceID": 17000
             },
             "name": "Misile Launcher",
             "price": 900,
