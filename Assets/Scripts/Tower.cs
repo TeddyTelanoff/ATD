@@ -36,6 +36,13 @@ public class Tower: MonoBehaviour
 	public DartProperty dartProps;
 	public float effectLifetime;
 	public float reload;
+	public int range { get => _range;
+		set
+		{
+			_range = value;
+			view.localScale = Vector3.one * value;
+		}
+	}
 	public float kb;
 	public int dps;
 	public int damage;
@@ -52,6 +59,8 @@ public class Tower: MonoBehaviour
 	public Tier path2Tier;
 	public Tier path3Tier;
 
+	private int _range;
+
 	private void Start()
 	{
 		invested = data.price;
@@ -65,19 +74,28 @@ public class Tower: MonoBehaviour
 		dps = data.dps;
 		damage = data.damage;
 		pierce = data.pierce;
-		view.localScale = Vector3.one * data.range;
 	}
 
 	public void Upgrade(Upgrade upgrade)
 	{
-		dartProps |= upgrade.props;
-		effectLifetime += upgrade.effectLifetime;
-		reload += upgrade.reload;
-		kb += upgrade.kb;
-		dps += upgrade.dps;
-		damage += upgrade.damage;
-		pierce += upgrade.pierce;
-		view.localScale += Vector3.one * upgrade.range;
+		switch (upgrade.props.op)
+		{
+		case Operator.Assign:
+			dartProps = upgrade.props.value;
+			break;
+		case Operator.Combine:
+			dartProps |= upgrade.props.value;
+			break;
+		}
+		upgrade.effectLifetime.Resolve(ref effectLifetime);
+		upgrade.reload.Resolve(ref reload);
+		upgrade.kb.Resolve(ref kb);
+		upgrade.dps.Resolve(ref dps);
+		upgrade.damage.Resolve(ref damage);
+		upgrade.pierce.Resolve(ref pierce);
+		upgrade.pierce.Resolve(ref pierce);
+		upgrade.range.Resolve(ref _range);
+		range = _range;
 	}
 
 	public void Upgrade(Path path)
@@ -211,7 +229,7 @@ public class Tower: MonoBehaviour
 		dart.pierce = pierce;
 		dart.damage = damage;
 		dart.props = dartProps;
-		dart.timeout = transform.localScale.x;
+		dart.timeout = range;
 		dart.effectLifetime = effectLifetime;
 
 		return dart;
