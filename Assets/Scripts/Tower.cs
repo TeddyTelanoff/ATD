@@ -26,14 +26,14 @@ public class Tower: MonoBehaviour
 {
 	public int SellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
-	public TowerData data;
-
+	public string dataFile;
 	public GameObject placement;
 	public GameObject dartPrefab;
 	public Transform view;
 	public Transform selectable;
 
 	[Header("Don t Touch")]
+	public TowerData data;
 	public DartProperty dartProps;
 	public float effectLifetime;
 	public float reload;
@@ -64,6 +64,8 @@ public class Tower: MonoBehaviour
 
 	private void Start()
 	{
+		data = JsonUtility.FromJson<TowerData>(File.ReadAllText(dataFile));
+
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;
 		StartCoroutine(Place());
@@ -75,13 +77,6 @@ public class Tower: MonoBehaviour
 		dps = data.dps;
 		damage = data.damage;
 		pierce = data.pierce;
-
-		string stats;
-		stats = JsonUtility.ToJson(data, true);
-		File.WriteAllText("soldier.json", stats);
-		print(stats);
-		//stats = File.ReadAllText("soldier.json");
-		data = JsonUtility.FromJson<TowerData>(stats);
 	}
 
 	public void Upgrade(Upgrade upgrade)

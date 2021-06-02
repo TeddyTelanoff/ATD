@@ -1,12 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tower", fileName = "Tower")]
-public class TowerData: ScriptableObject
+[Serializable]
+public struct TowerData
 {
 	public GameObject model;
 	public Sprite sprite;
+	public string name;
 	public int price;
 
 	public DartProperty props;
@@ -18,7 +20,7 @@ public class TowerData: ScriptableObject
 	public int pierce;
 	public int range;
 
-	public Upgrade[] upgradesPath1 = new Upgrade[5];
-	public Upgrade[] upgradesPath2 = new Upgrade[5];
-	public Upgrade[] upgradesPath3 = new Upgrade[5];
+	public Upgrade[] upgradesPath1;
+	public Upgrade[] upgradesPath2;
+	public Upgrade[] upgradesPath3;
 }

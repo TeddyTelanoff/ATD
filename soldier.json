@@ -19,39 +19,11 @@
             "sprite": {
                 "instanceID": 16996
             },
-            "name": "Bigger Barrel",
+            "name": "Bob the Barrel",
             "price": 50,
-            "props": {
-                "value": 0,
-                "op": 0
-            },
-            "effectLifetime": {
-                "value": 0.0,
-                "op": 0
-            },
-            "reload": {
-                "value": 0.0,
-                "op": 0
-            },
-            "kb": {
-                "value": 0.0,
-                "op": 0
-            },
-            "dps": {
-                "value": 0,
-                "op": 0
-            },
             "damage": {
                 "value": 1,
                 "op": 2
-            },
-            "pierce": {
-                "value": 0,
-                "op": 0
-            },
-            "range": {
-                "value": 0,
-                "op": 0
             }
         },
         {
