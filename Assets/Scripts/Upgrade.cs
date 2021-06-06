@@ -35,7 +35,9 @@ public struct Operation<T>
 [Serializable]
 public struct Upgrade
 {
+	[NonSerialized]
 	public Sprite sprite;
+	public string image;
 	public string name;
 	public int price;
 

@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-
-using System;
-using System.IO;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +21,7 @@ public enum Tier: int
 	Tier5,
 }
 
-public class Tower: MonoBehaviour
+public partial class Tower: MonoBehaviour
 {
 	public int sellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
@@ -67,18 +64,7 @@ public class Tower: MonoBehaviour
 	private void Start()
 	{
 		StartCoroutine(Place());
-		data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
-
-		invested = data.price;
-		transform.localScale = Vector3.one * data.range;
-
-		dartProps = data.props;
-		effectLifetime = data.effectLifetime;
-		reload = data.reload;
-		kb = data.kb;
-		dps = data.dps;
-		damage = data.damage;
-		pierce = data.pierce;
+		Load();
 	}
 
 	public void Upgrade(Upgrade upgrade)

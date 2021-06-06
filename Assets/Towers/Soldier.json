@@ -1,5 +1,5 @@
 {
-	"sprite": "Soldier.png",
+	"image": "Soldier/0-0.png",
 	"name": "Soldier",
 	"price": 200,
 	
@@ -9,7 +9,9 @@
 	"range": 3,
 	
 	"path1": [
-		{}, {}, {}, {}, {}, {},
+		{
+			"image": "Soldier/1-1.png"
+		}, {}, {}, {}, {}, {},
 	],
 	"path2": [
 		{}, {}, {}, {}, {}, {},
