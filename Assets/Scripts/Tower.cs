@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,7 +67,7 @@ public class Tower: MonoBehaviour
 	private void Start()
 	{
 		StartCoroutine(Place());
-		data = JsonUtility.FromJson<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
+		data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
 
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;

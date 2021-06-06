@@ -22,5 +22,7 @@ public class PathProducer: MonoBehaviour
 			Vector3 avg = (verts[indis[i + 0]] + verts[indis[i + 1]] + verts[indis[i + 2]]) / 3;
 			checkpoint.transform.localPosition = new Vector3(avg.x, -avg.y);
 		}
+
+		Debug.Log("Path Produced!");
 	}
 }

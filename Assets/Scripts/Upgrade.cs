@@ -14,8 +14,8 @@ public enum Operator: int
 [Serializable]
 public struct Operation<T>
 {
-	public T value;
-	public Operator op;
+	public T value { get; set; }
+	public Operator op { get; set; }
 
 	public T Resolve(ref T to) =>
 		op switch
@@ -24,8 +24,8 @@ public struct Operation<T>
 			Operator.Combine => to = (dynamic)to + value,
 			Operator.Scale => to = (dynamic)to * value,
 			_ => to,
-		};
 
+		};
 	public static explicit operator T(Operation<T> op) =>
 		op.value;
 	public static explicit operator Operator(Operation<T> op) =>
@@ -35,16 +35,16 @@ public struct Operation<T>
 [Serializable]
 public struct Upgrade
 {
-	public Sprite sprite;
-	public string name;
-	public int price;
+	public Sprite sprite { get; set; }
+	public string name { get; set; }
+	public int price { get; set; }
 
-	public Operation<DartProperty> props;
-	public Operation<float> effectLifetime;
-	public Operation<float> reload;
-	public Operation<float> kb;
-	public Operation<int> dps;
-	public Operation<int> damage;
-	public Operation<int> pierce;
-	public Operation<int> range;
+	public Operation<DartProperty> props { get; set; }
+	public Operation<float> effectLifetime { get; set; }
+	public Operation<float> reload { get; set; }
+	public Operation<float> kb { get; set; }
+	public Operation<int> dps { get; set; }
+	public Operation<int> damage { get; set; }
+	public Operation<int> pierce { get; set; }
+	public Operation<int> range { get; set; }
 }
