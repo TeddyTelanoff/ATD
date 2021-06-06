@@ -227,7 +227,7 @@ public partial class Ant: MonoBehaviour
 			break;
 		}
 
-		GetComponent<Renderer>().material.color = matCol;
+		GetComponentInChildren<Renderer>().material.color = matCol;
 	}
 
 	private IEnumerator DPSLoop()
@@ -245,7 +245,7 @@ public partial class Ant: MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
-		if (nextCheckpoint)
+		if (!nextCheckpoint)
 			return;
 
 		Gizmos.color = Color.white;
