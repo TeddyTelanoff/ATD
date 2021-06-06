@@ -6,7 +6,6 @@ using UnityEngine;
 [Serializable]
 public struct TowerData
 {
-	public GameObject model;
 	public Sprite sprite;
 	public string name;
 	public int price;
@@ -20,7 +19,7 @@ public struct TowerData
 	public int pierce;
 	public int range;
 
-	public Upgrade[] upgradesPath1;
-	public Upgrade[] upgradesPath2;
-	public Upgrade[] upgradesPath3;
+	public Upgrade[] path1;
+	public Upgrade[] path2;
+	public Upgrade[] path3;
 }

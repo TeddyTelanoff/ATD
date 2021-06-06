@@ -64,11 +64,11 @@ public class Tower: MonoBehaviour
 
 	private void Start()
 	{
-		data = JsonUtility.FromJson<TowerData>(File.ReadAllText(dataFile));
+		StartCoroutine(Place());
+		data = JsonUtility.FromJson<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
 
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;
-		StartCoroutine(Place());
 
 		dartProps = data.props;
 		effectLifetime = data.effectLifetime;
@@ -107,15 +107,15 @@ public class Tower: MonoBehaviour
 		{
 		case Path.Path1:
 			if (UpgradePath(path, ref path1Tier, path2Tier, path3Tier, Path.Path2, Path.Path3))
-				Upgrade(data.upgradesPath1[(int)path1Tier - 1]);
+				Upgrade(data.path1[(int)path1Tier - 1]);
 			break;
 		case Path.Path2:
 			if (UpgradePath(path, ref path2Tier, path1Tier, path3Tier, Path.Path1, Path.Path3))
-				Upgrade(data.upgradesPath2[(int)path2Tier - 1]);
+				Upgrade(data.path2[(int)path2Tier - 1]);
 			break;
 		case Path.Path3:
 			if (UpgradePath(path, ref path3Tier, path1Tier, path2Tier, Path.Path1, Path.Path2))
-				Upgrade(data.upgradesPath3[(int)path3Tier - 1]);
+				Upgrade(data.path3[(int)path3Tier - 1]);
 			break;
 		}
 	}
@@ -155,36 +155,36 @@ public class Tower: MonoBehaviour
 	public string UpgradeName(Path path, Tier tier) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)tier].name,
-			Path.Path2 => data.upgradesPath2[(int)tier].name,
-			Path.Path3 => data.upgradesPath3[(int)tier].name,
+			Path.Path1 => data.path1[(int)tier].name,
+			Path.Path2 => data.path2[(int)tier].name,
+			Path.Path3 => data.path3[(int)tier].name,
 			_ => null,
 		};
 
 	public string UpgradeName(Path path) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)path1Tier].name,
-			Path.Path2 => data.upgradesPath2[(int)path2Tier].name,
-			Path.Path3 => data.upgradesPath3[(int)path3Tier].name,
+			Path.Path1 => data.path1[(int)path1Tier].name,
+			Path.Path2 => data.path2[(int)path2Tier].name,
+			Path.Path3 => data.path3[(int)path3Tier].name,
 			_ => null,
 		};
 
 	public Sprite UpgradeSprite(Path path, Tier tier) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)tier].sprite,
-			Path.Path2 => data.upgradesPath2[(int)tier].sprite,
-			Path.Path3 => data.upgradesPath3[(int)tier].sprite,
+			Path.Path1 => data.path1[(int)tier].sprite,
+			Path.Path2 => data.path2[(int)tier].sprite,
+			Path.Path3 => data.path3[(int)tier].sprite,
 			_ => null,
 		};
 
 	public Sprite UpgradeSprite(Path path) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)path1Tier].sprite,
-			Path.Path2 => data.upgradesPath2[(int)path2Tier].sprite,
-			Path.Path3 => data.upgradesPath3[(int)path3Tier].sprite,
+			Path.Path1 => data.path1[(int)path1Tier].sprite,
+			Path.Path2 => data.path2[(int)path2Tier].sprite,
+			Path.Path3 => data.path3[(int)path3Tier].sprite,
 			_ => null,
 		};
 
@@ -200,18 +200,18 @@ public class Tower: MonoBehaviour
 	public int UpgradePrice(Path path, Tier tier) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)tier].price,
-			Path.Path2 => data.upgradesPath2[(int)tier].price,
-			Path.Path3 => data.upgradesPath3[(int)tier].price,
+			Path.Path1 => data.path1[(int)tier].price,
+			Path.Path2 => data.path2[(int)tier].price,
+			Path.Path3 => data.path3[(int)tier].price,
 			_ => 0,
 		};
 
 	public int UpgradePrice(Path path) =>
 		path switch
 		{
-			Path.Path1 => data.upgradesPath1[(int)path1Tier].price,
-			Path.Path2 => data.upgradesPath2[(int)path2Tier].price,
-			Path.Path3 => data.upgradesPath3[(int)path3Tier].price,
+			Path.Path1 => data.path1[(int)path1Tier].price,
+			Path.Path2 => data.path2[(int)path2Tier].price,
+			Path.Path3 => data.path3[(int)path3Tier].price,
 			_ => 0,
 		};
 
