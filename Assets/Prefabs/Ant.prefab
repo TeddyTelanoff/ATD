@@ -4873,6 +4873,7 @@ GameObject:
   - component: {fileID: 2257595214409899369}
   - component: {fileID: 2257595214409899368}
   - component: {fileID: 2257595214409899374}
+  - component: {fileID: 6630078467909474524}
   m_Layer: 31
   m_Name: Ant
   m_TagString: Untagged
@@ -4945,6 +4946,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!70 &6630078467909474524
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257595214409899371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.1}
+  m_Size: {x: 0.86182594, y: 2.6}
+  m_Direction: 0
 --- !u!1 &2333914189236745203
 GameObject:
   m_ObjectHideFlags: 0
@@ -9807,18 +9824,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &992492440412895759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7454414915282778790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4deb360e10afd74989f4a6b1acf4e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7854002128330655938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9887,10 +9892,5 @@ PrefabInstance:
 --- !u!4 &7743302047385186089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b8c3cfd07c9eb174497084de5605becc, type: 3}
-  m_PrefabInstance: {fileID: 7854002128330655938}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7454414915282778790 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: b8c3cfd07c9eb174497084de5605becc, type: 3}
   m_PrefabInstance: {fileID: 7854002128330655938}
   m_PrefabAsset: {fileID: 0}

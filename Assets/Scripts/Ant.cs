@@ -227,7 +227,7 @@ public partial class Ant: MonoBehaviour
 			break;
 		}
 
-		GetComponentInChildren<Renderer>().material.color = matCol;
+		GetComponentInChildren<MeshRenderer>().material.color = matCol;
 	}
 
 	private IEnumerator DPSLoop()

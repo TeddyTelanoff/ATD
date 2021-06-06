@@ -22,12 +22,40 @@ public partial class Tower
 	{
 		data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
 		data.sprite = LoadSprite($"Assets/Sprites/{data.image}");
-		for (int i = 0; i < data.path1.Length; i++)
-			data.path1[i].sprite = LoadSprite($"Assets/Sprites/{data.path1[i].image}");
-		for (int i = 0; i < data.path2.Length; i++)
+		if (data.path1 != null)
+			for (int i = 0; i < data.path1.Length; i++)
+				data.path1[i].sprite = LoadSprite($"Assets/Sprites/{data.path1[i].image}");
+		if (data.path2 != null)
+			for (int i = 0; i < data.path2.Length; i++)
 			data.path2[i].sprite = LoadSprite($"Assets/Sprites/{data.path2[i].image}");
-		for (int i = 0; i < data.path3.Length; i++)
+		if (data.path3 != null)
+			for (int i = 0; i < data.path3.Length; i++)
 			data.path3[i].sprite = LoadSprite($"Assets/Sprites/{data.path3[i].image}");
+
+		var tmp = new Upgrade[6];
+		if (data.path1 != null)
+			for (int i = 0; i < 6; i++)
+				if (i < data.path1.Length)
+					tmp[i] = data.path1[i];
+				else
+					tmp[i] = data.path1[data.path1.Length - 1];
+		data.path1 = tmp;
+		tmp = new Upgrade[6];
+		if (data.path2 != null)
+			for (int i = 0; i < 6; i++)
+			if (i < data.path2.Length)
+				tmp[i] = data.path2[i];
+			else
+				tmp[i] = data.path2[data.path2.Length - 1];
+		data.path2 = tmp;
+		tmp = new Upgrade[6];
+		if (data.path3 != null)
+			for (int i = 0; i < 6; i++)
+			if (i < data.path3.Length)
+				tmp[i] = data.path3[i];
+			else
+				tmp[i] = data.path3[data.path3.Length - 1];
+		data.path3 = tmp;
 
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;

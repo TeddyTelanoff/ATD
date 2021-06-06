@@ -44,12 +44,21 @@ public struct Upgrade
 	public string name;
 	public int price;
 
-	public Operation<DartProperty> props;
-	public Operation<float> effectLifetime;
-	public Operation<float> reload;
-	public Operation<float> kb;
-	public Operation<int> dps;
-	public Operation<int> damage;
-	public Operation<int> pierce;
-	public Operation<int> range;
+	public DartProperty props;
+	public float effectLifetime;
+	public float reload;
+	public float kb;
+	public int dps;
+	public int damage;
+	public int pierce;
+	public int range;
+
+	//public Operation<DartProperty> props;
+	//public Operation<float> effectLifetime;
+	//public Operation<float> reload;
+	//public Operation<float> kb;
+	//public Operation<int> dps;
+	//public Operation<int> damage;
+	//public Operation<int> pierce;
+	//public Operation<int> range;
 }

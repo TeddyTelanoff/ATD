@@ -69,24 +69,14 @@ public partial class Tower: MonoBehaviour
 
 	public void Upgrade(Upgrade upgrade)
 	{
-		switch (upgrade.props.op)
-		{
-		case Operator.Assign:
-			dartProps = upgrade.props.value;
-			break;
-		case Operator.Combine:
-			dartProps |= upgrade.props.value;
-			break;
-		}
-		upgrade.effectLifetime.Resolve(ref effectLifetime);
-		upgrade.reload.Resolve(ref reload);
-		upgrade.kb.Resolve(ref kb);
-		upgrade.dps.Resolve(ref dps);
-		upgrade.damage.Resolve(ref damage);
-		upgrade.pierce.Resolve(ref pierce);
-		upgrade.pierce.Resolve(ref pierce);
-		upgrade.range.Resolve(ref _range);
-		range = _range;
+		dartProps |= upgrade.props;
+		effectLifetime += upgrade.effectLifetime;
+		reload += upgrade.reload;
+		kb += upgrade.kb;
+		dps += upgrade.dps;
+		damage += upgrade.damage;
+		pierce += upgrade.pierce;
+		range += upgrade.range;
 	}
 
 	public void Upgrade(Path path)
