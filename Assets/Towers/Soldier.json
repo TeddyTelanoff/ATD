@@ -38,9 +38,8 @@
 			"name": "Misile Launcher",
 			"price": 900,
 			
-			"damage": {
-				
-			}
+			"damage": 2,
+			"range": 1,
 		},
 		{
 			

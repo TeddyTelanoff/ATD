@@ -35,19 +35,17 @@ public class OperationConverter<T>: JsonConverter<Operation<T>>
 
 	public override Operation<T> ReadJson(JsonReader reader, Type objectType, Operation<T> existingValue, Boolean hasExistingValue, JsonSerializer serializer)
 	{
-		var str = reader.ReadAsString();
-		if (str is null)
-			return new Operation<T>();
+		if (reader.TokenType == JsonToken.StartObject)
+			return serializer.Deserialize<Operation<T>>(reader);
 
-		Operator op = Sign(str[0]);
-		return new Operation<T> { op == Operator.None ? double.Parse(str)  };
+		// Do this cuz we default to `Combine`
+		return new Operation<T> { value = (T)reader.Value, op = Operator.Combine };
 	}
 
-	public override void WriteJson(JsonWriter writer, Operation<T> value, JsonSerializer serializer) =>
-		writer.WriteValue($"{Sign(value.op)}{value.value}");
+	public override void WriteJson(JsonWriter writer, Operation<T> value, JsonSerializer serializer) {}
 }
 
-[Serializable]
+[Serializable, JsonConverter(typeof(OperationConverter<>))]
 public struct Operation<T>
 {
 	public T value;
