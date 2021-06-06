@@ -38,11 +38,21 @@
 			"name": "Misile Launcher",
 			"price": 900,
 			
-			"damage": 2,
-			"range": 1,
+			"damage": {
+				"value": 2,
+				"op": "Combine",
+			}
+			"range":  {
+				"value": 1,
+				"op": "Combine",
+			}
 		},
 		{
+			"image": "Soldier/1-4.png",
+			"name": "Boom Box",
+			"price": 1200,
 			
+			"pierce": 2,
 		},
 		{
 			

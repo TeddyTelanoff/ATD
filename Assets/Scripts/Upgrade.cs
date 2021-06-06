@@ -13,39 +13,7 @@ public enum Operator: int
 	Scale,
 }
 
-public class OperationConverter<T>: JsonConverter<Operation<T>>
-{
-	public static char Sign(Operator op) =>
-		op switch
-		{
-			Operator.Assign => '=',
-			Operator.Combine => '+',
-			Operator.Scale => '*',
-			_ => ' ',
-		};
-
-	public static Operator Sign(char op) =>
-		op switch
-		{
-			'=' => Operator.Assign,
-			'+' => Operator.Combine,
-			'*' => Operator.Scale,
-			_ => Operator.None,
-		};
-
-	public override Operation<T> ReadJson(JsonReader reader, Type objectType, Operation<T> existingValue, Boolean hasExistingValue, JsonSerializer serializer)
-	{
-		if (reader.TokenType == JsonToken.StartObject)
-			return serializer.Deserialize<Operation<T>>(reader);
-
-		// Do this cuz we default to `Combine`
-		return new Operation<T> { value = (T)reader.Value, op = Operator.Combine };
-	}
-
-	public override void WriteJson(JsonWriter writer, Operation<T> value, JsonSerializer serializer) {}
-}
-
-[Serializable, JsonConverter(typeof(OperationConverter<>))]
+[Serializable]
 public struct Operation<T>
 {
 	public T value;
