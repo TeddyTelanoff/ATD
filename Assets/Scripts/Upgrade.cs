@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +11,40 @@ public enum Operator: int
 	Assign,
 	Combine,
 	Scale,
+}
+
+public class OperationConverter<T>: JsonConverter<Operation<T>>
+{
+	public static char Sign(Operator op) =>
+		op switch
+		{
+			Operator.Assign => '=',
+			Operator.Combine => '+',
+			Operator.Scale => '*',
+			_ => ' ',
+		};
+
+	public static Operator Sign(char op) =>
+		op switch
+		{
+			'=' => Operator.Assign,
+			'+' => Operator.Combine,
+			'*' => Operator.Scale,
+			_ => Operator.None,
+		};
+
+	public override Operation<T> ReadJson(JsonReader reader, Type objectType, Operation<T> existingValue, Boolean hasExistingValue, JsonSerializer serializer)
+	{
+		var str = reader.ReadAsString();
+		if (str is null)
+			return new Operation<T>();
+
+		Operator op = Sign(str[0]);
+		return new Operation<T> { op == Operator.None ? double.Parse(str)  };
+	}
+
+	public override void WriteJson(JsonWriter writer, Operation<T> value, JsonSerializer serializer) =>
+		writer.WriteValue($"{Sign(value.op)}{value.value}");
 }
 
 [Serializable]
