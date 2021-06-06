@@ -20,6 +20,7 @@ public struct Operation<T>
 	public T Resolve(ref T to) =>
 		op switch
 		{
+			Operator.None => to,
 			Operator.Assign => to = value,
 			Operator.Combine => to = (dynamic)to + value,
 			Operator.Scale => to = (dynamic)to * value,

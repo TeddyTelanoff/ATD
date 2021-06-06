@@ -39,5 +39,6 @@ public partial class Tower
 		dps = data.dps;
 		damage = data.damage;
 		pierce = data.pierce;
+		range = data.range;
 	}
 }
