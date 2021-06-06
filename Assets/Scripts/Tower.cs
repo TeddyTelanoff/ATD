@@ -26,7 +26,7 @@ public enum Tier: int
 
 public class Tower: MonoBehaviour
 {
-	public int SellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
+	public int sellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
 	public string dataFile;
 	public GameObject placement;
@@ -266,7 +266,7 @@ public class Tower: MonoBehaviour
 		{
 			if (antsInRange.Count > 0)
 			{
-				antsInRange.Sort();
+				antsInRange.Sort(AntTarget.First);
 				TryFireFirst();
 
 				yield return new WaitForSeconds(reload);

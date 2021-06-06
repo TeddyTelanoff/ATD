@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public struct TowerData
 {
-	public Sprite sprite;
+	public string sprite;
 	public string name;
 	public int price;
 

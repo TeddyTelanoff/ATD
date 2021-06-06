@@ -68,7 +68,7 @@ public class TowerManager : MonoBehaviour
 
 	public void Sell()
 	{
-		GameManager.Instance.Money += selectedTower.SellPrice;
+		GameManager.Instance.Money += selectedTower.sellPrice;
 		Destroy(selectedTower.gameObject);
 		DeselectInternal();
 	}
@@ -99,7 +99,7 @@ public class TowerManager : MonoBehaviour
 		upgradePanel.transform.Find("Tier").GetComponent<TMP_Text>().text = $"{(int)selectedTower.path1Tier}-{(int)selectedTower.path2Tier}-{(int)selectedTower.path3Tier}";
 
 		var sellTxt = upgradePanel.transform.Find("Sell").Find("Text (TMP)").GetComponent<TMP_Text>();
-		sellTxt.text = $"Sell {selectedTower.SellPrice}";
+		sellTxt.text = $"Sell {selectedTower.sellPrice}";
 
 		var p1Button = upgradePanel.transform.Find("Path (1)");
 		var p2Button = upgradePanel.transform.Find("Path (2)");
