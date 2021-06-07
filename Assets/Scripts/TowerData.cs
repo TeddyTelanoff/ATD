@@ -14,12 +14,13 @@ public struct TowerData
 
 	public DartProperty props;
 	public float effectLifetime;
+	public float explosion;
 	public float reload;
+	public float range;
 	public float kb;
 	public int dps;
 	public int damage;
 	public int pierce;
-	public int range;
 
 	public Upgrade[] path1;
 	public Upgrade[] path2;

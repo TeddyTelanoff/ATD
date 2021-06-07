@@ -11,8 +11,7 @@ public enum DartProperty
 	Camo = 1 << 0,
 	Flame = 1 << 1,
 	Wet = 1 << 2,
-	Explosive = 1 << 3,
-	Ricochet = 1 << 4,
+	Ricochet = 1 << 3,
 }
 
 public enum DartType
@@ -32,6 +31,7 @@ public class Dart: MonoBehaviour
 	public int dps;
 	public float kb;
 	public float effectLifetime;
+	public float explosion;
 	public float speed;
 	public float timeout;
 
@@ -49,11 +49,14 @@ public class Dart: MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		if (Vector3.Distance(transform.position, startPos) >= timeout)
-			Destroy(gameObject);
-
-		if (props.HasFlag(DartProperty.Ricochet) && AntSpawner.Instance.parent.childCount > 0)
+		if (props.HasFlag(DartProperty.Ricochet))
 		{
+			if (AntSpawner.Instance.parent.childCount <= 0)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			Transform ant = null;
 			for (int i = 0; i < AntSpawner.Instance.parent.childCount; i++)
 			{
@@ -61,6 +64,7 @@ public class Dart: MonoBehaviour
 				if (!hit.Contains(ant))
 					break;
 			}
+
 			dir = ant.position - transform.position;
 			dir.Normalize();
 
@@ -69,6 +73,8 @@ public class Dart: MonoBehaviour
 		}
 
 		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
+		if (Vector3.Distance(transform.position, startPos) >= timeout + 1)
+			Destroy(gameObject);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
@@ -84,13 +90,14 @@ public class Dart: MonoBehaviour
 
 		pierce--;
 
-		if (props.HasFlag(DartProperty.Explosive))
+		if (explosion > 0)
 		{
 			var obj = Instantiate(explosionPrefab);
 			obj.transform.position = transform.position;
 
 			var explosion = obj.GetComponent<Explosion>();
 			explosion.effectLifetime = effectLifetime;
+			explosion.explosion = this.explosion;
 			explosion.damage = damage;
 			explosion.props = props;
 			explosion.dps = dps;

@@ -38,6 +38,7 @@ public partial class Ant: MonoBehaviour
 	public AntType type;
 	public int dps;
 	public int hp;
+	public float lerp;
 	public float speed;
 	public float speedMul;
 	public float effectLifetime;
@@ -55,6 +56,8 @@ public partial class Ant: MonoBehaviour
 	private void Start()
 	{
 		nextCheckpoint = checkpoints[nextCheckIndex];
+		dir = nextCheckpoint.position - transform.position;
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
 		UpdateType();
 
 		if (effect == AntEffect.Flame)
@@ -66,7 +69,7 @@ public partial class Ant: MonoBehaviour
 	{
 		speedMul = effect == AntEffect.Wet ? 0.5f : 1f;
 		dir = nextCheckpoint.position - transform.position;
-		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90), lerp);
 
 		if (dir.sqrMagnitude <= speedMul * speedMul * speed * speed * GameManager.FixedDeltaTime * GameManager.FixedDeltaTime)
 		{

@@ -7,14 +7,16 @@ public class Explosion: MonoBehaviour
 	public ParticleSystem system;
 	public DartProperty props;
 	public float effectLifetime;
+	public float explosion;
 	public int damage;
 	public int dps;
 
-	[Header("I have CUTIES, plz don't tuch")]
-	public bool attacking;
-
-	private void Start() =>
+	private void Start()
+	{
 		StartCoroutine(SayGoodbye());
+		system.transform.localScale = Vector3.one * explosion * 0.2f;
+		transform.localScale = Vector3.one * explosion;
+	}
 
 	private IEnumerator SayGoodbye()
 	{
@@ -25,7 +27,7 @@ public class Explosion: MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-		if (attacking && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
+		if (system.isPlaying && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 			other.GetComponent<Ant>().Pop(this);
 	}
 }

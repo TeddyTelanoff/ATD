@@ -222,13 +222,15 @@ public class TowerManager : MonoBehaviour
 
 		if (secTier < Tier.Tier2)
 		{
+			var s2 = selectedTower.UpgradeSprite(sec);
+			pi2.sprite = s2 ? s2 : defTex;
 			pt2.text = selectedTower.UpgradeName(sec);
 			pp2.text = $"${selectedTower.UpgradePrice(sec)}";
 			return;
 		}
 
-		var s2 = selectedTower.LastUpgradeSprite(sec);
-		pi2.sprite = s2 ? s2 : defTex;
+		var ls2 = selectedTower.LastUpgradeSprite(sec);
+		pi2.sprite = ls2 ? ls2 : defTex;
 		pt2.text = maxUpgrade;
 		pp2.text = "";
 	}

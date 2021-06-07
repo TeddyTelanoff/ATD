@@ -35,8 +35,9 @@ public partial class Tower: MonoBehaviour
 	public TowerData data;
 	public DartProperty dartProps;
 	public float effectLifetime;
+	public float explosion;
 	public float reload;
-	public int range { get => _range;
+	public float range { get => _range;
 		set
 		{
 			_range = value;
@@ -59,7 +60,7 @@ public partial class Tower: MonoBehaviour
 	public Tier path2Tier;
 	public Tier path3Tier;
 
-	private int _range;
+	private float _range;
 
 	private void Start()
 	{
@@ -71,6 +72,7 @@ public partial class Tower: MonoBehaviour
 	{
 		dartProps |= upgrade.props;
 		effectLifetime += upgrade.effectLifetime;
+		explosion += upgrade.explosion;
 		reload += upgrade.reload;
 		kb += upgrade.kb;
 		dps += upgrade.dps;
@@ -133,18 +135,18 @@ public partial class Tower: MonoBehaviour
 	public string UpgradeName(Path path, Tier tier) =>
 		path switch
 		{
-			Path.Path1 => data.path1[(int)tier].name,
-			Path.Path2 => data.path2[(int)tier].name,
-			Path.Path3 => data.path3[(int)tier].name,
+			Path.Path1 => tier < Tier.Tier5 ? data.path1[(int)tier].name : null,
+			Path.Path2 => tier < Tier.Tier5 ? data.path2[(int)tier].name : null,
+			Path.Path3 => tier < Tier.Tier5 ? data.path3[(int)tier].name : null,
 			_ => null,
 		};
 
 	public string UpgradeName(Path path) =>
 		path switch
 		{
-			Path.Path1 => data.path1[(int)path1Tier].name,
-			Path.Path2 => data.path2[(int)path2Tier].name,
-			Path.Path3 => data.path3[(int)path3Tier].name,
+			Path.Path1 => path1Tier < Tier.Tier5 ? data.path1[(int)path1Tier].name : null,
+			Path.Path2 => path2Tier < Tier.Tier5 ? data.path2[(int)path2Tier].name : null,
+			Path.Path3 => path3Tier < Tier.Tier5 ? data.path3[(int)path3Tier].name : null,
 			_ => null,
 		};
 
@@ -211,6 +213,7 @@ public partial class Tower: MonoBehaviour
 		dart.damage = damage;
 		dart.props = dartProps;
 		dart.timeout = range;
+		dart.explosion = explosion;
 		dart.effectLifetime = effectLifetime;
 
 		return dart;

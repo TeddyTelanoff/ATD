@@ -4914,6 +4914,7 @@ MonoBehaviour:
   type: 0
   dps: 0
   hp: 0
+  lerp: 0.1
   speed: 0
   speedMul: 0
   effectLifetime: 0

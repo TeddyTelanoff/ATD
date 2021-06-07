@@ -46,12 +46,13 @@ public struct Upgrade
 
 	public DartProperty props;
 	public float effectLifetime;
+	public float explosion;
 	public float reload;
+	public float range;
 	public float kb;
 	public int dps;
 	public int damage;
 	public int pierce;
-	public int range;
 
 	//public Operation<DartProperty> props;
 	//public Operation<float> effectLifetime;
