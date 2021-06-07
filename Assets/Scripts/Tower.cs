@@ -25,7 +25,6 @@ public partial class Tower: MonoBehaviour
 {
 	public int sellPrice { get => Mathf.RoundToInt(invested * 0.8f); }
 
-	public string dataFile;
 	public GameObject placement;
 	public GameObject dartPrefab;
 	public Transform view;

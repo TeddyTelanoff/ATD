@@ -2,8 +2,18 @@
 using UnityEngine;
 using Newtonsoft.Json;
 
-public partial class Tower
+public partial class TowerManager
 {
+	public void LoadAll()
+	{
+		loadedStats = new TowerData[towerStats.Length];
+		for (int i = 0; i < towerStats.Length; i++)
+		{
+			loadedStats[i] = Load(towerStats[i]);
+			loadedStats[i].file = towerStats[i];
+		}
+	}
+	
 	public Sprite LoadSprite(string path)
 	{
 		if (string.IsNullOrEmpty(path))
@@ -18,19 +28,19 @@ public partial class Tower
 		return sprite;
 	}
 
-	public void Load()
+	public TowerData Load(string file)
 	{
-		data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{dataFile}.json"));
+		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{file}.json"));
 		data.sprite = LoadSprite($"Assets/Sprites/{data.image}");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
 				data.path1[i].sprite = LoadSprite($"Assets/Sprites/{data.path1[i].image}");
 		if (data.path2 != null)
 			for (int i = 0; i < data.path2.Length; i++)
-			data.path2[i].sprite = LoadSprite($"Assets/Sprites/{data.path2[i].image}");
+				data.path2[i].sprite = LoadSprite($"Assets/Sprites/{data.path2[i].image}");
 		if (data.path3 != null)
 			for (int i = 0; i < data.path3.Length; i++)
-			data.path3[i].sprite = LoadSprite($"Assets/Sprites/{data.path3[i].image}");
+				data.path3[i].sprite = LoadSprite($"Assets/Sprites/{data.path3[i].image}");
 
 		var tmp = new Upgrade[6];
 		if (data.path1 != null)
@@ -43,20 +53,28 @@ public partial class Tower
 		tmp = new Upgrade[6];
 		if (data.path2 != null)
 			for (int i = 0; i < 6; i++)
-			if (i < data.path2.Length)
-				tmp[i] = data.path2[i];
-			else
-				tmp[i] = data.path2[data.path2.Length - 1];
+				if (i < data.path2.Length)
+					tmp[i] = data.path2[i];
+				else
+					tmp[i] = data.path2[data.path2.Length - 1];
 		data.path2 = tmp;
 		tmp = new Upgrade[6];
 		if (data.path3 != null)
 			for (int i = 0; i < 6; i++)
-			if (i < data.path3.Length)
-				tmp[i] = data.path3[i];
-			else
-				tmp[i] = data.path3[data.path3.Length - 1];
+				if (i < data.path3.Length)
+					tmp[i] = data.path3[i];
+				else
+					tmp[i] = data.path3[data.path3.Length - 1];
 		data.path3 = tmp;
 
+		return data;
+	}
+}
+
+public partial class Tower
+{
+	public void Load()
+	{
 		invested = data.price;
 		transform.localScale = Vector3.one * data.range;
 

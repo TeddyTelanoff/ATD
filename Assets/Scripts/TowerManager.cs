@@ -4,38 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TowerManager : MonoBehaviour
+public partial class TowerManager : MonoBehaviour
 {
 	public const string upgradeLocked = "PATH LOCKED", maxUpgrade = "MAXED UPGRADE";
 	public static TowerManager Instance { get; private set; }
 
 	public Sprite padlock;
 	public Sprite defTex;
-	public int[] towerPrices;
 	public string[] towerStats;
 	public Transform parent;
 	public GameObject prefab;
 	public GameObject upgradePanel;
 
 	[Header("No Peeking")]
+	public TowerData[] loadedStats;
 	public List<Tower> towers;
 	public Tower placingTower;
 	public Tower selectedTower;
 	public bool deselecting;
 
-	private void Start() =>
+	private void Start()
+	{
 		Instance = this;
+		LoadAll();
+	}
 
 	public void Spawn(int id) =>
 		StartCoroutine(CoSpawn(id));
 
 	private IEnumerator CoSpawn(int id)
 	{
-		if (GameManager.Instance.money > towerPrices[id])
+		if (GameManager.Instance.money < loadedStats[id].price)
 			yield break;
 		yield return new WaitForFixedUpdate();
 		placingTower = Instantiate(prefab, parent).GetComponent<Tower>();
-		placingTower.dataFile = towerStats[id];
+		placingTower.data = loadedStats[id];
 		towers.Add(placingTower);
 	}
 

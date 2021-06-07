@@ -1923,10 +1923,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   padlock: {fileID: 21300000, guid: dde40095d7c2fef48810afeaea7879f1, type: 3}
   defTex: {fileID: 21300000, guid: b45a83ff3b090c3429f1dffb343d4907, type: 3}
+  towerStats:
+  - Soldier
   parent: {fileID: 2026348288}
+  prefab: {fileID: 1306673873791883564, guid: 70afad3f5ced49848a83333227b7c16e, type: 3}
   upgradePanel: {fileID: 1065555007}
-  prefabs:
-  - {fileID: 1306673873791883564, guid: 70afad3f5ced49848a83333227b7c16e, type: 3}
+  loadedStats: []
   towers: []
   placingTower: {fileID: 0}
   selectedTower: {fileID: 0}

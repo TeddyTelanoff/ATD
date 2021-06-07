@@ -7,6 +7,8 @@ using UnityEngine;
 public struct TowerData
 {
 	[NonSerialized]
+	public string file;
+	[NonSerialized]
 	public Sprite sprite;
 	public string image;
 	public string name;
