@@ -27,7 +27,6 @@ public partial class Tower: MonoBehaviour
 
 	public GameObject placement;
 	public GameObject dartPrefab;
-	public MeshFilter model;
 	public Transform view;
 	public Transform selectable;
 

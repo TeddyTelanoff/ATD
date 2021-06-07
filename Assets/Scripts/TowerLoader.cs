@@ -32,10 +32,8 @@ public partial class TowerManager
 	public TowerData Load(string file)
 	{
 		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText(file));
-		
-		data.mesh = ($"Assets/Models/{data.model}");
 
-		data.sprite = LoadSprite($"Assets/Sprites/{data.image}");
+		data._icon = LoadSprite($"Assets/Sprites/{data.icon}");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
 				data.path1[i].sprite = LoadSprite($"Assets/Sprites/{data.path1[i].image}");
