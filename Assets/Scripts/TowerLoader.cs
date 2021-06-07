@@ -6,6 +6,7 @@ public partial class TowerManager
 {
 	public void LoadAll()
 	{
+		var towerStats = Directory.GetFiles(towerStatsLoc, "*.tower", SearchOption.AllDirectories);
 		loadedStats = new TowerData[towerStats.Length];
 		for (int i = 0; i < towerStats.Length; i++)
 		{
@@ -30,7 +31,10 @@ public partial class TowerManager
 
 	public TowerData Load(string file)
 	{
-		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"Assets/Towers/{file}.json"));
+		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText(file));
+		
+		data.mesh = ($"Assets/Models/{data.model}");
+
 		data.sprite = LoadSprite($"Assets/Sprites/{data.image}");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
@@ -76,6 +80,7 @@ public partial class Tower
 	public void Load()
 	{
 		invested = data.price;
+		Instantiate(data.mesh, transform);
 		transform.localScale = Vector3.one * data.range;
 
 		dartProps = data.props;

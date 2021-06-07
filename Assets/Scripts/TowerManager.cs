@@ -11,7 +11,7 @@ public partial class TowerManager : MonoBehaviour
 
 	public Sprite padlock;
 	public Sprite defTex;
-	public string[] towerStats;
+	public string towerStatsLoc;
 	public Transform parent;
 	public GameObject prefab;
 	public GameObject upgradePanel;

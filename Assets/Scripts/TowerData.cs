@@ -10,6 +10,10 @@ public struct TowerData
 	public string file;
 	[NonSerialized]
 	public Sprite sprite;
+	[NonSerialized]
+	public Mesh mesh;
+
+	public string model;
 	public string image;
 	public string name;
 	public int price;

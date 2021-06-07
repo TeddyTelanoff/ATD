@@ -1,26 +1,27 @@
 {
+	"model": "Soldier.blend",
 	"image": "Soldier/0-0.png",
 	"name": "Soldier",
 	"price": 200,
-	
+
 	"reload": 1.4,
 	"pierce": 2,
 	"damage": 1,
 	"range": 3,
-	
+
 	"path1": [
 		{
 			"image": "Soldier/1-1.png",
 			"name": "Bigger Barrel",
 			"price": 50,
-			
+
 			"range": 1
 		},
 		{
 			"image": "Soldier/1-2.png",
 			"name": "Cannon",
 			"price": 500,
-			
+
 			"explosion": 0.3,
 			"range": 2
 		},
@@ -28,7 +29,7 @@
 			"image": "Soldier/1-3.png",
 			"name": "Misile Launcher",
 			"price": 900,
-			
+
 			"damage": 2,
 			"range": 1
 		},
