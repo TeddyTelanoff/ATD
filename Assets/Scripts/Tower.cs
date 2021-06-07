@@ -102,7 +102,7 @@ public partial class Tower: MonoBehaviour
 
 	private bool UpgradePath(Path path, ref Tier pathTier, Tier tier1, Tier tier2, Path path1, Path path2)
 	{
-		if (GameManager.Instance.Money < UpgradePrice(path, pathTier))
+		if (GameManager.Instance.money < UpgradePrice(path, pathTier))
 			return false;
 
 		if (disPath == path)
@@ -128,7 +128,7 @@ public partial class Tower: MonoBehaviour
 
 		int price = UpgradePrice(path, pathTier - 1);
 		invested += price;
-		GameManager.Instance.Money -= price;
+		GameManager.Instance.money -= price;
 		return true;
 	}	
 
@@ -282,7 +282,7 @@ public partial class Tower: MonoBehaviour
 		selectable.GetComponent<Collider2D>().enabled = true;
 		view.GetComponent<Collider2D>().enabled = true;
 		TowerManager.Instance.placingTower = null;
-		GameManager.Instance.Money -= data.price;
+		GameManager.Instance.money -= data.price;
 		GetComponent<Rigidbody2D>().WakeUp();
 		TowerManager.Instance.Select(this);
 

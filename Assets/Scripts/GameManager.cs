@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
 	public bool godMode;
 	public TMP_Text moneyText;
-	public int Money
+	public int money
 	{
 		get => godMode ? _money = 999999 : _money;
 		set

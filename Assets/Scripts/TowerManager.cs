@@ -11,9 +11,11 @@ public class TowerManager : MonoBehaviour
 
 	public Sprite padlock;
 	public Sprite defTex;
+	public int[] towerPrices;
+	public string[] towerStats;
 	public Transform parent;
+	public GameObject prefab;
 	public GameObject upgradePanel;
-	public GameObject[] prefabs;
 
 	[Header("No Peeking")]
 	public List<Tower> towers;
@@ -29,11 +31,11 @@ public class TowerManager : MonoBehaviour
 
 	private IEnumerator CoSpawn(int id)
 	{
-		if (GameManager.Instance.Money < prefabs[id].GetComponent<Tower>().data.price)
+		if (GameManager.Instance.money > towerPrices[id])
 			yield break;
-
 		yield return new WaitForFixedUpdate();
-		placingTower = Instantiate(prefabs[id], parent).GetComponent<Tower>();
+		placingTower = Instantiate(prefab, parent).GetComponent<Tower>();
+		placingTower.dataFile = towerStats[id];
 		towers.Add(placingTower);
 	}
 
@@ -68,7 +70,7 @@ public class TowerManager : MonoBehaviour
 
 	public void Sell()
 	{
-		GameManager.Instance.Money += selectedTower.sellPrice;
+		GameManager.Instance.money += selectedTower.sellPrice;
 		Destroy(selectedTower.gameObject);
 		DeselectInternal();
 	}

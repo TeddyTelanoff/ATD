@@ -162,7 +162,7 @@ public partial class Ant: MonoBehaviour
 		if (hp > 0)
 			return;
 
-		GameManager.Instance.Money++;
+		GameManager.Instance.money++;
 
 		switch (type)
 		{

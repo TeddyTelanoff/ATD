@@ -96,7 +96,7 @@ public class AntSpawner: MonoBehaviour
 
 		while (!RoundOver())
 			yield return new WaitForFixedUpdate();
-		GameManager.Instance.Money += reward;
+		GameManager.Instance.money += reward;
 		round++;
 
 		roundTxt.text = round.ToString();
