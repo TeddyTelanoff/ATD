@@ -13,7 +13,7 @@ public struct TowerData
 	[NonSerialized]
 	public Sprite _icon;
 	[NonSerialized]
-	public Mesh mesh;
+	public GameObject mesh;
 
 	public string model;
 	public string sprite;

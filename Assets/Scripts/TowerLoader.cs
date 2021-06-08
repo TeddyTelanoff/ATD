@@ -32,6 +32,9 @@ public partial class TowerManager
 	public TowerData Load(string file)
 	{
 		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText(file));
+		foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
+			if (obj.name == data.model)
+				data.mesh = obj;
 
 		data._icon = LoadSprite($"Assets/Sprites/{data.icon}");
 		if (data.path1 != null)
@@ -75,10 +78,17 @@ public partial class TowerManager
 
 public partial class Tower
 {
+	public Transform model;
+
 	public void Load()
 	{
+		if (data.mesh)
+		{
+			Instantiate(data.mesh, model);
+			GetComponent<SpriteRenderer>().enabled = false;
+		}
+
 		invested = data.price;
-		Instantiate(data.mesh, transform);
 		transform.localScale = Vector3.one * data.range;
 
 		dartProps = data.props;
