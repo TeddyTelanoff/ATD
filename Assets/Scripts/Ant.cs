@@ -35,6 +35,7 @@ public enum AntType: int
 public partial class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
+	public Texture camoTex;
 	public AntType type;
 	public int dps;
 	public int hp;
@@ -98,6 +99,12 @@ public partial class Ant: MonoBehaviour
 	}
 	public void Pop(Explosion dart)
 	{
+		if (dart.props.HasFlag(DartProperty.Rinse))
+		{
+			props &= ~AntProperty.Camo;
+			props &= ~AntProperty.Armor;
+		}
+
 		if (props.HasFlag(AntProperty.Camo) && !dart.props.HasFlag(DartProperty.Camo))
 			return;
 
@@ -230,6 +237,8 @@ public partial class Ant: MonoBehaviour
 			break;
 		}
 
+		if (props.HasFlag(AntProperty.Camo))
+			GetComponentInChildren<MeshRenderer>().material.mainTexture = camoTex;
 		GetComponentInChildren<MeshRenderer>().material.color = matCol;
 	}
 

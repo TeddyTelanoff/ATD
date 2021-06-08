@@ -13,6 +13,7 @@ public partial class TowerManager : MonoBehaviour
 	public Sprite defTex;
 	public Transform parent;
 	public Image placeImg;
+	public TMP_Text placePrice;
 	public GameObject prefab;
 	public GameObject upgradePanel;
 
@@ -53,7 +54,8 @@ public partial class TowerManager : MonoBehaviour
 	public void Choose(int id)
 	{
 		towerId = id;
-		placeImg.sprite = towerData[id].icon;
+		placePrice.text = $"${towerData[id].price}";
+		placeImg.sprite = towerData[id].icon ? towerData[id].icon : defTex;
 	}
 
 	public void Upgrade(int path)

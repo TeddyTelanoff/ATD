@@ -38,7 +38,7 @@ public partial class TowerManager
 	{
 		data.mesh = Resources.Load<GameObject>($"{path}/Model");
 
-		data.icon = LoadSprite("{path}/Icon");
+		data.icon = LoadSprite($"{path}/Icon");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
 				data.path1[i].sprite = LoadSprite($"{path}/1-{i + 1}");
@@ -89,7 +89,6 @@ public partial class Tower
 		}
 
 		invested = data.price;
-		transform.localScale = Vector3.one * data.range;
 
 		dartProps = data.props;
 		effectLifetime = data.effectLifetime;

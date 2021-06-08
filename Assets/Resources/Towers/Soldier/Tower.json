@@ -18,8 +18,8 @@
 			"name": "Cannon",
 			"price": 500,
 
-			"explosion": 0.3,
-			"range": 2
+			"explosion": 1,
+			"range": 1
 		},
 		{
 			"name": "Misile Launcher",
@@ -32,13 +32,14 @@
 			"name": "Boom Box",
 			"price": 1200,
 
-			"explosion": 3,
+			"explosion": 1,
+			"damage": 1
 		},
 		{
 			"name": "Tzar Bomba",
 			"price": 14300,
 
-			"explosion": 3.3,
+			"explosion": 2,
 			"damage": 2,
 			"range": 3
 		}

@@ -11,7 +11,8 @@ public enum DartProperty
 	Camo = 1 << 0,
 	Flame = 1 << 1,
 	Wet = 1 << 2,
-	Ricochet = 1 << 3,
+	Rinse = 1 << 3,
+	Ricochet = 1 << 4,
 }
 
 public enum DartType
@@ -74,7 +75,7 @@ public class Dart: MonoBehaviour
 
 		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
 		if (Vector3.Distance(transform.position, startPos) >= timeout + 1)
-			Destroy(gameObject);
+			Destroy(gameObject, Time.fixedDeltaTime);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)

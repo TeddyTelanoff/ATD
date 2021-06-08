@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Explosion: MonoBehaviour
 {
-	public ParticleSystem system;
+	public ParticleSystem normal;
+	public ParticleSystem wet;
 	public DartProperty props;
 	public float effectLifetime;
 	public float explosion;
 	public int damage;
 	public int dps;
 
+	[Header("Donut Tuch")]
+	public ParticleSystem system;
+
 	private void Start()
 	{
 		StartCoroutine(SayGoodbye());
+		system = props.HasFlag(DartProperty.Wet) ? wet : normal;
+		system.gameObject.SetActive(true);
+
 		system.transform.localScale = Vector3.one * explosion * 0.2f;
 		transform.localScale = Vector3.one * explosion;
 	}

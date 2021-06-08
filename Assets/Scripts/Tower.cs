@@ -201,7 +201,7 @@ public partial class Tower: MonoBehaviour
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
 		var obj = Instantiate(dartPrefab);
-		obj.transform.position = transform.position;
+		obj.transform.position = new Vector3(transform.position.x, transform.position.y, obj.transform.position.z);
 		obj.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
 
 		var dart = obj.GetComponent<Dart>();
@@ -262,14 +262,15 @@ public partial class Tower: MonoBehaviour
 			Vector3 wordPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			transform.position = new Vector3(wordPos.x, wordPos.y, transform.position.z);
 
+			if (Input.GetMouseButtonUp(1))
+				Destroy(gameObject);
+
 			if (obsTouching == 0)
 			{
 				view.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0.1333f);
 
 				if (Input.GetMouseButtonUp(0))
 					placing = false;
-				else if (Input.GetMouseButtonUp(1))
-					Destroy(gameObject);
 			}
 			else
 				view.GetComponent<SpriteRenderer>().color = new Color(1, 0, 0, 0.25f);
@@ -285,9 +286,7 @@ public partial class Tower: MonoBehaviour
 		GetComponent<Rigidbody2D>().WakeUp();
 		TowerManager.Instance.Select(this);
 
-		placement.GetComponent<TowerPlacement>().enabled = false;
-		placement.GetComponent<Rigidbody2D>().Sleep();
-		placement.GetComponent<Obsticle>().enabled = true;
+		Destroy(placement);
 	}
 
 	private void OnTriggerEnter2D(Collider2D other)
