@@ -9,15 +9,10 @@ public struct TowerData
 	[NonSerialized]
 	public string file;
 	[NonSerialized]
-	public Sprite _sprite;
-	[NonSerialized]
-	public Sprite _icon;
+	public Sprite icon;
 	[NonSerialized]
 	public GameObject mesh;
 
-	public string model;
-	public string sprite;
-	public string icon;
 	public string name;
 	public int price;
 

@@ -1,6 +1,4 @@
 {
-	"model": "Soldier Model",
-	"image": "Soldier/0-0.png",
 	"name": "Soldier",
 	"price": 200,
 
@@ -11,14 +9,12 @@
 
 	"path1": [
 		{
-			"image": "Soldier/1-1.png",
 			"name": "Bigger Barrel",
 			"price": 50,
 
 			"range": 1
 		},
 		{
-			"image": "Soldier/1-2.png",
 			"name": "Cannon",
 			"price": 500,
 
@@ -26,7 +22,6 @@
 			"range": 2
 		},
 		{
-			"image": "Soldier/1-3.png",
 			"name": "Misile Launcher",
 			"price": 900,
 
@@ -34,14 +29,12 @@
 			"range": 1
 		},
 		{
-			"image": "Soldier/1-4.png",
 			"name": "Boom Box",
 			"price": 1200,
 
 			"explosion": 3,
 		},
 		{
-			"image": "Soldier/1-5.png",
 			"name": "Tzar Bomba",
 			"price": 14300,
 
@@ -52,7 +45,6 @@
 	],
 	"path2": [
 		{
-			"image": "Soldier/2-1.png",
 			"name": "Faster Barrel",
 			"price": 100,
 

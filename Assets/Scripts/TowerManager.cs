@@ -11,17 +11,19 @@ public partial class TowerManager : MonoBehaviour
 
 	public Sprite padlock;
 	public Sprite defTex;
-	public string towerStatsLoc;
 	public Transform parent;
+	public Image placeImg;
 	public GameObject prefab;
 	public GameObject upgradePanel;
 
 	[Header("No Peeking")]
-	public TowerData[] loadedStats;
+	public TowerData[] towerData;
 	public List<Tower> towers;
 	public Tower placingTower;
 	public Tower selectedTower;
 	public bool deselecting;
+
+	public int towerId;
 
 	private void Start()
 	{
@@ -29,17 +31,29 @@ public partial class TowerManager : MonoBehaviour
 		LoadAll();
 	}
 
+	public void Spawn() =>
+		Spawn(towerId);
+
 	public void Spawn(int id) =>
 		StartCoroutine(CoSpawn(id));
 
 	private IEnumerator CoSpawn(int id)
 	{
-		if (GameManager.Instance.money < loadedStats[id].price)
+		if (GameManager.Instance.money < towerData[id].price)
 			yield break;
 		yield return new WaitForFixedUpdate();
 		placingTower = Instantiate(prefab, parent).GetComponent<Tower>();
-		placingTower.data = loadedStats[id];
+		placingTower.data = towerData[id];
 		towers.Add(placingTower);
+	}
+
+	public void Next() =>
+		Choose((towerId + 1) % towerData.Length);
+
+	public void Choose(int id)
+	{
+		towerId = id;
+		placeImg.sprite = towerData[id].icon;
 	}
 
 	public void Upgrade(int path)

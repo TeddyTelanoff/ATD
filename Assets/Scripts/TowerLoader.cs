@@ -4,17 +4,23 @@ using Newtonsoft.Json;
 
 public partial class TowerManager
 {
+	public string resourceLocation;
+
 	public void LoadAll()
 	{
-		var towerStats = Directory.GetDirectories($"{towerStatsLoc}/Towers");
-		loadedStats = new TowerData[towerStats.Length];
+		var towerStats = Directory.GetDirectories($"{resourceLocation}/Towers");
+		if (towerStats.Length <= 0)
+			return;
+
+		towerData = new TowerData[towerStats.Length];
 		for (int i = 0; i < towerStats.Length; i++)
 		{
-			towerStats[i] = towerStats[i].Substring(towerStatsLoc.Length + 1);
-			print(towerStats[i]);
-			loadedStats[i] = Load(towerStats[i]);
-			loadedStats[i].file = towerStats[i];
+			towerStats[i] = towerStats[i].Substring(resourceLocation.Length + 1);
+			towerData[i] = Load(towerStats[i]);
+			towerData[i].file = towerStats[i];
 		}
+
+		Choose(0);
 	}
 
 	public Sprite LoadSprite(string path) =>
@@ -31,9 +37,8 @@ public partial class TowerManager
 	public void LoadTower(string path, ref TowerData data)
 	{
 		data.mesh = Resources.Load<GameObject>($"{path}/Model");
-		Debug.Log(data.mesh);
 
-		data._icon = LoadSprite("{path}/Icon");
+		data.icon = LoadSprite("{path}/Icon");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
 				data.path1[i].sprite = LoadSprite($"{path}/1-{i + 1}");
