@@ -35,7 +35,8 @@ public enum AntType: int
 public partial class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
-	public Texture camoTex;
+	public GameObject camoModel;
+	public GameObject defModel;
 	public AntType type;
 	public int dps;
 	public int hp;
@@ -50,6 +51,7 @@ public partial class Ant: MonoBehaviour
 	public AudioSource pop;
 
 	[Header("Don't Touch")]
+	public GameObject model;
 	public int nextCheckIndex;
 	public Transform nextCheckpoint;
 	public Vector3 dir;
@@ -103,6 +105,8 @@ public partial class Ant: MonoBehaviour
 		{
 			props &= ~AntProperty.Camo;
 			props &= ~AntProperty.Armor;
+
+			UpdateType();
 		}
 
 		if (props.HasFlag(AntProperty.Camo) && !dart.props.HasFlag(DartProperty.Camo))
@@ -238,8 +242,20 @@ public partial class Ant: MonoBehaviour
 		}
 
 		if (props.HasFlag(AntProperty.Camo))
-			GetComponentInChildren<MeshRenderer>().material.mainTexture = camoTex;
-		GetComponentInChildren<MeshRenderer>().material.color = matCol;
+		{
+			defModel.SetActive(false);
+			camoModel.SetActive(true);
+			model = camoModel;
+		}
+		else
+		{
+			camoModel.SetActive(false);
+			defModel.SetActive(true);
+			model = defModel;
+		}
+
+		var mat = model.GetComponentInChildren<MeshRenderer>().material;
+		mat.color = matCol;
 	}
 
 	private IEnumerator DPSLoop()
