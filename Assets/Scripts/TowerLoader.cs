@@ -1,12 +1,13 @@
 ﻿using System.IO;
 using UnityEngine;
 using Newtonsoft.Json;
+using UnityEngine.SceneManagement;
 
 public partial class TowerManager
 {
 	public void LoadAll()
 	{
-		var towerStats = Directory.GetFiles(towerStatsLoc, "*.tower", SearchOption.AllDirectories);
+		var towerStats = Directory.GetDirectories(towerStatsLoc);
 		loadedStats = new TowerData[towerStats.Length];
 		for (int i = 0; i < towerStats.Length; i++)
 		{
@@ -14,14 +15,14 @@ public partial class TowerManager
 			loadedStats[i].file = towerStats[i];
 		}
 	}
-	
+
 	public Sprite LoadSprite(string path)
 	{
 		if (string.IsNullOrEmpty(path))
 			return null;
 		if (!File.Exists(path))
 			return null;
-		
+
 		byte[] bytes = File.ReadAllBytes(path);
 		Texture2D texture = new Texture2D(1, 1);
 		texture.LoadImage(bytes);
@@ -29,23 +30,43 @@ public partial class TowerManager
 		return sprite;
 	}
 
-	public TowerData Load(string file)
+	public TowerData Load(string path)
 	{
-		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText(file));
-		foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
-			if (obj.name == data.model)
-				data.mesh = obj;
+		var data = JsonConvert.DeserializeObject<TowerData>(File.ReadAllText($"{path}/Tower.json"));
+		LoadTower(path, ref data);
 
-		data._icon = LoadSprite($"Assets/Sprites/{data.icon}");
+		return data;
+	}
+
+	public void LoadTower(string path, ref TowerData data)
+	{
+		bool found = false;
+		var scene = SceneManager.GetSceneByPath(path);
+		// TODO: Make it not supa slow
+		foreach (var obj in scene.GetRootGameObjects())
+			if (obj.name == "Model" &&
+				(found = true)) // Neat Trick, huh?
+				{
+					data.mesh = obj;
+					print(obj.scene);
+				}
+
+		if (!found)
+		{
+			data.mesh = Resources.Load<GameObject>($"{path}/Model");
+			Debug.Log(data.mesh);
+		}
+
+		data._icon = LoadSprite("{path}/Icon.png");
 		if (data.path1 != null)
 			for (int i = 0; i < data.path1.Length; i++)
-				data.path1[i].sprite = LoadSprite($"Assets/Sprites/{data.path1[i].image}");
+				data.path1[i].sprite = LoadSprite($"{path}/1-{i + 1}.png");
 		if (data.path2 != null)
 			for (int i = 0; i < data.path2.Length; i++)
-				data.path2[i].sprite = LoadSprite($"Assets/Sprites/{data.path2[i].image}");
+				data.path2[i].sprite = LoadSprite($"{path}/2-{i + 1}.png");
 		if (data.path3 != null)
 			for (int i = 0; i < data.path3.Length; i++)
-				data.path3[i].sprite = LoadSprite($"Assets/Sprites/{data.path3[i].image}");
+				data.path3[i].sprite = LoadSprite($"{path}/3-{i + 1}.png");
 
 		var tmp = new Upgrade[6];
 		if (data.path1 != null)
@@ -71,8 +92,6 @@ public partial class TowerManager
 				else
 					tmp[i] = data.path3[data.path3.Length - 1];
 		data.path3 = tmp;
-
-		return data;
 	}
 }
 
