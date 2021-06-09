@@ -33,7 +33,7 @@ public partial class Tower: MonoBehaviour
 	[Header("Don t Touch")]
 	public TowerData data;
 	public DartProperty dartProps;
-	public float effectLifetime;
+	public float stick;
 	public float explosion;
 	public float reload;
 	public float range { get => _range;
@@ -70,7 +70,7 @@ public partial class Tower: MonoBehaviour
 	public void Upgrade(Upgrade upgrade)
 	{
 		dartProps |= upgrade.props;
-		effectLifetime += upgrade.effectLifetime;
+		stick += upgrade.stick;
 		explosion += upgrade.explosion;
 		reload += upgrade.reload;
 		kb += upgrade.kb;
@@ -213,7 +213,7 @@ public partial class Tower: MonoBehaviour
 		dart.props = dartProps;
 		dart.timeout = range;
 		dart.explosion = explosion;
-		dart.effectLifetime = effectLifetime;
+		dart.stick = stick;
 
 		return dart;
 	}

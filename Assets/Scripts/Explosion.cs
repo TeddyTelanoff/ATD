@@ -7,7 +7,7 @@ public class Explosion: MonoBehaviour
 	public ParticleSystem normal;
 	public ParticleSystem wet;
 	public DartProperty props;
-	public float effectLifetime;
+	public float stick;
 	public float explosion;
 	public int damage;
 	public int dps;

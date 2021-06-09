@@ -31,7 +31,7 @@ public class Dart: MonoBehaviour
 	public int damage;
 	public int dps;
 	public float kb;
-	public float effectLifetime;
+	public float stick;
 	public float explosion;
 	public float speed;
 	public float timeout;
@@ -97,7 +97,7 @@ public class Dart: MonoBehaviour
 			obj.transform.position = transform.position;
 
 			var explosion = obj.GetComponent<Explosion>();
-			explosion.effectLifetime = effectLifetime;
+			explosion.stick = stick;
 			explosion.explosion = this.explosion;
 			explosion.damage = damage;
 			explosion.props = props;

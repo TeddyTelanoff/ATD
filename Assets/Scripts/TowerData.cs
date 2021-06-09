@@ -17,7 +17,7 @@ public struct TowerData
 	public int price;
 
 	public DartProperty props;
-	public float effectLifetime;
+	public float stick;
 	public float explosion;
 	public float reload;
 	public float range;

@@ -3,14 +3,15 @@
 	"price": 350,
 
 	"range": 4,
+	"stick": 1,
 	"reload": 2,
 	"pierce": 1,
 	"props": "Wet",
 
 	"path1": [
 		{
-			"name": "Water Baloons",
-			"price": 350,
+			"name": "Better Supply",
+			"price": 100,
 
 			"explosion": 1.5
 		},
@@ -20,7 +21,7 @@
 		},
 		{
 			"name": "Washing Machine",
-			"price": 800,
+			"price": 1000,
 
 			"props": "Rinse"
 		}

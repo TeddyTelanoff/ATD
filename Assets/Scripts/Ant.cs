@@ -43,7 +43,7 @@ public partial class Ant: MonoBehaviour
 	public float lerp;
 	public float speed;
 	public float speedMul;
-	public float effectLifetime;
+	public float stick;
 	public AntEffect effect;
 	public AntProperty props;
 	public ParticleSystem flameSystem;
@@ -89,7 +89,14 @@ public partial class Ant: MonoBehaviour
 			return;
 		}
 
-		transform.position += speedMul * speed * dir.normalized * GameManager.FixedDeltaTime;
+		if (stick <= 0)
+		{
+			effect &= ~AntEffect.Flame;
+			effect &= ~AntEffect.Wet;
+		}
+		else
+			stick -= Time.deltaTime;
+		transform.position += speedMul * speed * dir.normalized * Time.deltaTime;
 	}
 
 	public void Split()
@@ -126,7 +133,7 @@ public partial class Ant: MonoBehaviour
 			wetSystem.Play();
 			dps = dart.dps;
 
-			effectLifetime = dart.effectLifetime;
+			stick = dart.stick;
 		}
 
 		Pop(dart.damage);
@@ -152,7 +159,7 @@ public partial class Ant: MonoBehaviour
 			dps = dart.dps;
 			dart.pierce--;
 
-			effectLifetime = dart.effectLifetime;
+			stick = dart.stick;
 		}
 
 		transform.position += dart.kb * (Vector3)(Vector2)dart.dir;
