@@ -1,0 +1,10 @@
+100:20 black 2
+100:32 black 2
+100:10 black 1.8;6 white 2
+100:24 black 1.8;8 white 2
+100:36 black 1.8
+100:15 white 2
+100:48 black 2;4 white 1.8
+100:4 blue 2;9 white 1.8
+100:12 white 1.5;10 blue 2
+100:10 black 1;20 black 1.5;30 black 2

@@ -88,11 +88,11 @@ public partial class AntSpawner: MonoBehaviour
 
 	private IEnumerator PlayRoundInternal()
 	{
-		if (round >= rounds.Length)
+		if (round > rounds.Length)
 			yield break;
 
-		int reward = rounds[round].reward;
-		foreach (var group in rounds[round].waves)
+		int reward = rounds[round - 1].reward;
+		foreach (var group in rounds[round - 1].waves)
 			yield return SpawnGroup(group);
 
 		while (!RoundOver())

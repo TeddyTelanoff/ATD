@@ -75,7 +75,7 @@ public class Dart: MonoBehaviour
 		}
 
 		rb.velocity = speed * dir * GameManager.FixedDeltaTime;
-		if (Vector3.Distance(transform.position, startPos) >= timeout + 1)
+		if (!props.HasFlag(DartProperty.Ricochet) && Vector3.Distance(transform.position, startPos) >= timeout + 1)
 			Destroy(gameObject, Time.fixedDeltaTime);
 	}
 
