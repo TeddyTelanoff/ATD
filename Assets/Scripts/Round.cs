@@ -6,6 +6,6 @@ using System;
 [Serializable]
 public struct Round
 {
-	public AntGroup[] groups;
+	public Wave[] waves;
 	public int reward;
 }

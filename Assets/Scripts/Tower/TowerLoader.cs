@@ -8,6 +8,11 @@ public partial class TowerManager
 
 	public void LoadAll()
 	{
+#if UNITY_EDITOR
+		resourceLocation = "Assets/Resources";
+#else
+		resourceLocation = "Resources";
+#endif
 		var towerStats = Directory.GetDirectories($"{resourceLocation}/Towers");
 		if (towerStats.Length <= 0)
 			return;

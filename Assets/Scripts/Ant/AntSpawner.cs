@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AntSpawner: MonoBehaviour
+public partial class AntSpawner: MonoBehaviour
 {
 	public static AntSpawner Instance { get; private set; }
 
@@ -20,6 +20,7 @@ public class AntSpawner: MonoBehaviour
 	private void Start()
 	{
 		Instance = this;
+		LoadRounds();
 		roundTxt.text = round.ToString();
 
 		checkpoints = new Transform[checkpointsParent.childCount];
@@ -76,12 +77,12 @@ public class AntSpawner: MonoBehaviour
 		return ant;
 	}
 
-	private IEnumerator SpawnGroup(AntGroup group)
+	private IEnumerator SpawnGroup(Wave wave)
 	{
-		for (int i = 0; i < group.count; i++)
+		for (int i = 0; i < wave.count; i++)
 		{
-			SpawnAnt(group.type, group.props);
-			yield return new WaitForSeconds(group.interval);
+			SpawnAnt(wave.type, wave.props);
+			yield return new WaitForSeconds(wave.interval);
 		}
 	}
 
@@ -91,7 +92,7 @@ public class AntSpawner: MonoBehaviour
 			yield break;
 
 		int reward = rounds[round].reward;
-		foreach (var group in rounds[round].groups)
+		foreach (var group in rounds[round].waves)
 			yield return SpawnGroup(group);
 
 		while (!RoundOver())

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public struct AntGroup
+public struct Wave
 {
 	public AntType type;
 	public AntProperty props;
