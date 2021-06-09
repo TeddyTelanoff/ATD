@@ -35,6 +35,7 @@ public partial class Tower: MonoBehaviour
 	public DartProperty dartProps;
 	public float stick;
 	public float explosion;
+	public float dartSpeed;
 	public float reload;
 	public float range { get => _range;
 		set
@@ -45,6 +46,7 @@ public partial class Tower: MonoBehaviour
 	}
 	public float kb;
 	public int dps;
+	public int blast;
 	public int damage;
 	public int pierce;
 	public int invested;
@@ -72,9 +74,11 @@ public partial class Tower: MonoBehaviour
 		dartProps |= upgrade.props;
 		stick += upgrade.stick;
 		explosion += upgrade.explosion;
+		dartSpeed += upgrade.dartSpeed;
 		reload += upgrade.reload;
 		kb += upgrade.kb;
 		dps += upgrade.dps;
+		blast += upgrade.blast;
 		damage += upgrade.damage;
 		pierce += upgrade.pierce;
 		range += upgrade.range;
@@ -212,6 +216,8 @@ public partial class Tower: MonoBehaviour
 		dart.damage = damage;
 		dart.props = dartProps;
 		dart.timeout = range;
+		dart.blast = blast;
+		dart.speed = dartSpeed;
 		dart.explosion = explosion;
 		dart.stick = stick;
 

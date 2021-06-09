@@ -29,6 +29,7 @@ public class Dart: MonoBehaviour
 	public DartType type;
 	public int pierce;
 	public int damage;
+	public int blast;
 	public int dps;
 	public float kb;
 	public float stick;
@@ -66,14 +67,14 @@ public class Dart: MonoBehaviour
 					break;
 			}
 
-			dir = ant.position - transform.position;
-			dir.Normalize();
+			if (ant is null)
+				Destroy(gameObject);
 
+			dir = ant.position - transform.position;
 			transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
-			rb.velocity = rb.velocity.magnitude * dir;
 		}
 
-		rb.AddForce(speed * dir * GameManager.FixedDeltaTime, ForceMode2D.Impulse);
+		rb.velocity = speed * dir * GameManager.FixedDeltaTime;
 		if (Vector3.Distance(transform.position, startPos) >= timeout + 1)
 			Destroy(gameObject, Time.fixedDeltaTime);
 	}
@@ -89,8 +90,6 @@ public class Dart: MonoBehaviour
 		if (other.gameObject.layer != LayerMask.NameToLayer("Ant"))
 			return;
 
-		pierce--;
-
 		if (explosion > 0)
 		{
 			var obj = Instantiate(explosionPrefab);
@@ -101,6 +100,7 @@ public class Dart: MonoBehaviour
 			explosion.explosion = this.explosion;
 			explosion.damage = damage;
 			explosion.props = props;
+			explosion.blast = blast;
 			explosion.dps = dps;
 		}
 

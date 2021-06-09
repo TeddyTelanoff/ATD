@@ -9,6 +9,7 @@ public class Explosion: MonoBehaviour
 	public DartProperty props;
 	public float stick;
 	public float explosion;
+	public int blast;
 	public int damage;
 	public int dps;
 
@@ -34,6 +35,9 @@ public class Explosion: MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
+		if (blast <= 0)
+			return;
+
 		if (system.isPlaying && other.gameObject.layer == LayerMask.NameToLayer("Ant"))
 			other.GetComponent<Ant>().Pop(this);
 	}

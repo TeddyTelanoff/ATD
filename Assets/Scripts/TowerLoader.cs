@@ -91,10 +91,13 @@ public partial class Tower
 		invested = data.price;
 
 		dartProps = data.props;
-		effectLifetime = data.effectLifetime;
+		stick = data.stick;
+		explosion = data.explosion;
+		dartSpeed = data.dartSpeed;
 		reload = data.reload;
 		kb = data.kb;
 		dps = data.dps;
+		blast = data.blast;
 		damage = data.damage;
 		pierce = data.pierce;
 		range = data.range;

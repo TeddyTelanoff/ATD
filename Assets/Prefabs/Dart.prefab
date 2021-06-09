@@ -104,9 +104,10 @@ MonoBehaviour:
   damage: 0
   dps: 0
   kb: 0
-  effectLifetime: 0
+  stick: 0
   explosion: 0
-  speed: 1000
+  speed: 200
+  termVel: 0
   timeout: 1
   startPos: {x: 0, y: 0, z: 0}
   hit: []

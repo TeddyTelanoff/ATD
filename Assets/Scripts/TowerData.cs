@@ -19,10 +19,12 @@ public struct TowerData
 	public DartProperty props;
 	public float stick;
 	public float explosion;
+	public float dartSpeed;
 	public float reload;
 	public float range;
 	public float kb;
 	public int dps;
+	public int blast;
 	public int damage;
 	public int pierce;
 

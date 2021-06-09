@@ -35,8 +35,7 @@ public enum AntType: int
 public partial class Ant: MonoBehaviour
 {
 	public Transform[] checkpoints;
-	public GameObject camoModel;
-	public GameObject defModel;
+	public SpriteRenderer camoGuy;
 	public AntType type;
 	public int dps;
 	public int hp;
@@ -51,6 +50,7 @@ public partial class Ant: MonoBehaviour
 	public AudioSource pop;
 
 	[Header("Don't Touch")]
+	public Material mat;
 	public GameObject model;
 	public int nextCheckIndex;
 	public Transform nextCheckpoint;
@@ -58,6 +58,7 @@ public partial class Ant: MonoBehaviour
 
 	private void Start()
 	{
+		mat = GetComponentInChildren<SpriteRenderer>().material;
 		nextCheckpoint = checkpoints[nextCheckIndex];
 		dir = nextCheckpoint.position - transform.position;
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90);
@@ -93,6 +94,9 @@ public partial class Ant: MonoBehaviour
 		{
 			effect &= ~AntEffect.Flame;
 			effect &= ~AntEffect.Wet;
+
+			wetSystem.Stop();
+			flameSystem.Stop();
 		}
 		else
 			stick -= Time.deltaTime;
@@ -137,6 +141,7 @@ public partial class Ant: MonoBehaviour
 		}
 
 		Pop(dart.damage);
+		dart.blast--;
 	}
 
 	public void Pop(Dart dart)
@@ -157,13 +162,13 @@ public partial class Ant: MonoBehaviour
 			flameSystem.Stop();
 			wetSystem.Play();
 			dps = dart.dps;
-			dart.pierce--;
 
 			stick = dart.stick;
 		}
 
 		transform.position += dart.kb * (Vector3)(Vector2)dart.dir;
 		Pop(dart.damage);
+		dart.pierce--;
 	}
 
 	public void Pop(int damage)
@@ -214,55 +219,43 @@ public partial class Ant: MonoBehaviour
 	public void UpdateType()
 	{
 		hp = 1;
-		Color matCol = Color.black;
 		switch (type)
 		{
 		case AntType.Black:
 			speed = 3;
-			matCol = Color.gray;
+			mat.color = Color.gray;
 			break;
 		case AntType.White:
 			speed = 3;
-			matCol = Color.white;
+			mat.color = Color.white;
 			break;
 		case AntType.Blue:
 			speed = 4;
-			matCol = Color.blue;
+			mat.color = Color.blue;
 			break;
 		case AntType.Green:
 			speed = 4;
-			matCol = Color.green;
+			mat.color = Color.green;
 			break;
 		case AntType.Yellow:
 			speed = 8;
-			matCol = Color.yellow;
+			mat.color = Color.yellow;
 			break;
 		case AntType.Pink:
 			speed = 10;
-			matCol = Color.magenta;
+			mat.color = Color.magenta;
 			break;
 		case AntType.Brown:
 			hp = 10;
 			speed = 5;
-			matCol = new Color(0.8f, 0.4f, 0.1f);
+			mat.color = new Color(0.8f, 0.4f, 0.1f);
 			break;
 		}
 
 		if (props.HasFlag(AntProperty.Camo))
-		{
-			defModel.SetActive(false);
-			camoModel.SetActive(true);
-			model = camoModel;
-		}
+			camoGuy.enabled = true;
 		else
-		{
-			camoModel.SetActive(false);
-			defModel.SetActive(true);
-			model = defModel;
-		}
-
-		var mat = model.GetComponentInChildren<MeshRenderer>().material;
-		mat.color = matCol;
+			camoGuy.enabled = false;
 	}
 
 	private IEnumerator DPSLoop()
