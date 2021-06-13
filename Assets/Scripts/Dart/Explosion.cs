@@ -19,6 +19,7 @@ public class Explosion: MonoBehaviour
 	private void Start()
 	{
 		StartCoroutine(SayGoodbye());
+		GameManager.Instance.explosionSound.Play();
 		system = props.HasFlag(DartProperty.Wet) ? wet : normal;
 		system.gameObject.SetActive(true);
 

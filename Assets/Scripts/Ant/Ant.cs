@@ -179,7 +179,7 @@ public partial class Ant: MonoBehaviour
 
 	public void Pop()
 	{
-		pop.Play();
+		GameManager.Instance.popSound.Play();
 		hp--;
 
 		if (hp > 0)

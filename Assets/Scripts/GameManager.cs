@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 	public static float FixedDeltaTime { get => 0.02f; }
 
 	public bool godMode;
+	public AudioSource popSound;
+	public AudioSource explosionSound;
 	public TMP_Text moneyText;
 	public int money
 	{

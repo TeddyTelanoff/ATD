@@ -8,7 +8,6 @@ public partial class AntSpawner: MonoBehaviour
 {
 	public static AntSpawner Instance { get; private set; }
 
-	public AudioSource antPop;
 	public Transform parent;
 	public Transform checkpointsParent;
 	public Transform[] checkpoints;
@@ -72,7 +71,6 @@ public partial class AntSpawner: MonoBehaviour
 		var ant = obj.GetComponent<Ant>();
 		ant.checkpoints = checkpoints;
 		ant.props = props;
-		ant.pop = antPop;
 		ant.type = type;
 		return ant;
 	}

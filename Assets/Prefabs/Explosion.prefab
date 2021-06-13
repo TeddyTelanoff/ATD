@@ -4998,11 +4998,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2040e3fee2069d40a952d21429ad0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 1072544496664139915, guid: 4d5e64fa4a9b15c45b4b5278bc7542fe, type: 3}
   normal: {fileID: 5082068353483725234}
   wet: {fileID: 8476902849792948067}
   props: 0
-  effectLifetime: 0
+  stick: 0
   explosion: 0
+  blast: 0
   damage: 0
   dps: 0
   system: {fileID: 5082068353483725234}
